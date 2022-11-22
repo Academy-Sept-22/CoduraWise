@@ -11,11 +11,13 @@ repositories {
 
 dependencies {
 
+    // Amazon
     implementation platform('software.amazon.awssdk:bom:2.18.21')
     implementation 'software.amazon.awssdk:dynamodb-enhanced:2.18.21'
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.2'
     implementation 'com.amazonaws:aws-lambda-java-events:3.11.0'
 
+    // testing
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.0'
     testImplementation 'org.mockito:mockito-core:4.8.0'
