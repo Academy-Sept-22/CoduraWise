@@ -4,11 +4,15 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
+import com.codurance.codurawise.model.Resource;
+import com.codurance.codurawise.repos.ResourcesRepository;
+import com.codurance.codurawise.repos.dynamo.DynamoResourcesTable;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
@@ -18,38 +22,29 @@ public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent,
 
     private static final Logger logger = LoggerFactory.getLogger(GetResources.class);
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private final String tableName;
-    private final String region;
+    private final ResourcesRepository repository;
 
     public GetResources() {
-        tableName = System.getenv(TABLE_NAME_PROPERTY);
-        region = System.getenv(REGION_PROPERTY);
+        String tableName = System.getenv(TABLE_NAME_PROPERTY);
+        String region = System.getenv(REGION_PROPERTY);
+        repository = new DynamoResourcesTable(region, tableName);
     }
 
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
+        Collection<Resource> resources = repository.getAllResources();
+        return createResponse(resources);
+    }
 
+    private APIGatewayProxyResponseEvent createResponse(Collection<Resource> resources) {
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
         response.setIsBase64Encoded(false);
         response.setStatusCode(200);
         HashMap<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "text/json");
         response.setHeaders(headers);
-        response.setBody(gson.toJson(tableName + " - " + region));
-        // log execution details
-        logEnvironment(event, context, gson);
+        response.setBody(gson.toJson(resources));
         return response;
-//        return gson.toJson("200 OK");
-    }
-
-    public static void logEnvironment(Object event, Context context, Gson gson)
-    {
-        // log execution details
-        logger.info("ENVIRONMENT VARIABLES: " + gson.toJson(System.getenv()));
-        logger.info("CONTEXT: " + gson.toJson(context));
-        // log event details
-        logger.info("EVENT: " + gson.toJson(event));
-        logger.info("EVENT TYPE: " + event.getClass().toString());
     }
 
 }
