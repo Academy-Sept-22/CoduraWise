@@ -2,8 +2,17 @@ service: CoduraWise
 
 frameworkVersion: '3'
 
+
+plugins:
+  - serverless-domain-manager
+
 custom:
   stage: ${opt:stage, 'dev'}
+  customDomain:
+    domainName: codurawise-dev.codurance.io
+    basePath: ''
+    stage: ${self:custom.stage}
+    createRoute53Record: true
 
 provider:
   name: aws
