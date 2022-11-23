@@ -1,18 +1,21 @@
 service: CoduraWise
 
-frameworkVersion: '3'
-
+frameworkVersion: "3"
 
 plugins:
   - serverless-domain-manager
+  - serverless-finch
 
 custom:
   stage: ${opt:stage, 'dev'}
   customDomain:
     domainName: codurawise-dev.codurance.io
-    basePath: ''
+    basePath: ""
     stage: ${self:custom.stage}
     createRoute53Record: true
+  client:
+    bucketName: "codurawise-${self:custom.stage}"
+    distributionFolder: ../frontend/build
 
 provider:
   name: aws
@@ -33,10 +36,10 @@ provider:
   iam:
     role:
       statements:
-      - Effect: Allow
-        Action:
-          - dynamodb:*
-        Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.AppName}_*"
+        - Effect: Allow
+          Action:
+            - dynamodb:*
+          Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.AppName}_*"
 
 package:
   artifact: ../backend/build/distributions/CoduraWiseBackend-0.1-SKELETON.zip
@@ -67,3 +70,4 @@ resources:
         ProvisionedThroughput:
           ReadCapacityUnits: 5
           WriteCapacityUnits: 5
+
