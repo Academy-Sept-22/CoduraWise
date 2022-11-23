@@ -1,0 +1,60 @@
+service: CoduraWise
+
+frameworkVersion: '3'
+
+custom:
+  stage: ${opt:stage, 'dev'}
+
+provider:
+  name: aws
+  runtime: java11
+  profile: codurawise
+  region: eu-west-3
+
+  stage: ${self:custom.stage}
+
+  # httpApi:
+  #   shouldStartNameWithService: true
+  #   cors: true
+
+  environment:
+    AppName: "CoduraWise_${self:provider.stage}"
+    ResourcesTableName: "${self:provider.environment.AppName}_Resources"
+
+  iam:
+    role:
+      statements:
+      - Effect: Allow
+        Action:
+          - dynamodb:*
+        Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.AppName}_*"
+
+package:
+  artifact: ../backend/build/distributions/CoduraWiseBackend-0.1-SKELETON.zip
+
+functions:
+  GetResources:
+    handler: com.codurance.codurawise.lambdas.GetResources
+    events:
+      - http:
+          path: resources
+          method: get
+          cors: true
+    environment:
+      TABLE_NAME: ${self:provider.environment.ResourcesTableName}
+
+resources:
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.ResourcesTableName}
+        AttributeDefinitions:
+          - AttributeName: Id
+            AttributeType: N
+        KeySchema:
+          - AttributeName: Id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5

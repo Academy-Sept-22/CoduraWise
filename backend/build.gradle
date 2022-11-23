@@ -16,6 +16,7 @@ dependencies {
     implementation 'software.amazon.awssdk:dynamodb-enhanced:2.18.21'
     implementation 'com.amazonaws:aws-lambda-java-core:1.2.2'
     implementation 'com.amazonaws:aws-lambda-java-events:3.11.0'
+    implementation 'com.google.code.gson:gson:2.10'
 
     // testing
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
