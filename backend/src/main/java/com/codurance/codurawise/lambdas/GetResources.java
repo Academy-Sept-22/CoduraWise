@@ -4,9 +4,9 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.codurance.codurawise.model.Resource;
+import com.codurance.codurawise.models.Resource;
 import com.codurance.codurawise.repos.ResourcesRepository;
-import com.codurance.codurawise.repos.dynamo.DynamoResourcesTable;
+import com.codurance.codurawise.repos.dynamo.ResourcesDynamoRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
@@ -27,12 +27,13 @@ public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent,
     public GetResources() {
         String tableName = System.getenv(TABLE_NAME_PROPERTY);
         String region = System.getenv(REGION_PROPERTY);
-        repository = new DynamoResourcesTable(region, tableName);
+        repository = new ResourcesDynamoRepository(region, tableName);
     }
 
     @Override
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
         Collection<Resource> resources = repository.getAllResources();
+        logger.info("Got " + resources.size() + " resources.");
         return createResponse(resources);
     }
 

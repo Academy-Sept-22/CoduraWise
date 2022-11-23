@@ -1,6 +1,4 @@
-package com.codurance.codurawise.model;
-
-import com.amazonaws.services.lambda.runtime.events.models.dynamodb.AttributeValue;
+package com.codurance.codurawise.models;
 
 public class Resource {
 

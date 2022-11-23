@@ -1,6 +1,6 @@
 package com.codurance.codurawise.repos.dynamo;
 
-import com.codurance.codurawise.model.Resource;
+import com.codurance.codurawise.models.Resource;
 import com.codurance.codurawise.repos.ResourcesRepository;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
@@ -10,13 +10,13 @@ import software.amazon.awssdk.services.dynamodb.model.ScanResponse;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class DynamoResourcesTable implements ResourcesRepository {
+public class ResourcesDynamoRepository implements ResourcesRepository {
 
     private final DynamoDbClient client;
     private final String tableName;
     private final ResourceConversion resourceConversion = new ResourceConversion();
 
-    public DynamoResourcesTable(String region, String tableName) {
+    public ResourcesDynamoRepository(String region, String tableName) {
         client = DynamoDbClient.builder().region(Region.of(region)).build();
         this.tableName = tableName;
     }
