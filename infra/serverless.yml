@@ -8,11 +8,18 @@ plugins:
 
 custom:
   stage: ${opt:stage, 'dev'}
+  domain:
+    dev: codurawise-api-dev.codurance.io
+    prod: codurawise-api.codurance.io
   customDomain:
-    domainName: codurawise-dev.codurance.io
-    basePath: ""
+    domainName: ${self:custom.domain.${opt:stage, 'dev'}}
     stage: ${self:custom.stage}
+    basePath: ""
+    # apiType: rest
+    hostedZoneId: Z2P3IWUGUFUUGE
     createRoute53Record: true
+    # endpointType: regional
+    # certificateName: codurance.io
   client:
     bucketName: "codurawise-${self:custom.stage}"
     distributionFolder: ../frontend/build
