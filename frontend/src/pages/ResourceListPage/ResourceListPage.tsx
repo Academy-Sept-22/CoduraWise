@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ResourceList from "../../components/ResourceList/ResourceList";
 import useResources from "../../store/hooks/useResources";
 
 const ResourceListPage = () => {
-  const { resources } = useResources();
+  const { resources, getResources } = useResources();
+
+  useEffect(() => {
+    getResources();
+  }, []);
 
   return <ResourceList resources={resources} />;
 };

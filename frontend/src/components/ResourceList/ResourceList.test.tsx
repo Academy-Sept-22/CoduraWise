@@ -1,9 +1,6 @@
 import { render, screen } from "@testing-library/react";
-
 import { Resource } from "../../models/Resource";
-
 import ResourceList from "./ResourceList";
-
 import React from "react";
 
 describe("given the resorce list", () => {

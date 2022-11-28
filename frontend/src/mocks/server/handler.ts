@@ -1,6 +1,6 @@
 import { rest } from "msw";
-import { backendUrls } from "../routes/paths";
-import { mockResources } from "./mocks";
+import { backendUrls } from "../../routes/paths";
+import { mockResources } from "../mocks";
 
 const resourceListHandler = rest.get(
   backendUrls.resourceListUrl,

@@ -17,7 +17,6 @@ export default function ResourcesContextProvider({
   children: JSX.Element;
 }) {
   const [resources, setResources] = useState<Array<Resource>>([]);
-  console.log(setResources);
 
   return (
     <ResourcesContext.Provider value={{ resources, setResources }}>

@@ -1,8 +1,7 @@
 import React from "react";
-
 import { Resource } from "../../models/Resource";
-
 import ResourceCard from "../ResourceCard/ResourceCard";
+import "./ResourceList.scss";
 
 interface ResourceListProps {
   resources: Array<Resource>;
@@ -13,7 +12,7 @@ const ResourceList = ({ resources }: ResourceListProps) => {
     <ul className="resource-list__container">
       {resources
         ? resources.map((resource) => (
-            <li key={resource.id}>
+            <li className="resource-list__list-element" key={resource.id}>
               <ResourceCard title={resource.title} link={resource.link} />
             </li>
           ))

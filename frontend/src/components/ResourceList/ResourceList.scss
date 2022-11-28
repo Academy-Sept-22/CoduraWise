@@ -1,0 +1,11 @@
+.resource-list {
+  &__container {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  &__list-element {
+    list-style: none;
+  }
+}

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect } from "react";
+import { useCallback, useContext } from "react";
 import { ResourcesContext } from "../ResourcesContext";
 import { backendUrls } from "../../routes/paths";
 
@@ -13,12 +13,9 @@ function useResources() {
     }
   }, []);
 
-  useEffect(() => {
-    getResources();
-  }, []);
-
   return {
     resources,
+    getResources,
   };
 }
 

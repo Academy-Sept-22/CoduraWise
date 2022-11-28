@@ -15,19 +15,3 @@ export default function ContextRouterMock({
     </ResourcesContextProvider>
   );
 }
-
-/* export default function ContextRouterMock({
-  children,
-}: {
-  children: JSX.Element;
-}) {
-  const history = createMemoryHistory();
-
-  return (
-    <ResourcesContextProvider>
-      <Router location={history.location} navigator={history}>
-        {children}
-      </Router>
-    </ResourcesContextProvider>
-  );
-} */
