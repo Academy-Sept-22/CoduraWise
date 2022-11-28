@@ -1,7 +1,7 @@
-package com.codurance.codurawise.models;
+package com.codurance.codurawise.domain.services;
 
+import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.repos.ResourcesRepository;
-import com.codurance.codurawise.repos.dynamo.ResourcesDynamoRepository;
 
 import java.util.Collection;
 

@@ -1,5 +1,6 @@
-package com.codurance.codurawise.models;
+package com.codurance.codurawise.domain.services;
 
+import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.repos.dynamo.ResourcesDynamoRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 

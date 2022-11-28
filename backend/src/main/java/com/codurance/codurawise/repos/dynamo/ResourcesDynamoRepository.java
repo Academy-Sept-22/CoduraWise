@@ -1,6 +1,6 @@
 package com.codurance.codurawise.repos.dynamo;
 
-import com.codurance.codurawise.models.Resource;
+import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.repos.ResourcesRepository;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;

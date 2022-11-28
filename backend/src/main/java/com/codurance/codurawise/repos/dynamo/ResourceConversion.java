@@ -1,6 +1,6 @@
 package com.codurance.codurawise.repos.dynamo;
 
-import com.codurance.codurawise.models.Resource;
+import com.codurance.codurawise.domain.models.Resource;
 import software.amazon.awssdk.services.dynamodb.model.AttributeValue;
 
 import java.util.Map;
