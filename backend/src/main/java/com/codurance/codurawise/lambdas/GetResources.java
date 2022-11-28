@@ -5,6 +5,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.codurance.codurawise.models.Resource;
+import com.codurance.codurawise.models.ResourceService;
 import com.codurance.codurawise.repos.ResourcesRepository;
 import com.codurance.codurawise.repos.dynamo.ResourcesDynamoRepository;
 import com.google.gson.Gson;
@@ -17,37 +18,39 @@ import java.util.HashMap;
 
 public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-    private static final String REGION_PROPERTY = "AWS_REGION";
-    private static final String TABLE_NAME_PROPERTY = "TABLE_NAME";
+  private static final String REGION_PROPERTY = "AWS_REGION";
+  private static final String TABLE_NAME_PROPERTY = "TABLE_NAME";
 
-    private static final Logger logger = LoggerFactory.getLogger(GetResources.class);
-    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-    private final ResourcesRepository repository;
+  private static final Logger logger = LoggerFactory.getLogger(GetResources.class);
+  private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
+  private final ResourcesRepository repository;
+  private final ResourceService resourceService;
 
-    public GetResources() {
-        String tableName = System.getenv(TABLE_NAME_PROPERTY);
-        String region = System.getenv(REGION_PROPERTY);
-        repository = new ResourcesDynamoRepository(region, tableName);
-    }
+  public GetResources() {
+    String tableName = System.getenv(TABLE_NAME_PROPERTY);
+    String region = System.getenv(REGION_PROPERTY);
+    repository = new ResourcesDynamoRepository(region, tableName);
+    resourceService = new ResourceService(repository);
+  }
 
-    @Override
-    public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
-        Collection<Resource> resources = repository.getAllResources();
-        logger.info("Got " + resources.size() + " resources.");
-        return createResponse(resources);
-    }
+  @Override
+  public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
+    Collection<Resource> resources = resourceService.getAll();
+    logger.info("Got " + resources.size() + " resources.");
+    return createResponse(resources);
+  }
 
-    private APIGatewayProxyResponseEvent createResponse(Collection<Resource> resources) {
-        APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
-        response.setIsBase64Encoded(false);
-        response.setStatusCode(200);
-        HashMap<String, String> headers = new HashMap<>();
-        headers.put("Content-Type", "text/json");
-        headers.put("Access-Control-Allow-Origin", "*");
-        headers.put("Access-Control-Allow-Credentials", "true");
-        response.setHeaders(headers);
-        response.setBody(gson.toJson(resources));
-        return response;
-    }
+  private APIGatewayProxyResponseEvent createResponse(Collection<Resource> resources) {
+    APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
+    response.setIsBase64Encoded(false);
+    response.setStatusCode(200);
+    HashMap<String, String> headers = new HashMap<>();
+    headers.put("Content-Type", "text/json");
+    headers.put("Access-Control-Allow-Origin", "*");
+    headers.put("Access-Control-Allow-Credentials", "true");
+    response.setHeaders(headers);
+    response.setBody(gson.toJson(resources));
+    return response;
+  }
 
 }

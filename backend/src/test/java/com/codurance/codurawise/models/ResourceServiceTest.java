@@ -30,4 +30,6 @@ class ResourceServiceTest {
     verify(repository).getAllResources();
     assertThat(result).isEqualTo(repositoryCollection);
   }
+
+
 }

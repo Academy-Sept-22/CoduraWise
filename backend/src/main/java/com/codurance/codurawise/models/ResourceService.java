@@ -1,13 +1,14 @@
 package com.codurance.codurawise.models;
 
+import com.codurance.codurawise.repos.ResourcesRepository;
 import com.codurance.codurawise.repos.dynamo.ResourcesDynamoRepository;
 
 import java.util.Collection;
 
 public class ResourceService {
-  private ResourcesDynamoRepository repository;
+  private ResourcesRepository repository;
 
-  public ResourceService(ResourcesDynamoRepository repository) {
+  public ResourceService(ResourcesRepository repository) {
     this.repository = repository;
   }
 
