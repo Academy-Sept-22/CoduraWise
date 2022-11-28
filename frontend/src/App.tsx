@@ -1,10 +1,10 @@
 import React from "react";
 
 import "./App.scss";
-import ResourceListPage from "./pages/ResourceListPage/ResourceListPage";
+import Routing from "./routes/Routing";
 
 function App() {
-  return <ResourceListPage />;
+  return <Routing />;
 }
 
 export default App;
