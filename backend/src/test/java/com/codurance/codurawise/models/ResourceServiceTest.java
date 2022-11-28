@@ -19,7 +19,7 @@ class ResourceServiceTest {
   @Mock ResourcesDynamoRepository repository;
 
   @Test
-  public void foo() {
+  public void returns_all_resources() {
     Collection<Resource> repositoryCollection = new ArrayList<>();
     ResourceService resourceService = new ResourceService(repository);
 
