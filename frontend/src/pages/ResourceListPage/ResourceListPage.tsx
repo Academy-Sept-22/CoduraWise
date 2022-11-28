@@ -1,22 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ResourceList from "../../components/ResourceList/ResourceList";
-import { Resource } from "../../models/Resource";
-import { backendUrls } from "../../routes/paths";
+import useResources from "../../store/hooks/useResources";
 
 const ResourceListPage = () => {
-  const [resources, setResources] = useState<Array<Resource>>([]);
-
-  async function getResources() {
-    const response = await fetch(backendUrls.resourceListUrl);
-    const data = await response.json();
-    if (data) {
-      setResources(data);
-    }
-  }
+  const {resources, getResources} = useResources();
 
   useEffect(() => {
     getResources();
-  }, []);
+  }, [getResources]);
 
   return <ResourceList resources={resources} />;
 };
