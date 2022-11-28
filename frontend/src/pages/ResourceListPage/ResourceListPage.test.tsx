@@ -1,7 +1,8 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import ResourceListPage from "./ResourceListPage";
 import React from "react";
 import { server } from "../../mocks/server";
+import ContextRouterMock from "../../mocks/contextRouterMock";
 
 describe("given the resorce list page", () => {
   beforeEach(() => {
@@ -15,7 +16,11 @@ describe("given the resorce list page", () => {
     expect(resourceList).toHaveClass("resource-list__container");
   });
   test("the list will include the titles Java, Python and Javascript", async () => {
-    render(<ResourceListPage />);
+    render(
+      <ContextRouterMock>
+        <ResourceListPage />
+      </ContextRouterMock>,
+    );
 
     const title1 = await screen.findByRole("heading", { name: "Title: Java" });
     const title2 = await screen.findByRole("heading", {
