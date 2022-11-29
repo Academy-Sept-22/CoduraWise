@@ -13,7 +13,11 @@ const ResourceList = ({ resources }: ResourceListProps) => {
       {resources
         ? resources.map((resource) => (
             <li className="resource-list__list-element" key={resource.id}>
-              <ResourceCard title={resource.title} link={resource.link} />
+              <ResourceCard
+                title={resource.title}
+                link={resource.link}
+                rating={resource.rating}
+              />
             </li>
           ))
         : null}
