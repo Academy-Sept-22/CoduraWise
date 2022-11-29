@@ -6,7 +6,7 @@ import com.codurance.codurawise.repos.ResourcesRepository;
 import java.util.Collection;
 
 public class ResourceService {
-  private ResourcesRepository repository;
+  private final ResourcesRepository repository;
 
   public ResourceService(ResourcesRepository repository) {
     this.repository = repository;

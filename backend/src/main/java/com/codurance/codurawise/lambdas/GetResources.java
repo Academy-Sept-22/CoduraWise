@@ -23,13 +23,12 @@ public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent,
 
   private static final Logger logger = LoggerFactory.getLogger(GetResources.class);
   private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-  private final ResourcesRepository repository;
   private final ResourceService resourceService;
 
   public GetResources() {
     String tableName = System.getenv(TABLE_NAME_PROPERTY);
     String region = System.getenv(REGION_PROPERTY);
-    repository = new ResourcesDynamoRepository(region, tableName);
+    ResourcesRepository repository = new ResourcesDynamoRepository(region, tableName);
     resourceService = new ResourceService(repository);
   }
 

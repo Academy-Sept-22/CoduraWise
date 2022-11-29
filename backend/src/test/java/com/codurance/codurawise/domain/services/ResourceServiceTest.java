@@ -25,7 +25,7 @@ class ResourceServiceTest {
 
     given(repository.getAllResources()).willReturn(repositoryCollection);
 
-    Collection result = resourceService.getAll();
+    Collection<Resource> result = resourceService.getAll();
 
     assertThat(result).isEqualTo(repositoryCollection);
   }
