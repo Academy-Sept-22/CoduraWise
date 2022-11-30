@@ -1,11 +1,25 @@
 .resource-card {
   &__container {
-    width: 200px;
-    height: 100px;
+    width: 100%;
+    height: fit-content;
     border: pink dotted 3px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: cadetblue;
+    padding: 2%;
   }
 
   &__link {
     text-decoration: none;
+    margin-right: 1em;
+    color: white;
+  }
+
+  &__link:hover {
+    color: black;
+    background-color: white;
   }
 }
