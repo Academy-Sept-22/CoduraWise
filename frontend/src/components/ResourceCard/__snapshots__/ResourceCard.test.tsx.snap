@@ -1,16 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`snapshot test: the html matches 1`] = `
-<article>
-  <h3>
-    Title: 
-    title
-  </h3>
-  <a
-    href="url"
+<article
+  className="resource-card__container"
+>
+  <h3
+    className="resource-card__title"
   >
-    URL: 
-    url
-  </a>
+    <a
+      className="resource-card__link"
+      href="url"
+    >
+      Title: 
+      title
+    </a>
+  </h3>
 </article>
 `;
