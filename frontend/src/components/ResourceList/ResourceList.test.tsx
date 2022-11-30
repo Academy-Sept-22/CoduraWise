@@ -3,13 +3,13 @@ import { Resource } from "../../models/Resource";
 import ResourceList from "./ResourceList";
 import React from "react";
 
-describe("given the resorce list", () => {
+describe("given the resource list", () => {
   describe("when it receives resource data", () => {
     test("then the titles match the data", () => {
       const arrayList: Array<Resource> = [
-        { id: 1, title: "Java", link: "Java Link" },
-        { id: 2, title: "Python", link: "Python Link" },
-        { id: 3, title: "Javascript", link: "Javascript Link" },
+        { id: 1, title: "Java", link: "Java Link", rating: 1 },
+        { id: 2, title: "Python", link: "Python Link", rating: 1 },
+        { id: 3, title: "Javascript", link: "Javascript Link", rating: 1 },
       ];
 
       render(<ResourceList resources={arrayList} />);
@@ -26,21 +26,21 @@ describe("given the resorce list", () => {
 
     test("then the url match the data", () => {
       const arrayList: Array<Resource> = [
-        { id: 1, title: "Java", link: "Java Link" },
-        { id: 2, title: "Python", link: "Python Link" },
-        { id: 3, title: "Javascript", link: "Javascript Link" },
+        { id: 1, title: "Java", link: "Java Link", rating: 1 },
+        { id: 2, title: "Python", link: "Python Link", rating: 1 },
+        { id: 3, title: "Javascript", link: "Javascript Link", rating: 1 },
       ];
 
       render(<ResourceList resources={arrayList} />);
 
-      const url1 = screen.getByRole("link", { name: "URL: Java Link" });
-      expect(url1).toBeInTheDocument();
+      const url1 = screen.getByRole("link", { name: "Title: Java" });
+      expect(url1).toHaveAttribute("href", arrayList[0].link);
 
-      const url2 = screen.getByRole("link", { name: "URL: Python Link" });
-      expect(url2).toBeInTheDocument();
+      const url2 = screen.getByRole("link", { name: "Title: Python" });
+      expect(url2).toHaveAttribute("href", arrayList[1].link);
 
-      const url3 = screen.getByRole("link", { name: "URL: Javascript Link" });
-      expect(url3).toBeInTheDocument();
+      const url3 = screen.getByRole("link", { name: "Title: Javascript" });
+      expect(url3).toHaveAttribute("href", arrayList[2].link);
     });
   });
 });

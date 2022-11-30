@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import StarRating from "./StarRating";
+import React from "react";
 
 describe("given the resource has a rating", () => {
   describe("when the rating is one", () => {
