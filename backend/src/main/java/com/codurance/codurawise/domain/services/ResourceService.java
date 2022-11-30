@@ -15,4 +15,8 @@ public class ResourceService {
   public Collection<Resource> getAll() {
     return repository.getAllResources();
   }
+
+  public Collection<Resource> getByTag(String tag) {
+    return repository.getByTag(tag);
+  }
 }

@@ -7,4 +7,6 @@ import java.util.Collection;
 public interface ResourcesRepository {
 
     Collection<Resource> getAllResources();
+
+  Collection<Resource> getByTag(String tag);
 }

@@ -32,23 +32,37 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
   @Override
   public Collection<Resource> getAllResources() {
     try {
-      Statement statement = connection.createStatement();
       String sql = ("SELECT * FROM " + RESOURCE_TABLE + ";");
-      ResultSet result = statement.executeQuery(sql);
-      HashSet<Resource> resources = new HashSet<>();
-      while (result.next()) {
-        int resourceID = result.getInt("Resource_ID");
-        String title = result.getString("Title");
-        String link = result.getString("Link");
-        Resource resource = new Resource();
-        resource.setId(resourceID);
-        resource.setTitle(title);
-        resource.setLink(link);
-        resources.add(resource);
-      }
-      return resources;
+      return runQuery(sql);
     } catch (SQLException sqlException) {
       throw new RuntimeException("Error getting resources", sqlException);
     }
+  }
+
+  @Override
+  public Collection<Resource> getByTag(String tag) {
+    try {
+      String sql = ("SELECT * FROM " + RESOURCE_TABLE + " WHERE Tag = '"+ tag+"';");
+      return runQuery(sql);
+    } catch (SQLException sqlException) {
+      throw new RuntimeException("Error getting resources", sqlException);
+    }
+  }
+
+  private Collection<Resource> runQuery(String sql) throws SQLException {
+    Statement statement = connection.createStatement();
+    ResultSet result = statement.executeQuery(sql);
+    HashSet<Resource> resources = new HashSet<>();
+    while (result.next()) {
+      int resourceID = result.getInt("Resource_ID");
+      String title = result.getString("Title");
+      String link = result.getString("Link");
+      Resource resource = new Resource();
+      resource.setId(resourceID);
+      resource.setTitle(title);
+      resource.setLink(link);
+      resources.add(resource);
+    }
+    return resources;
   }
 }

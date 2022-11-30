@@ -7,7 +7,6 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.domain.services.ResourceService;
 import com.codurance.codurawise.repos.ResourcesRepository;
-import com.codurance.codurawise.repos.dynamo.ResourcesDynamoRepository;
 import com.codurance.codurawise.repos.mysql.ResourcesMySQLRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
