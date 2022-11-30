@@ -16,7 +16,7 @@ const ResourceList = ({ resources }: ResourceListProps) => {
               <ResourceCard
                 title={resource.title}
                 link={resource.link}
-                rating={resource.rating}
+                rating={resource.averageRating}
               />
             </li>
           ))
