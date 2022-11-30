@@ -15,5 +15,14 @@ exports[`snapshot test: the html matches 1`] = `
       title
     </a>
   </h3>
+  <div
+    aria-label="Rating of this product is 1 out of 5."
+    className="star-container"
+    style={
+      Object {
+        "--rating": 1,
+      }
+    }
+  />
 </article>
 `;

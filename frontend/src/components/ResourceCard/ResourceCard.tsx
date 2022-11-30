@@ -1,4 +1,5 @@
 import React from "react";
+import StarRating from "../StarRating/StarRating";
 import "./ResourceCard.scss";
 
 interface ResourceCardProps {
@@ -15,6 +16,7 @@ const ResourceCard = ({ title, link, rating }: ResourceCardProps) => {
           Title: {title}
         </a>
       </h3>
+      <StarRating rating={rating} />
     </article>
   );
 };
