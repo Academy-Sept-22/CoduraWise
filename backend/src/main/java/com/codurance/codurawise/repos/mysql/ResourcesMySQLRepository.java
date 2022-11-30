@@ -1,6 +1,6 @@
 package com.codurance.codurawise.repos.mysql;
 
-import com.codurance.codurawise.models.Resource;
+import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.repos.ResourcesRepository;
 
 import java.sql.*;
