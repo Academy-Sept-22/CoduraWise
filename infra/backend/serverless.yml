@@ -1,0 +1,83 @@
+service: CoduraWise
+
+frameworkVersion: "3"
+
+plugins:
+  - serverless-domain-manager
+
+# -----------------------------------------------------------------------------
+custom:
+  stage: ${opt:stage, 'dev'}
+  coduranceHostedZoneId: Z2P3IWUGUFUUGE
+  apiDomain:
+    dev: codurawise-api-dev.codurance.io
+    prod: codurawise-api.codurance.io
+  customDomain:
+    domainName: ${self:custom.apiDomain.${opt:stage, 'dev'}}
+    stage: ${self:custom.stage}
+    basePath: ""
+    # apiType: rest
+    hostedZoneId: ${self:custom.coduranceHostedZoneId}
+    createRoute53Record: true
+    # endpointType: regional
+    # certificateName: codurance.io
+    autoDomain: true
+
+# -----------------------------------------------------------------------------
+provider:
+  name: aws
+  runtime: java11
+  profile: codurawise
+  region: eu-west-3
+
+  stage: ${self:custom.stage}
+
+  vpc:
+      securityGroupIds:
+        - Ref: LambdaSecurityGroup
+      subnetIds:
+        - subnet-075cbc4a
+        - subnet-72b47f09
+        - subnet-e060d189
+
+package:
+  artifact: ../../backend/build/distributions/CoduraWiseBackend-0.1-SKELETON.zip
+
+functions:
+  GetResources:
+    handler: com.codurance.codurawise.lambdas.GetResources
+    events:
+      - http:
+          method: GET
+          path: /resources
+          cors: true
+
+# -----------------------------------------------------------------------------
+resources:
+  Resources:
+    LambdaSecurityGroup:
+      Type: "AWS::EC2::SecurityGroup"
+      Properties:
+        GroupName: CoduraWiseLambdaSecurityGroup-${opt:stage, 'dev'}
+        GroupDescription: Allow all outbound traffic, no inbound
+        SecurityGroupIngress:
+          - IpProtocol: -1
+            CidrIp: 127.0.0.1/32
+        VpcId: vpc-f3ff439a
+    CoduraWiseDbInstance:
+      Type: AWS::RDS::DBInstance
+      Properties:
+        DBName: codurawise
+        DBInstanceIdentifier: codurawisedb-${opt:stage, 'dev'}
+        MasterUsername: ${param:username}
+        MasterUserPassword: ${param:password}
+        Engine: MySQL
+        EngineVersion: 8.0.28
+        DBInstanceClass: db.t3.micro
+        StorageType: gp2
+        PubliclyAccessible: true
+        MultiAZ: false
+        AllocatedStorage: "20"
+        AvailabilityZone: "${self:provider.region}a"
+        VPCSecurityGroups:
+          - Ref: LambdaSecurityGroup
