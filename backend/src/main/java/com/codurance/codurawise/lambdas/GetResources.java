@@ -8,6 +8,7 @@ import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.domain.services.ResourceService;
 import com.codurance.codurawise.repos.ResourcesRepository;
 import com.codurance.codurawise.repos.dynamo.ResourcesDynamoRepository;
+import com.codurance.codurawise.repos.mysql.ResourcesMySQLRepository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
@@ -28,7 +29,14 @@ public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent,
   public GetResources() {
     String tableName = System.getenv(TABLE_NAME_PROPERTY);
     String region = System.getenv(REGION_PROPERTY);
-    ResourcesRepository repository = new ResourcesDynamoRepository(region, tableName);
+    ResourcesRepository repository = null;
+    try {
+      repository = ResourcesMySQLRepository.create(
+        "codurawise-rds-test.csmvfqdkjhyz.eu-west-3.rds.amazonaws.com",
+        3306, "CoduraWise", "admin", "CoduraWise");
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
     resourceService = new ResourceService(repository);
   }
 
