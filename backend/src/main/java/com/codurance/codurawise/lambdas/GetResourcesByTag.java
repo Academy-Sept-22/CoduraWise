@@ -12,17 +12,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
+import java.util.Map;
 
-public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class GetResourcesByTag implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
   private static final String REGION_PROPERTY = "AWS_REGION";
   private static final String TABLE_NAME_PROPERTY = "TABLE_NAME";
 
-  private static final Logger logger = LoggerFactory.getLogger(GetResources.class);
-  private final ResourcesResponse resourcesResponse = new ResourcesResponse();
+  private static final Logger logger = LoggerFactory.getLogger(com.codurance.codurawise.lambdas.GetResourcesByTag.class);
   private final ResourceService resourceService;
+  private final ResourcesResponse resourcesResponse = new ResourcesResponse();
 
-  public GetResources() {
+  public GetResourcesByTag() {
     String tableName = System.getenv(TABLE_NAME_PROPERTY);
     String region = System.getenv(REGION_PROPERTY);
     ResourcesRepository repository;
@@ -38,8 +39,10 @@ public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent,
 
   @Override
   public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
-    Collection<Resource> resources = resourceService.getAll();
-    logger.info("Got " + resources.size() + " resources.");
+    Map<String, String> pathParameters = event.getPathParameters();
+    String tag = pathParameters.get("tag");
+    Collection<Resource> resources = resourceService.getByTag(tag);
+    logger.info("Got " + resources.size() + " resources for tag " + tag);
     return resourcesResponse.createResponse(resources);
   }
 }
