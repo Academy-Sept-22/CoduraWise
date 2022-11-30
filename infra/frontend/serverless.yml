@@ -1,4 +1,4 @@
-service: CoduraWise
+service: CoduraWiseFront
 
 frameworkVersion: "3"
 
