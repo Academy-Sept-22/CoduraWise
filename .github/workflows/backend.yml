@@ -51,7 +51,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: infra
+        working-directory: infra/backend
         
     permissions:
       contents: read
@@ -86,4 +86,4 @@ jobs:
         path: backend/build/distributions/
     
     - name: Create Back-end infrastructure and deploy lambda zip to AWS
-      run: sls deploy -s dev
+      run: sls deploy -s dev --param="username=${{ secrets.RDS_USERNAME }}" --param="password=${{ secrets.RDS_PASSWORD }}"

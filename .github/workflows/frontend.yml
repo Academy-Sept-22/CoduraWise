@@ -56,7 +56,7 @@ jobs:
     
     defaults:
       run:
-        working-directory: infra
+        working-directory: infra/frontend
         
     permissions:
       contents: read
@@ -92,3 +92,6 @@ jobs:
     
     - name: Deploy Front-end to S3 bucket
       run: sls client deploy -s dev --no-confirm
+      
+    - name: Create DNS record
+      run: sls deploy -s dev
