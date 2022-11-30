@@ -32,7 +32,7 @@ public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent,
     ResourcesRepository repository = null;
     try {
       repository = ResourcesMySQLRepository.create(
-        "codurawise-rds-test.csmvfqdkjhyz.eu-west-3.rds.amazonaws.com",
+        "codurawisedb-dev.codurance.io",
         3306, "CoduraWise", "admin", "CoduraWise");
     } catch (Exception e) {
       throw new RuntimeException(e);
