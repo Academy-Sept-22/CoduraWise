@@ -12,7 +12,7 @@ const StarRating = ({ rating }: StarRatingProps) => {
     <div
       className="star-container"
       style={style}
-      aria-label="Rating of this product is 2.3 out of 5."
+      aria-label= {`Rating of this product is ${rating} out of 5.`}
     />
   );
 };

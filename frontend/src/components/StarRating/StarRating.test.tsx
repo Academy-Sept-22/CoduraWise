@@ -9,9 +9,9 @@ describe("given the resource has a rating", () => {
 
       render(<StarRating rating={rating} />);
 
-      const stars = screen.getAllByRole("radio");
+      const stars = screen.getByLabelText(`Rating of this product is ${rating} out of 5.`)
+
       expect(stars).toBeInTheDocument();
-      expect(stars[0]).toBeTruthy();
     });
   });
 });
