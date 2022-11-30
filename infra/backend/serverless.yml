@@ -9,6 +9,8 @@ plugins:
 custom:
   stage: ${opt:stage, 'dev'}
   coduranceHostedZoneId: Z2P3IWUGUFUUGE
+  coduranceHostedZoneName: codurance.io
+  databaseUrl: codurawisedb-${self:custom.stage}.${self:custom.coduranceHostedZoneName}
   apiDomain:
     dev: codurawise-api-dev.codurance.io
     prod: codurawise-api.codurance.io
@@ -49,8 +51,19 @@ functions:
     events:
       - http:
           method: GET
-          path: /resources
+          path: /resources/
           cors: true
+    environment:
+      DATABASE_URL: ${self:custom.databaseUrl}
+  GetResourcesByTag:
+    handler: com.codurance.codurawise.lambdas.GetResourcesByTag
+    events:
+      - http:
+          method: GET
+          path: /resources/tag/{tag}
+          cors: true
+    environment:
+      DATABASE_URL: ${self:custom.databaseUrl}
 
 # -----------------------------------------------------------------------------
 resources:
@@ -62,7 +75,7 @@ resources:
         GroupDescription: Allow all outbound traffic, no inbound
         SecurityGroupIngress:
           - IpProtocol: -1
-            CidrIp: 127.0.0.1/32
+            CidrIp: 0.0.0.0/0
         VpcId: vpc-f3ff439a
     CoduraWiseDbInstance:
       Type: AWS::RDS::DBInstance
@@ -81,3 +94,19 @@ resources:
         AvailabilityZone: "${self:provider.region}a"
         VPCSecurityGroups:
           - Ref: LambdaSecurityGroup
+    DNSRecordSet:
+      Type: AWS::Route53::RecordSet
+      Properties:
+        HostedZoneName: ${self:custom.coduranceHostedZoneName}.
+        Name: ${self:custom.databaseUrl}
+        Type: CNAME
+        TTL: '300'
+        ResourceRecords:
+        - {"Fn::GetAtt": ["CoduraWiseDbInstance","Endpoint.Address"]}
+      DependsOn: CoduraWiseDbInstance
+    RDSSecret:
+      Type: 'AWS::SecretsManager::Secret'
+      Properties:
+        Name: CoduraWiseRDSSecret
+        Description: This secret has a hardcoded password in SecretString
+        SecretString: '{"username":"${param:username}","password":"${param:password}"}'
