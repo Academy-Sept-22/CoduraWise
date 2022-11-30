@@ -6,6 +6,8 @@ public class Resource {
     private String title;
     private String link;
 
+    private Double averageRating;
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -17,4 +19,8 @@ public class Resource {
     public void setLink(String link) {
         this.link = link;
     }
+
+  public void setAverageRating(Double averageRating) {
+    this.averageRating = averageRating;
+  }
 }
