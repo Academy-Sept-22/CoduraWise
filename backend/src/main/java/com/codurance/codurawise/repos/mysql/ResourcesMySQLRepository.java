@@ -42,7 +42,7 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
   @Override
   public Collection<Resource> getByTag(String tag) {
     try {
-      String sql = ("SELECT * FROM " + RESOURCE_TABLE + " WHERE Tag = '"+ tag+"';");
+      String sql = ("SELECT Resource.* FROM Resource INNER JOIN Resource_Tag USING (Resource_ID) WHERE Resource_Tag.Tag = '"+ tag+"';");
       return runQuery(sql);
     } catch (SQLException sqlException) {
       throw new RuntimeException("Error getting resources", sqlException);
