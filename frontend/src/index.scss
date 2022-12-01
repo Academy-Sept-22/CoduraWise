@@ -2,4 +2,9 @@ body {
   margin: 0;
   max-width: 100vw;
   min-height: 100vh;
+  background: linear-gradient(
+    101deg,
+    rgba(250, 247, 231, 1) 25%,
+    rgba(254, 244, 174, 1) 75%
+  );
 }

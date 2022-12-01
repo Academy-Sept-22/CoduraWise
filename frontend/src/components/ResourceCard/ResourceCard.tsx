@@ -13,7 +13,7 @@ const ResourceCard = ({ title, link, rating }: ResourceCardProps) => {
     <article className="resource-card__container">
       <h3 className="resource-card__title">
         <a className="resource-card__link" href={link}>
-          Title: {title}
+          {title}
         </a>
       </h3>
       <StarRating rating={rating} />
