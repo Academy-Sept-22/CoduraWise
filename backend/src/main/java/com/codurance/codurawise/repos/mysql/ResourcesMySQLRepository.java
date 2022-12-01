@@ -12,19 +12,6 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
   private static final String RESOURCE_TABLE = "Resource";
   private final Connection connection;
 
-  public static ResourcesMySQLRepository create(String host,
-                                                int port,
-                                                String database,
-                                                String userName,
-                                                String password) throws Exception {
-
-    Class.forName("com.mysql.cj.jdbc.Driver");
-    Connection connection = DriverManager.getConnection(
-      "jdbc:mysql://" + host + ":" + port + "/" + database, userName, password);
-
-    return new ResourcesMySQLRepository(connection);
-  }
-
   public ResourcesMySQLRepository(Connection connection) {
     this.connection = connection;
   }

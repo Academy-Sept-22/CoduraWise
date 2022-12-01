@@ -1,20 +1,19 @@
 package com.codurance.codurawise.lambdas;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.codurance.codurawise.domain.models.Resource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class ResourcesResponse {
+public class Response<T> {
   final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-  public ResourcesResponse() {
+  public Response() {
   }
 
-  APIGatewayProxyResponseEvent createResponse(List<Resource> resources) {
+  APIGatewayProxyResponseEvent createResponse(List<T> elements) {
     APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
     response.setIsBase64Encoded(false);
     response.setStatusCode(200);
@@ -23,7 +22,7 @@ public class ResourcesResponse {
     headers.put("Access-Control-Allow-Origin", "*");
     headers.put("Access-Control-Allow-Credentials", "true");
     response.setHeaders(headers);
-    response.setBody(gson.toJson(resources));
+    response.setBody(gson.toJson(elements));
     return response;
   }
 }

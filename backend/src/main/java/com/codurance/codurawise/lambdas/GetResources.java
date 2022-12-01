@@ -7,10 +7,12 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.domain.services.ResourceService;
 import com.codurance.codurawise.repos.ResourcesRepository;
+import com.codurance.codurawise.repos.mysql.MysqlConnection;
 import com.codurance.codurawise.repos.mysql.ResourcesMySQLRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
@@ -19,7 +21,7 @@ public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent,
   private static final String TABLE_NAME_PROPERTY = "TABLE_NAME";
 
   private static final Logger logger = LoggerFactory.getLogger(GetResources.class);
-  private final ResourcesResponse resourcesResponse = new ResourcesResponse();
+  private final Response<Resource> response = new Response<>();
   private final ResourceService resourceService;
 
   public GetResources() {
@@ -27,9 +29,9 @@ public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent,
     String region = System.getenv(REGION_PROPERTY);
     ResourcesRepository repository;
     try {
-      repository = ResourcesMySQLRepository.create(
-        "codurawisedb-dev.codurance.io",
+      Connection connection = MysqlConnection.createConnection("codurawisedb-dev.codurance.io",
         3306, "CoduraWise", "admin", "CoduraWise");
+      repository = new ResourcesMySQLRepository(connection);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
@@ -40,6 +42,6 @@ public class GetResources implements RequestHandler<APIGatewayProxyRequestEvent,
   public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
     List<Resource> resources = resourceService.getAll();
     logger.info("Got " + resources.size() + " resources.");
-    return resourcesResponse.createResponse(resources);
+    return response.createResponse(resources);
   }
 }
