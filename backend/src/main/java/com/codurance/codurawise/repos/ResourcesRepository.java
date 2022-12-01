@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ResourcesRepository {
 
-    List<Resource> getAllResources();
+    List<Resource> getAllSortedByAverageRatingAndCreationDate();
 
-  List<Resource> getByTag(String tag);
+  List<Resource> getByTagSortedByAverageRatingAndCreationDate(String tag);
 }

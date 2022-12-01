@@ -13,10 +13,10 @@ public class ResourceService {
   }
 
   public List<Resource> getAll() {
-    return repository.getAllResources();
+    return repository.getAllSortedByAverageRatingAndCreationDate();
   }
 
   public List<Resource> getByTag(String tag) {
-    return repository.getByTag(tag);
+    return repository.getByTagSortedByAverageRatingAndCreationDate(tag);
   }
 }

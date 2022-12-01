@@ -23,27 +23,22 @@ class ResourceServiceTest {
     List<Resource> resourceCollection = new ArrayList<>();
     ResourceService resourceService = new ResourceService(repository);
 
-    given(repository.getAllResources()).willReturn(resourceCollection);
+    given(repository.getAllSortedByAverageRatingAndCreationDate()).willReturn(resourceCollection);
 
     List<Resource> result = resourceService.getAll();
 
     assertThat(result).isEqualTo(resourceCollection);
   }
 
-@Test
-public void return_by_tag() {
-  List<Resource> resourceCollection =  new ArrayList<>();
-  ResourceService resourceService = new ResourceService(repository);
+  @Test
+  public void return_by_tag() {
+    List<Resource> resourceCollection =  new ArrayList<>();
+    ResourceService resourceService = new ResourceService(repository);
 
-  given(repository.getByTag("java")).willReturn(resourceCollection);
+    given(repository.getByTagSortedByAverageRatingAndCreationDate("java")).willReturn(resourceCollection);
 
-  List<Resource> result = resourceService.getByTag("java");
+    List<Resource> result = resourceService.getByTag("java");
 
-  assertThat(result).isEqualTo(resourceCollection);
-
-
-
-
-
-}
+    assertThat(result).isEqualTo(resourceCollection);
+  }
 }

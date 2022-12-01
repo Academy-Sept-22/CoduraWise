@@ -17,12 +17,12 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
   }
 
   @Override
-  public List<Resource> getAllResources() {
+  public List<Resource> getAllSortedByAverageRatingAndCreationDate() {
     try {
       String sql = ("SELECT" +
         " * " +
         "FROM " + RESOURCE_TABLE + " " +
-        "ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date Desc;");
+        "ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date DESC;");
       return runQuery(sql);
     } catch (SQLException sqlException) {
       throw new RuntimeException("Error getting resources", sqlException);
@@ -30,15 +30,15 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
   }
 
   @Override
-  public List<Resource> getByTag(String tag) {
+  public List<Resource> getByTagSortedByAverageRatingAndCreationDate(String tag) {
     try {
       String sql = ("SELECT" +
         " Resource.* " +
         "FROM Resource " +
         "INNER JOIN Resource_Tag " +
         "USING (Resource_ID) " +
-        "WHERE Resource_Tag.Tag = '"+ tag+"' " +
-        "ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date Desc;");
+        "WHERE Resource_Tag.Tag = '" + tag + "' " +
+        "ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date DESC;");
       return runQuery(sql);
     } catch (SQLException sqlException) {
       throw new RuntimeException("Error getting resources", sqlException);
