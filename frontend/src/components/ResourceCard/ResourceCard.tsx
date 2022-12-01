@@ -12,7 +12,12 @@ const ResourceCard = ({ title, link, rating }: ResourceCardProps) => {
   return (
     <article className="resource-card__container">
       <h3 className="resource-card__title">
-        <a className="resource-card__link" href={link}>
+        <a
+          className="resource-card__link"
+          href={link}
+          target="_blank"
+          rel="noreferrer"
+        >
           {title}
         </a>
       </h3>
