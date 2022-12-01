@@ -4,11 +4,11 @@ import ResourceList from "../../components/ResourceList/ResourceList";
 import useResources from "../../store/hooks/useResources";
 
 const ResourceListPage = () => {
-  const { resources, getResources } = useResources();
+  const { resources, getResources, getResourcesByTag } = useResources();
   const { tag } = useParams();
 
   useEffect(() => {
-    tag ? resources : getResources();
+    tag ? getResourcesByTag(tag) : getResources();
   }, []);
 
   return <ResourceList resources={resources} />;

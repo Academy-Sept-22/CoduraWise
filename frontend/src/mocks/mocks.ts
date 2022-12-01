@@ -11,7 +11,7 @@ export const mockResources: Array<Resource> = [
 export const mockTags: Array<Tag> = [
   { tag: "Java" },
   { tag: "JavaScript" },
-  { tag: "Tim is Great" },
+  { tag: "Agile" },
   { tag: "React" },
   { tag: "Beginners" },
   { tag: "HTML" },
