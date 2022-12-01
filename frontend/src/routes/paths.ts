@@ -8,5 +8,6 @@ export const routerPaths = {
   noPath: "/",
   home: "/home",
   resources: "/resources",
+  tag: "/resources/tag/:tag",
   any: "*",
 };
