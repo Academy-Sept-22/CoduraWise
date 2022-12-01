@@ -1,0 +1,76 @@
+service: CoduraWiseDb
+
+frameworkVersion: "3"
+
+# -----------------------------------------------------------------------------
+custom:
+  stage: ${opt:stage, 'dev'}
+  coduranceHostedZoneId: Z2P3IWUGUFUUGE
+  coduranceHostedZoneName: codurance.io
+  dbSecretStoreName: CoduraWiseRDSSecret
+  databaseUrl: codurawisedb-${self:custom.stage}.${self:custom.coduranceHostedZoneName}
+
+# -----------------------------------------------------------------------------
+provider:
+  name: aws
+  runtime: java11
+  profile: codurawise
+  region: eu-west-3
+
+  stage: ${self:custom.stage}
+
+  iam:
+      role:
+        statements:
+          # Allow functions to access all secrets
+          - Effect: Allow
+            Action: 
+              - 'secretsmanager:GetResourcePolicy'
+              - 'secretsmanager:GetSecretValue'
+              - 'secretsmanager:DescribeSecret'
+              - 'secretsmanager:ListSecretVersionIds'
+              - 'secretsmanager:ListSecrets'
+            Resource: '*'
+
+  environment:
+    DATABASE_URL: ${self:custom.databaseUrl}
+    DATABASE_PORT: 3306
+    DATABASE_NAME: CoduraWise
+    DATABASE_SECRET_STORE_NAME: ${self:custom.dbSecretStoreName}
+
+# -----------------------------------------------------------------------------
+resources:
+  Resources:
+    CoduraWiseDbInstance:
+      Type: AWS::RDS::DBInstance
+      Properties:
+        DBName: codurawise
+        DBInstanceIdentifier: codurawisedb-${opt:stage, 'dev'}
+        MasterUsername: ${param:username}
+        MasterUserPassword: ${param:password}
+        Engine: MySQL
+        EngineVersion: 8.0.28
+        DBInstanceClass: db.t3.micro
+        StorageType: gp2
+        PubliclyAccessible: true
+        MultiAZ: false
+        AllocatedStorage: "20"
+        AvailabilityZone: "${self:provider.region}a"
+        # VPCSecurityGroups:
+        #   - Ref: LambdaSecurityGroup
+    DNSRecordSet:
+      Type: AWS::Route53::RecordSet
+      Properties:
+        HostedZoneName: ${self:custom.coduranceHostedZoneName}.
+        Name: ${self:custom.databaseUrl}
+        Type: CNAME
+        TTL: '300'
+        ResourceRecords:
+        - {"Fn::GetAtt": ["CoduraWiseDbInstance","Endpoint.Address"]}
+      DependsOn: CoduraWiseDbInstance
+    CoduraWiseDbSecret:
+      Type: 'AWS::SecretsManager::Secret'
+      Properties:
+        Name: CoduraWiseDbSecret-${opt:stage, 'dev'}
+        Description: This secret has a hardcoded password in SecretString
+        SecretString: '{"username":"${param:username}","password":"${param:password}"}'

@@ -1,4 +1,4 @@
-service: CoduraWise
+service: CoduraWiseBack
 
 frameworkVersion: "3"
 
@@ -10,8 +10,10 @@ custom:
   stage: ${opt:stage, 'dev'}
   coduranceHostedZoneId: Z2P3IWUGUFUUGE
   coduranceHostedZoneName: codurance.io
-  dbSecretStoreName: CoduraWiseRDSSecret
   databaseUrl: codurawisedb-${self:custom.stage}.${self:custom.coduranceHostedZoneName}
+  dbName: codurawise
+  dbPort: 3306
+  dbSecretStoreName: CoduraWiseDbSecret-${opt:stage, 'dev'}
   apiDomain:
     dev: codurawise-api-dev.codurance.io
     prod: codurawise-api.codurance.io
@@ -34,19 +36,32 @@ provider:
   region: eu-west-3
 
   stage: ${self:custom.stage}
+  timeout: 30
 
-  vpc:
-      securityGroupIds:
-        - Ref: LambdaSecurityGroup
-      subnetIds:
-        - subnet-075cbc4a
-        - subnet-72b47f09
-        - subnet-e060d189
+  # vpc:
+  #     securityGroupIds:
+  #       - Ref: LambdaSecurityGroup
+  #     subnetIds:
+  #       - subnet-075cbc4a
+  #       - subnet-72b47f09
+  #       - subnet-e060d189
+  iam:
+      role:
+        statements:
+          # Allow functions to access all secrets
+          - Effect: Allow
+            Action: 
+              - 'secretsmanager:GetResourcePolicy'
+              - 'secretsmanager:GetSecretValue'
+              - 'secretsmanager:DescribeSecret'
+              - 'secretsmanager:ListSecretVersionIds'
+              - 'secretsmanager:ListSecrets'
+            Resource: '*'
 
   environment:
     DATABASE_URL: ${self:custom.databaseUrl}
-    DATABASE_PORT: 3306
-    DATABASE_NAME: CoduraWise
+    DATABASE_PORT: ${self:custom.dbPort}
+    DATABASE_NAME: ${self:custom.dbName}
     DATABASE_SECRET_STORE_NAME: ${self:custom.dbSecretStoreName}
 
 package:
@@ -74,49 +89,3 @@ functions:
           method: GET
           path: /tags
           cors: true
-
-# -----------------------------------------------------------------------------
-resources:
-  Resources:
-    LambdaSecurityGroup:
-      Type: "AWS::EC2::SecurityGroup"
-      Properties:
-        GroupName: CoduraWiseLambdaSecurityGroup-${opt:stage, 'dev'}
-        GroupDescription: Allow all outbound traffic, no inbound
-        SecurityGroupIngress:
-          - IpProtocol: -1
-            CidrIp: 0.0.0.0/0
-        VpcId: vpc-f3ff439a
-    CoduraWiseDbInstance:
-      Type: AWS::RDS::DBInstance
-      Properties:
-        DBName: codurawise
-        DBInstanceIdentifier: codurawisedb-${opt:stage, 'dev'}
-        MasterUsername: ${param:username}
-        MasterUserPassword: ${param:password}
-        Engine: MySQL
-        EngineVersion: 8.0.28
-        DBInstanceClass: db.t3.micro
-        StorageType: gp2
-        PubliclyAccessible: true
-        MultiAZ: false
-        AllocatedStorage: "20"
-        AvailabilityZone: "${self:provider.region}a"
-        VPCSecurityGroups:
-          - Ref: LambdaSecurityGroup
-    DNSRecordSet:
-      Type: AWS::Route53::RecordSet
-      Properties:
-        HostedZoneName: ${self:custom.coduranceHostedZoneName}.
-        Name: ${self:custom.databaseUrl}
-        Type: CNAME
-        TTL: '300'
-        ResourceRecords:
-        - {"Fn::GetAtt": ["CoduraWiseDbInstance","Endpoint.Address"]}
-      DependsOn: CoduraWiseDbInstance
-    RDSSecret:
-      Type: 'AWS::SecretsManager::Secret'
-      Properties:
-        Name: CoduraWiseRDSSecret
-        Description: This secret has a hardcoded password in SecretString
-        SecretString: '{"username":"${param:username}","password":"${param:password}"}'

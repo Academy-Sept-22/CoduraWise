@@ -1,0 +1,42 @@
+name: Database deploy
+
+on: 
+  workflow_dispatch
+
+jobs:
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: infra/database
+        
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+         
+    - name: Install Serverless Framework
+      run: npm install -g serverless
+    
+    - name: Serverless AWS authentication
+      run: sls config credentials --provider aws --key ${{ secrets.AWS_KEY }} --secret ${{ secrets.AWS_SECRET }} --profile codurawise
+    
+    - name: Create env file
+      run: | # cp sample.env.yml env.yml
+        cat > env.yml << EOF
+        ${{ secrets.ENV }}
+        EOF
+    
+    - name: Install NPM dependencies
+      run: npm install
+    
+    - name: Create Database infrastructure on AWS
+      run: sls deploy -s dev --param="username=${{ secrets.RDS_USERNAME }}" --param="password=${{ secrets.RDS_PASSWORD }}"
