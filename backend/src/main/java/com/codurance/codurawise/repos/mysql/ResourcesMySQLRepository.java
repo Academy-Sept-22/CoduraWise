@@ -4,8 +4,8 @@ import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.repos.ResourcesRepository;
 
 import java.sql.*;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ResourcesMySQLRepository implements ResourcesRepository {
 
@@ -30,9 +30,12 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
   }
 
   @Override
-  public Collection<Resource> getAllResources() {
+  public List<Resource> getAllResources() {
     try {
-      String sql = ("SELECT * FROM " + RESOURCE_TABLE + ";");
+      String sql = ("SELECT" +
+        " * " +
+        "FROM " + RESOURCE_TABLE + " " +
+        "ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date Desc;");
       return runQuery(sql);
     } catch (SQLException sqlException) {
       throw new RuntimeException("Error getting resources", sqlException);
@@ -40,19 +43,25 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
   }
 
   @Override
-  public Collection<Resource> getByTag(String tag) {
+  public List<Resource> getByTag(String tag) {
     try {
-      String sql = ("SELECT Resource.* FROM Resource INNER JOIN Resource_Tag USING (Resource_ID) WHERE Resource_Tag.Tag = '"+ tag+"';");
+      String sql = ("SELECT" +
+        " Resource.* " +
+        "FROM Resource " +
+        "INNER JOIN Resource_Tag " +
+        "USING (Resource_ID) " +
+        "WHERE Resource_Tag.Tag = '"+ tag+"' " +
+        "ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date Desc;");
       return runQuery(sql);
     } catch (SQLException sqlException) {
       throw new RuntimeException("Error getting resources", sqlException);
     }
   }
 
-  private Collection<Resource> runQuery(String sql) throws SQLException {
+  private List<Resource> runQuery(String sql) throws SQLException {
     Statement statement = connection.createStatement();
     ResultSet result = statement.executeQuery(sql);
-    HashSet<Resource> resources = new HashSet<>();
+    List<Resource> resources = new ArrayList<>();
     while (result.next()) {
 
       int resourceID = result.getInt("Resource_ID");

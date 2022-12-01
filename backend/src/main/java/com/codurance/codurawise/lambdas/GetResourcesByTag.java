@@ -11,7 +11,7 @@ import com.codurance.codurawise.repos.mysql.ResourcesMySQLRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public class GetResourcesByTag implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
@@ -41,7 +41,7 @@ public class GetResourcesByTag implements RequestHandler<APIGatewayProxyRequestE
   public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
     Map<String, String> pathParameters = event.getPathParameters();
     String tag = pathParameters.get("tag");
-    Collection<Resource> resources = resourceService.getByTag(tag);
+    List<Resource> resources = resourceService.getByTag(tag);
     logger.info("Got " + resources.size() + " resources for tag " + tag);
     return resourcesResponse.createResponse(resources);
   }

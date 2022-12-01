@@ -3,7 +3,7 @@ package com.codurance.codurawise.domain.services;
 import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.repos.ResourcesRepository;
 
-import java.util.Collection;
+import java.util.List;
 
 public class ResourceService {
   private final ResourcesRepository repository;
@@ -12,11 +12,11 @@ public class ResourceService {
     this.repository = repository;
   }
 
-  public Collection<Resource> getAll() {
+  public List<Resource> getAll() {
     return repository.getAllResources();
   }
 
-  public Collection<Resource> getByTag(String tag) {
+  public List<Resource> getByTag(String tag) {
     return repository.getByTag(tag);
   }
 }

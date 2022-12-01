@@ -2,11 +2,11 @@ package com.codurance.codurawise.repos;
 
 import com.codurance.codurawise.domain.models.Resource;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface ResourcesRepository {
 
-    Collection<Resource> getAllResources();
+    List<Resource> getAllResources();
 
-  Collection<Resource> getByTag(String tag);
+  List<Resource> getByTag(String tag);
 }

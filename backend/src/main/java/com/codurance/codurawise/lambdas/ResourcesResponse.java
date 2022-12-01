@@ -5,8 +5,8 @@ import com.codurance.codurawise.domain.models.Resource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 public class ResourcesResponse {
   final Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -14,7 +14,7 @@ public class ResourcesResponse {
   public ResourcesResponse() {
   }
 
-  APIGatewayProxyResponseEvent createResponse(Collection<Resource> resources) {
+  APIGatewayProxyResponseEvent createResponse(List<Resource> resources) {
     APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
     response.setIsBase64Encoded(false);
     response.setStatusCode(200);
