@@ -18,7 +18,10 @@ const Routing = () => {
           path={routerPaths.any}
           element={<Navigate to={routerPaths.noPath} replace />}
         />
-        <Route path={routerPaths.tag} element={<ResourceListPage />} />
+        <Route
+        path={routerPaths.tag}
+        element={<ResourceListPage />}
+         />
       </Routes>
     </BrowserRouter>
   );
