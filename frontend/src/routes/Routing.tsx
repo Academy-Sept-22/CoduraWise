@@ -8,6 +8,10 @@ const Routing = () => {
     <BrowserRouter>
       <Routes>
         <Route
+        path={routerPaths.home}
+        element={<HomePage/>}
+        />
+        <Route
           path={routerPaths.noPath}
           element={<Navigate to={routerPaths.resources} replace />}
         />
