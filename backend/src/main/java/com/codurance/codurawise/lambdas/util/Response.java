@@ -1,4 +1,4 @@
-package com.codurance.codurawise.lambdas;
+package com.codurance.codurawise.lambdas.util;
 
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.google.gson.Gson;
@@ -13,7 +13,7 @@ public class Response<T> {
   public Response() {
   }
 
-  APIGatewayProxyResponseEvent createResponse(List<T> elements) {
+  public APIGatewayProxyResponseEvent createResponse(List<T> elements) {
     APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
     response.setIsBase64Encoded(false);
     response.setStatusCode(200);
