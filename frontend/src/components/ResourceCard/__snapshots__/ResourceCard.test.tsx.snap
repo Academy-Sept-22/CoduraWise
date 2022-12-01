@@ -10,6 +10,8 @@ exports[`snapshot test: the html matches 1`] = `
     <a
       className="resource-card__link"
       href="url"
+      rel="noreferrer"
+      target="_blank"
     >
       title
     </a>
