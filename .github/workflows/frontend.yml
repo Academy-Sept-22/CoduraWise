@@ -6,8 +6,8 @@ on:
     branches:
       - development
     paths:
-      - 'frontend/*'
-      - 'infra/*'
+      - 'frontend/**'
+      - 'infra/frontend/*'
 
 jobs:
   build-and-test:
