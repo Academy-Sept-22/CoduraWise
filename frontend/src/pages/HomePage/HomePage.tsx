@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TagCloud from "../../components/TagCloud/TagCloud";
-import { mockTags } from "../../mocks/mocks";
+import useTags from "../../store/hooks/useTags";
 
 const HomePage = () => {
+  const { tags, getTags } = useTags();
+
+  useEffect(() => {
+    getTags();
+  }, []);
+
   return (
     <div className="home-page">
-      <TagCloud tags={mockTags} />
+      <TagCloud tags={tags} />
     </div>
   );
 };

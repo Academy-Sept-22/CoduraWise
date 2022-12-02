@@ -10,9 +10,9 @@ interface TagCloudProps {
 const TagCloud = ({ tags }: TagCloudProps) => {
   return (
     <div className="tag-cloud">
-      {tags.map((tag) => (
+      {tags ? tags.map((tag) => (
         <TagCloudTag key={tag.tag} tagName={tag.tag} />
-      ))}
+      )) : null}
     </div>
   );
 };
