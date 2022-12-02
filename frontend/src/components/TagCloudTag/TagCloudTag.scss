@@ -1,0 +1,11 @@
+.tag-container{border:black solid 1px;
+     max-width: fit-content;
+      padding: 50px;
+      margin: auto;
+      margin-top: 5%;
+      background-color:gray;
+   & > a{
+    color: white;
+    font-family: monospace, sans-serif;
+    text-decoration: none ;
+   }}

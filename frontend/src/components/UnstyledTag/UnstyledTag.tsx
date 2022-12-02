@@ -10,7 +10,7 @@ const UnstyledTag = ({ tagName }: UnstyledTagProps) => {
   const path = routerPaths.tag.replace(":tag", tagName);
 
   return (
-    <div>
+    <div className="tag-container">
       <Link to={path}>{tagName}</Link>
     </div>
   );

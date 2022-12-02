@@ -1,6 +1,7 @@
 import React from "react";
 import { Tag } from "../../models/Tags";
 import TagCloudTag from "../TagCloudTag/TagCloudTag";
+import "./TagCloud.scss";
 
 interface TagCloudProps {
   tags: Array<Tag>;
@@ -8,7 +9,7 @@ interface TagCloudProps {
 
 const TagCloud = ({ tags }: TagCloudProps) => {
   return (
-    <div>
+    <div className="tag-cloud">
       {tags.map((tag) => (
         <TagCloudTag key={tag.tag} tagName={tag.tag} />
       ))}
