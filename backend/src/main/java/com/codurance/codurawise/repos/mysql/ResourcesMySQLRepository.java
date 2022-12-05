@@ -45,6 +45,11 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
     }
   }
 
+  @Override
+  public List<Resource> getByTitle(String titleQuery) {
+      throw new UnsupportedOperationException();
+  }
+
   private List<Resource> runQuery(String sql) throws SQLException {
     Statement statement = connection.createStatement();
     ResultSet result = statement.executeQuery(sql);
