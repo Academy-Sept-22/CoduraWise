@@ -10,6 +10,6 @@ public interface ResourcesRepository {
 
   List<Resource> getByTagSortedByAverageRatingAndCreationDate(String tag);
 
-  List<Resource> getByTitle(String titleQuery);
+  List<Resource> getByTitleSortedByAverageRatingAndCreationDate(String titleQuery);
 
 }

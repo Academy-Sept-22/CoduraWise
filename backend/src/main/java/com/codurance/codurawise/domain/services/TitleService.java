@@ -14,6 +14,6 @@ public class TitleService{
   }
 
   public List<Resource> getResourceByTitle(String title) {
-      return repository.getByTitle(title);
+      return repository.getByTitleSortedByAverageRatingAndCreationDate(title);
   }
 }

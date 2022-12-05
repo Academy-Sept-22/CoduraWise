@@ -23,7 +23,7 @@ public class TitleServiceTest {
     List<Resource> resourceList =  new ArrayList<>();
     TitleService titleService = new TitleService(repository);
 
-    given(repository.getByTitle("scrum")).willReturn(resourceList);
+    given(repository.getByTitleSortedByAverageRatingAndCreationDate("scrum")).willReturn(resourceList);
 
     List<Resource> result = titleService.getResourceByTitle("scrum");
 
