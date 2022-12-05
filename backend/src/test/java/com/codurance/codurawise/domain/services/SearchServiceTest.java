@@ -24,12 +24,11 @@ public class SearchServiceTest {
   public void return_by_title() {
     List<Resource> resourceList =  new ArrayList<>();
     SearchService searchService = new SearchService(repository);
-    Map<String, String> query = new java.util.HashMap<>(Collections.emptyMap());
-    query.put("title", "scrum");
+    String title = "scrum";
 
-    given(repository.queryByTitleAndTag(query)).willReturn(resourceList);
+    given(repository.queryByTitleAndTag(title, null)).willReturn(resourceList);
 
-    List<Resource> result = searchService.getResourceBySearch(query);
+    List<Resource> result = searchService.getResourceBySearch(title, null);
 
     assertThat(result).isEqualTo(resourceList);
   }

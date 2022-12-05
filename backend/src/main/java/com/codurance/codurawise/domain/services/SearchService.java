@@ -4,7 +4,6 @@ import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.repos.SearchRepository;
 
 import java.util.List;
-import java.util.Map;
 
 public class SearchService{
 
@@ -14,7 +13,7 @@ public class SearchService{
     this.repository = repository;
   }
 
-  public List<Resource> getResourceBySearch(Map<String, String> query) {
-      return repository.queryByTitleAndTag(query);
+  public List<Resource> getResourceBySearch(String title, String tag) {
+      return repository.queryByTitleAndTag(title, tag);
   }
 }

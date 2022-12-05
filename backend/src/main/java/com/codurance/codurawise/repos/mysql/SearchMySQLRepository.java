@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class SearchMySQLRepository implements SearchRepository {
   private final Connection connection;
@@ -19,10 +18,7 @@ public class SearchMySQLRepository implements SearchRepository {
   }
 
   @Override
-  public List<Resource> queryByTitleAndTag(Map<String, String> query) {
-    String tag = query.get("tag");
-    String title = query.get("title");
-
+  public List<Resource> queryByTitleAndTag(String title, String tag) {
     String conditionsForTag = tag.length() > 0 ? "Tag = '" + tag + "' " : "";
     String conditionsForTitle = title.length() > 0 ? "Title LIKE = '%" + title + "%'" : "";
     String or = tag.length() > 0 && title.length() > 0 ? "OR " : "";
