@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import { MediaType, MediaTypes } from "../../models/MediaTypes"
-import { Resource } from "../../models/Resource"
 import { ResourcesContext } from "../../store/ResourcesContext";
 
 const MediaTypeSelection = () => {
-  const { mediaTypes, setMediaTypes } = useContext(ResourcesContext);
+  const { setFilterMediaTypes } = useContext(ResourcesContext);
   const [checkedState, setCheckedState] = useState(
     new Array(MediaTypes.length).fill(false)
 );
@@ -18,19 +17,18 @@ const MediaTypeSelection = () => {
       index === position ? !item : item
     )
 
-    const TypesChecked : Array<MediaType> = []
+    const mediaTypesChecked : Array<MediaType> = []
 
     setCheckedState(updatedCheckedState);
 
     checkedState.map((value : MediaType, index : number) => {
        if (value) {
-        TypesChecked.push(MediaTypes[index])
+        mediaTypesChecked.push(MediaTypes[index])
        }
       }
     )
-    setMediaTypes(TypesChecked)
+    setFilterMediaTypes(mediaTypesChecked)
   }
-
 
   return(
     <form className="media-selection">
