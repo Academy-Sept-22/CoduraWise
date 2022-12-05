@@ -3,9 +3,9 @@ import { Resource } from "../models/Resource";
 import { Tag } from "../models/Tags";
 
 export const mockResources: Array<Resource> = [
-  { id: 1, title: "Java", link: "Java Link", averageRating: 1 },
-  { id: 2, title: "Python", link: "Python Link", averageRating: 4 },
-  { id: 3, title: "Javascript", link: "Javascript Link", averageRating: 3 },
+  { id: 1, title: "Java", link: "Java Link", mediaType: "video", averageRating: 1 },
+  { id: 2, title: "Python", link: "Python Link", mediaType: "article", averageRating: 4 },
+  { id: 3, title: "Javascript", link: "Javascript Link", mediaType: "course", averageRating: 3 },
 ];
 
 export const mockTags: Array<Tag> = [

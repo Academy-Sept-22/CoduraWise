@@ -1,3 +1,5 @@
-export const MediaTypes = [
-  "Video", "Article", "book", "Tutorial", "course"
+type MediaType = "video" | "article" | "book" | "tutorial" | "course";
+
+export const MediaTypes: Array<MediaType> = [
+  "video", "article", "book", "tutorial", "course"
 ];

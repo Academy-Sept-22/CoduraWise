@@ -7,11 +7,13 @@ interface ResourceListProps {
   resources: Array<Resource>;
 }
 
+const resourcesFilter = (resource: Resource) => { return true; }
+
 const ResourceList = ({ resources }: ResourceListProps) => {
   return (
     <ul className="resource-list__container">
       {resources
-        ? resources.map((resource) => (
+        ? resources.filter(resourcesFilter).map((resource) => (
             <li className="resource-list__list-element" key={resource.id}>
               <ResourceCard
                 title={resource.title}

@@ -15,6 +15,10 @@ interface TagState {
   tags: Array<Tag>;
   setTags: Dispatch<SetStateAction<Tag[]>>;
 }
+interface MediaTypeFilter {
+  mediaType: Array<string>;
+  setMediaTypes: Dispatch<SetStateAction<string[]>>;
+}
 
 export default function ResourcesContextProvider({
   children,
