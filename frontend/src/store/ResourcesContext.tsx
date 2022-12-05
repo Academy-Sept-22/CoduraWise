@@ -4,6 +4,7 @@ import React, {
   SetStateAction,
   useState,
 } from "react";
+import { MediaType } from "../models/MediaTypes";
 import { Resource } from "../models/Resource";
 import { Tag } from "../models/Tags";
 
@@ -15,9 +16,9 @@ interface TagState {
   tags: Array<Tag>;
   setTags: Dispatch<SetStateAction<Tag[]>>;
 }
-interface MediaTypeFilter {
-  mediaType: Array<string>;
-  setMediaTypes: Dispatch<SetStateAction<string[]>>;
+interface MediaTypeFilterState {
+  mediaTypes: Array<MediaType>;
+  setMediaTypes: Dispatch<SetStateAction<MediaType[]>>;
 }
 
 export default function ResourcesContextProvider({
@@ -27,12 +28,17 @@ export default function ResourcesContextProvider({
 }) {
   const [resources, setResources] = useState<Array<Resource>>([]);
   const [tags, setTags] = useState<Array<Tag>>([]);
+  const [mediaTypes, setMediaTypes] = useState<Array<MediaType>>([]);
 
   return (
-    <ResourcesContext.Provider value={{ resources, setResources, tags, setTags}}>
+    <ResourcesContext.Provider value={{ 
+      resources, setResources, 
+      tags, setTags,
+      mediaTypes, setMediaTypes,
+      }}>
       {children}
     </ResourcesContext.Provider>
   );
 }
 
-export const ResourcesContext = createContext({} as ResourceState & TagState);
+export const ResourcesContext = createContext({} as ResourceState & TagState & MediaTypeFilterState);

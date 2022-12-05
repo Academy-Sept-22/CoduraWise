@@ -1,32 +1,50 @@
-import React, { useContext } from "react";
-import { MediaTypes } from "../../models/MediaTypes"
+import React, { useContext, useState } from "react";
+import { MediaType, MediaTypes } from "../../models/MediaTypes"
 import { Resource } from "../../models/Resource"
 import { ResourcesContext } from "../../store/ResourcesContext";
 
 const MediaTypeSelection = () => {
-  const { resources, setResources } = useContext(ResourcesContext);
+  const { mediaTypes, setMediaTypes } = useContext(ResourcesContext);
+  const [checkedState, setCheckedState] = useState(
+    new Array(MediaTypes.length).fill(false)
+);
+
 
   MediaTypes.map((mediaType : string) => console.log("mediaType", mediaType));
 
-  const handleOnChange = (mediaType: string) => {
-    console.log("Clicked ", mediaType);
-    // filter the resources and set it to the context
-    const filteredResources: Resource[] = [...resources];
-    filteredResources.pop();
-    setResources(filteredResources);
+  const handleOnChange = (mediaType: MediaType, position : number) => {
+
+    const updatedCheckedState = checkedState.map((item, index) =>
+      index === position ? !item : item
+    )
+
+    const TypesChecked : Array<MediaType> = []
+
+    setCheckedState(updatedCheckedState);
+
+    checkedState.map((value : MediaType, index : number) => {
+       if (value) {
+        TypesChecked.push(MediaTypes[index])
+       }
+      }
+    )
+    setMediaTypes(TypesChecked)
   }
+
 
   return(
     <form className="media-selection">
       <h3>Filter by</h3>
-      {MediaTypes.map((mediaType : string) => (
+      {MediaTypes.map((mediaType : MediaType, index) => (
         <div key={mediaType}>
           <input 
             type="checkbox" 
             name={mediaType} 
             id={`${mediaType}media`} 
             value={mediaType}
-            onChange={() => handleOnChange(mediaType)} />
+            onChange={() => handleOnChange(mediaType, index)}
+            checked={checkedState[index]}
+            />
           <label htmlFor={`${mediaType}media`}>{mediaType}</label>
         </div>
       ))}
