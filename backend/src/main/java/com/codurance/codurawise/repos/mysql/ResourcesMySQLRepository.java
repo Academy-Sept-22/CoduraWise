@@ -45,20 +45,6 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
     }
   }
 
-  @Override
-  public List<Resource> getByTitleSortedByAverageRatingAndCreationDate(String titleQuery) {
-    try {
-      String sql = ("SELECT" +
-        " Resource.* " +
-        "FROM Resource " +
-        "WHERE Title = '" + titleQuery + "' " +
-        "ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date DESC;");
-      return runQuery(sql);
-    } catch (SQLException sqlException) {
-      throw new RuntimeException("Error getting resources", sqlException);
-    }
-  }
-
   private List<Resource> runQuery(String sql) throws SQLException {
     Statement statement = connection.createStatement();
     ResultSet result = statement.executeQuery(sql);
