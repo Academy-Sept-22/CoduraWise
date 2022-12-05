@@ -1,22 +1,17 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
+import React, { useContext } from "react";
+import { getAllByRole, render, screen } from "@testing-library/react";
 import ResourceList from "./ResourceList";
 import { mockResources } from "../../mocks/mocks";
-import ResourcesContextProvider from "../../store/ResourcesContext";
+import ContextRouterMock from "../../mocks/contextRouterMock";
+import ResourcesContextProvider, { ResourcesContext } from "../../store/ResourcesContext";
+import { MediaType } from "../../models/MediaTypes";
 
-const mockUseContext = jest.fn().mockImplementation(() => ({
-  filterMediaTypes: [],
-  setFilterMediaTypes: [],
-}));
-
-React.useContext = mockUseContext;
 describe("given the resource list", () => {
   describe("when it receives resource data", () => {
     test("then the titles match the data", () => {
-      render(<ResourcesContextProvider>
-          <ResourceList resources={mockResources} />
-        </ResourcesContextProvider>
-      );
+      render(<ContextRouterMock>
+        <ResourceList resources={mockResources} />
+      </ContextRouterMock>);
 
       const title1 = screen.getByRole("heading", { name: "Java" });
       expect(title1).toBeInTheDocument();
@@ -29,10 +24,9 @@ describe("given the resource list", () => {
     });
 
     test("then the url match the data", () => {
-      render(<ResourcesContextProvider>
+      render(<ContextRouterMock>
         <ResourceList resources={mockResources} />
-      </ResourcesContextProvider>
-    );
+      </ContextRouterMock>);
 
       const url1 = screen.getByRole("link", { name: "Java" });
       expect(url1).toHaveAttribute("href", mockResources[0].link);
@@ -43,5 +37,21 @@ describe("given the resource list", () => {
       const url3 = screen.getByRole("link", { name: "Javascript" });
       expect(url3).toHaveAttribute("href", mockResources[2].link);
     });
+
+    test("the", () => {
+      const mockUseContext: jest.SpyInstance = jest.spyOn(React, "useContext");
+      mockUseContext.mockReturnValue({ filterMediaTypes: [ "video" ] as Array<MediaType>})
+
+      render(<ResourcesContextProvider>
+        <ResourceList resources={mockResources} />
+      </ResourcesContextProvider>);
+
+      const url1 = screen.getByRole("link", { name: "Java" });
+      expect(url1).toHaveAttribute("href", mockResources[0].link);
+
+      const links = screen.getAllByRole("link");
+      expect(links).toHaveLength(1);
+    });
+
   });
 });

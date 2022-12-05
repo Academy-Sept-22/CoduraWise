@@ -11,6 +11,7 @@ interface ResourceListProps {
 
 const ResourceList = ({ resources }: ResourceListProps) => {
   const { filterMediaTypes } = useContext(ResourcesContext);
+  console.log("Filter: ", filterMediaTypes);
 
   const isFilterEmpty = () => {
     return filterMediaTypes.length === 0;
@@ -24,9 +25,10 @@ const ResourceList = ({ resources }: ResourceListProps) => {
     return isFilterEmpty() || resourceMediaTypeIsInFilter(resource); 
   }
   
+
   return (
     <ul className="resource-list__container">
-      {resources
+      { resources
         ? resources.filter(isResourceDisplayable).map((resource) => (
             <li className="resource-list__list-element" key={resource.id}>
               <ResourceCard

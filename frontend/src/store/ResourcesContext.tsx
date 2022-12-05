@@ -34,11 +34,11 @@ export default function ResourcesContextProvider({
     <ResourcesContext.Provider value={{ 
       resources, setResources, 
       tags, setTags,
-      filterMediaTypes: filterMediaTypes, setFilterMediaTypes: setFilterMediaTypes,
+      filterMediaTypes, setFilterMediaTypes,
       }}>
       {children}
     </ResourcesContext.Provider>
   );
 }
-
-export const ResourcesContext = createContext({} as ResourceState & TagState & FilterMediaTypeState);
+export type ContextState = ResourceState & TagState & FilterMediaTypeState;
+export const ResourcesContext = createContext({} as ContextState);
