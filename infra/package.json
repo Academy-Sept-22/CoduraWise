@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "serverless-domain-manager": "^6.2.0"
+  },
+  "dependencies": {
+    "serverless-finch": "^4.0.0"
+  }
+}

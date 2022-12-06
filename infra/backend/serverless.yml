@@ -46,17 +46,17 @@ provider:
   #       - subnet-72b47f09
   #       - subnet-e060d189
   iam:
-      role:
-        statements:
-          # Allow functions to access all secrets
-          - Effect: Allow
-            Action: 
-              - 'secretsmanager:GetResourcePolicy'
-              - 'secretsmanager:GetSecretValue'
-              - 'secretsmanager:DescribeSecret'
-              - 'secretsmanager:ListSecretVersionIds'
-              - 'secretsmanager:ListSecrets'
-            Resource: '*'
+    role:
+      statements:
+        # Allow functions to access all secrets
+        - Effect: Allow
+          Action:
+            - "secretsmanager:GetResourcePolicy"
+            - "secretsmanager:GetSecretValue"
+            - "secretsmanager:DescribeSecret"
+            - "secretsmanager:ListSecretVersionIds"
+            - "secretsmanager:ListSecrets"
+          Resource: "*"
 
   environment:
     DATABASE_URL: ${self:custom.databaseUrl}
@@ -81,7 +81,7 @@ functions:
       - http:
           method: GET
           path: /resources/tag/{tag}
-          cors: true  
+          cors: true
   GetTags:
     handler: com.codurance.codurawise.lambdas.GetTags
     events:
@@ -89,3 +89,11 @@ functions:
           method: GET
           path: /tags
           cors: true
+  QueryResourcesByTitleAndTag:
+    handler: com.codurance.codurawise.lambdas.QueryResourcesByTitleAndTag
+    events:
+      - http:
+          method: GET
+          path: /search
+          cors: true
+
