@@ -6,28 +6,29 @@ const MediaTypeSelection = () => {
   const { setFilterMediaTypes } = useContext(ResourcesContext);
   const [checkedState, setCheckedState] = useState(
     new Array(MediaTypes.length).fill(false)
-);
+  );
 
-
-  MediaTypes.map((mediaType : string) => console.log("mediaType", mediaType));
+  const createFilter = (checkedArray: Array<boolean>) => {
+    const mediaTypesChecked : Array<MediaType> = []
+    checkedArray.map((value : boolean, index : number) => {
+      if (value) {
+        mediaTypesChecked.push(MediaTypes[index])
+      }
+    })
+    return mediaTypesChecked;
+  }
 
   const handleOnChange = (mediaType: MediaType, position : number) => {
-
+    // create new state with the checked value
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     )
-
-    const mediaTypesChecked : Array<MediaType> = []
-
-    setCheckedState(updatedCheckedState);
-
-    checkedState.map((value : MediaType, index : number) => {
-       if (value) {
-        mediaTypesChecked.push(MediaTypes[index])
-       }
-      }
-    )
+    // create MediaType array from check list
+    const mediaTypesChecked = createFilter(updatedCheckedState);
+    // set the context
     setFilterMediaTypes(mediaTypesChecked)
+    // set the state
+    setCheckedState(updatedCheckedState);
   }
 
   return(

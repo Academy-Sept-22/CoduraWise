@@ -11,7 +11,6 @@ interface ResourceListProps {
 
 const ResourceList = ({ resources }: ResourceListProps) => {
   const { filterMediaTypes } = useContext(ResourcesContext);
-  console.log("Filter: ", filterMediaTypes);
 
   const isFilterEmpty = () => {
     return filterMediaTypes.length === 0;
