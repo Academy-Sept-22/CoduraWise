@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { MediaType, MediaTypes } from "../../models/MediaTypes"
 import { ResourcesContext } from "../../store/ResourcesContext";
+import "./MediaTypeSelection.scss";
 
 const MediaTypeSelection = () => {
   const { setFilterMediaTypes } = useContext(ResourcesContext);

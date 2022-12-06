@@ -1,0 +1,16 @@
+.media-selection {
+  width: 10rem;
+  padding: 0.5rem 0 2rem 2rem;
+
+  font-family: monospace, sans-serif;
+  font-size: 0.9em;
+
+  & h3 {
+      font-size: 1em;
+      margin: 7px 0;
+    }
+  & label {
+    margin-left: 5px;
+  }
+}
+
