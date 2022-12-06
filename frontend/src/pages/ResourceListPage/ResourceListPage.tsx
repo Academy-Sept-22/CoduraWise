@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import MediaTypeSelection from "../../components/MediaTypeSelection/MediaTypeSelection";
 import ResourceList from "../../components/ResourceList/ResourceList";
 import useResources from "../../store/hooks/useResources";
+import "./ResourceListPage.scss"
 
 const ResourceListPage = () => {
   const { resources, getResources, getResourcesByTag } = useResources();
@@ -12,9 +13,9 @@ const ResourceListPage = () => {
     tag ? getResourcesByTag(tag) : getResources();
   }, []);
 
-  return (<>
+  return (<div className="container">
   <MediaTypeSelection /><ResourceList resources={resources} />
-  </>);
+  </div>);
 };
 
 export default ResourceListPage;
