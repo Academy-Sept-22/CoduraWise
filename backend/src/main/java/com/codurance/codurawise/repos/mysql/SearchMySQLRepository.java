@@ -19,9 +19,9 @@ public class SearchMySQLRepository implements SearchRepository {
 
   @Override
   public List<Resource> queryByTitleAndTag(String title, String tag) {
-    String conditionsForTag = tag.length() > 0 ? "Tag = '" + tag + "' " : "";
-    String conditionsForTitle = title.length() > 0 ? "Title LIKE = '%" + title + "%'" : "";
-    String or = tag.length() > 0 && title.length() > 0 ? "OR " : "";
+    String conditionsForTag = tag != null ? "Tag = '" + tag + "' " : "";
+    String or = tag != null && title != null ? "OR " : "";
+    String conditionsForTitle = title != null ? "Title LIKE '%" + title + "%'" : "";
 
     try {
       String sql = ("SELECT" +
@@ -37,6 +37,16 @@ public class SearchMySQLRepository implements SearchRepository {
     } catch (SQLException sqlException) {
       throw new RuntimeException("Error searching resources", sqlException);
     }
+  }
+
+  @Override
+  public List<Resource> queryByTitle(String title) {
+    return null;
+  }
+
+  @Override
+  public List<Resource> queryByTag(String tag) {
+    return null;
   }
 
   private List<Resource> runQuery(String sql) throws SQLException {
