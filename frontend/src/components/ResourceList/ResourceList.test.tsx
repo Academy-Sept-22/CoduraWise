@@ -1,14 +1,23 @@
-import React, { useContext } from "react";
-import { getAllByRole, render, screen } from "@testing-library/react";
+import React, { useContext, useEffect } from "react";
+import { render, screen } from "@testing-library/react";
 import ResourceList from "./ResourceList";
-import { mockResources } from "../../mocks/mocks";
 import ContextRouterMock from "../../mocks/contextRouterMock";
-import ResourcesContextProvider, { ResourcesContext } from "../../store/ResourcesContext";
+import { ContextState, ResourcesContext } from "../../store/ResourcesContext";
 import { MediaType } from "../../models/MediaTypes";
+import { Resource } from "../../models/Resource";
 
 describe("given the resource list", () => {
+ 
   describe("when it receives resource data", () => {
+
+    let mockResources : Array<Resource>;
+
+    beforeEach(() => {
+      mockResources = setupData();
+    });
+
     test("then the titles match the data", () => {
+
       render(<ContextRouterMock>
         <ResourceList resources={mockResources} />
       </ContextRouterMock>);
@@ -38,20 +47,49 @@ describe("given the resource list", () => {
       expect(url3).toHaveAttribute("href", mockResources[2].link);
     });
 
-    test("the", () => {
-      const mockUseContext: jest.SpyInstance = jest.spyOn(React, "useContext");
-      mockUseContext.mockReturnValue({ filterMediaTypes: [ "video" ] as Array<MediaType>})
+    describe("then the context has video in filter", () => {
+      test("then only titles for video match the data", () => {
 
-      render(<ResourcesContextProvider>
-        <ResourceList resources={mockResources} />
-      </ResourcesContextProvider>);
+        render(<ResourcesContext.Provider value={{filterMediaTypes: [ "video" ] as Array<MediaType>} as ContextState}>
+            <ResourceList resources={mockResources} />
+        </ResourcesContext.Provider>);
 
-      const url1 = screen.getByRole("link", { name: "Java" });
-      expect(url1).toHaveAttribute("href", mockResources[0].link);
+        const title1 = screen.getByRole("heading", { name: "Java" });
+        expect(title1).toBeInTheDocument();
 
-      const links = screen.getAllByRole("link");
-      expect(links).toHaveLength(1);
+        const links = screen.getAllByRole("heading");
+        expect(links).toHaveLength(1);
+      });
     });
 
+    describe("then the context has video and article in filter", () => {
+      test("filter video and article", () => {
+
+        render(<ResourcesContext.Provider value={{filterMediaTypes: [ "video", "article" ] as Array<MediaType>} as ContextState}>
+            <ResourceList resources={mockResources} />
+        </ResourcesContext.Provider>);
+
+        const title1 = screen.getByRole("heading", { name: "Java" });
+        expect(title1).toBeInTheDocument();
+
+        const title2 = screen.getByRole("heading", { name: "Python" });
+        expect(title2).toBeInTheDocument();
+
+        const title3 = screen.getByRole("heading", { name: "C#" });
+        expect(title3).toBeInTheDocument();
+
+        const links = screen.getAllByRole("heading");
+        expect(links).toHaveLength(3);
+      });
+    });
+
+    const setupData = () => {
+      return [
+        { id: 1, title: "Java", link: "Java Link", mediaType: "video", averageRating: 1 },
+        { id: 2, title: "Python", link: "Python Link", mediaType: "article", averageRating: 4 },
+        { id: 3, title: "Javascript", link: "Javascript Link", mediaType: "course", averageRating: 3 },
+        { id: 4, title: "C#", link: "C# Link", mediaType: "article", averageRating: 4 },
+      ] as Array<Resource>;
+    }
   });
 });
