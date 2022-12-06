@@ -4,16 +4,15 @@ import com.codurance.codurawise.domain.models.Tag;
 import com.codurance.codurawise.repos.TagRepository;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
+
+import static com.codurance.codurawise.repos.mysql.util.StatementCreator.tagsStatementCreator;
 
 public class TagsMySQLRepository implements TagRepository {
 
   private static final String TAG_TABLE = "Tag";
-  private static final String TAG_COLUMN= "Tag";
+  private static final String TAG_COLUMN = "Tag";
   private final Connection connection;
 
   public TagsMySQLRepository(Connection connection) {
@@ -34,15 +33,7 @@ public class TagsMySQLRepository implements TagRepository {
   }
 
   private List<Tag> runQuery(String sql) throws SQLException {
-    Statement statement = connection.createStatement();
-    ResultSet result = statement.executeQuery(sql);
-    List<Tag> tags = new ArrayList<>();
-    while (result.next()) {
-      String tagValue = result.getString("Tag");
-      Tag tag = new Tag();
-      tag.setTag(tagValue);
-      tags.add(tag);
-    }
-    return tags;
+    return tagsStatementCreator(sql, connection);
   }
+
 }
