@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test: the html matches 1`] = `
+<form
+  className="media-selection"
+>
+  <h3>
+    Filter by
+  </h3>
+  <div>
+    <input
+      checked={false}
+      id="videomedia"
+      name="video"
+      onChange={[Function]}
+      type="checkbox"
+      value="video"
+    />
+    <label
+      htmlFor="videomedia"
+    >
+      video
+    </label>
+  </div>
+  <div>
+    <input
+      checked={false}
+      id="articlemedia"
+      name="article"
+      onChange={[Function]}
+      type="checkbox"
+      value="article"
+    />
+    <label
+      htmlFor="articlemedia"
+    >
+      article
+    </label>
+  </div>
+  <div>
+    <input
+      checked={false}
+      id="bookmedia"
+      name="book"
+      onChange={[Function]}
+      type="checkbox"
+      value="book"
+    />
+    <label
+      htmlFor="bookmedia"
+    >
+      book
+    </label>
+  </div>
+  <div>
+    <input
+      checked={false}
+      id="tutorialmedia"
+      name="tutorial"
+      onChange={[Function]}
+      type="checkbox"
+      value="tutorial"
+    />
+    <label
+      htmlFor="tutorialmedia"
+    >
+      tutorial
+    </label>
+  </div>
+  <div>
+    <input
+      checked={false}
+      id="coursemedia"
+      name="course"
+      onChange={[Function]}
+      type="checkbox"
+      value="course"
+    />
+    <label
+      htmlFor="coursemedia"
+    >
+      course
+    </label>
+  </div>
+</form>
+`;
