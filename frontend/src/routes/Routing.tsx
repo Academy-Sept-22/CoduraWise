@@ -3,10 +3,12 @@ import React from "react";
 import ResourceListPage from "../pages/ResourceListPage/ResourceListPage";
 import { routerPaths } from "./paths";
 import HomePage from "../pages/HomePage/HomePage";
+import Header from "../components/Header/Header";
 
 const Routing = () => {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route
           path={routerPaths.noPath}
@@ -18,10 +20,7 @@ const Routing = () => {
           path={routerPaths.any}
           element={<Navigate to={routerPaths.noPath} replace />}
         />
-        <Route
-        path={routerPaths.tag}
-        element={<ResourceListPage />}
-         />
+        <Route path={routerPaths.tag} element={<ResourceListPage />} />
       </Routes>
     </BrowserRouter>
   );
