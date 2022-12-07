@@ -33,4 +33,31 @@ public class SearchServiceTest {
     assertThat(result).isEqualTo(resourceList);
   }
 
+  @Test
+  public void return_by_tag() {
+    List<Resource> resourceList =  new ArrayList<>();
+    SearchService searchService = new SearchService(repository);
+    String tag = "agile";
+
+    given(repository.queryByTitleAndTag(null, tag)).willReturn(resourceList);
+
+    List<Resource> result = searchService.getResourceBySearch(null, tag);
+
+    assertThat(result).isEqualTo(resourceList);
+  }
+
+  @Test
+  public void return_by_title_and_tag() {
+    List<Resource> resourceList =  new ArrayList<>();
+    SearchService searchService = new SearchService(repository);
+    String title = "scrum";
+    String tag = "agile";
+
+    given(repository.queryByTitleAndTag(title, tag)).willReturn(resourceList);
+
+    List<Resource> result = searchService.getResourceBySearch(title, tag);
+
+    assertThat(result).isEqualTo(resourceList);
+  }
+
   }
