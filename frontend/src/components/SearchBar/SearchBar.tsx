@@ -2,18 +2,22 @@ import React from "react";
 import "./SearchBar.scss";
 
 const SearchBar = () => {
-  const submitSearch = () => {
+  const submitSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     console.log("test");
   };
-  debugger;
+  const onChange = () => {
+    console.log("onchange");
+  };
+  //debugger;
   return (
     <section role="search">
-      <form onSubmit={submitSearch}>
+      <form onSubmit={(event) => submitSearch(event)}>
         <input
           type="search"
           name="whatever"
           value="hello world"
-          onChange={submitSearch}
+          onChange={onChange}
         />
         <button type="submit">search</button>
       </form>
@@ -22,4 +26,3 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
-
