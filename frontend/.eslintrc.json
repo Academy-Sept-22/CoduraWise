@@ -24,6 +24,7 @@
         "destructuring": "any",
         "ignoreReadBeforeAssign": false
       }
-    ]
+    ],
+    "prefer-template": "warn"
   }
 }

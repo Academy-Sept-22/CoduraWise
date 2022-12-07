@@ -1,27 +1,33 @@
 import React, { useState } from "react";
+import useResources from "../../store/hooks/useResources";
 import "./SearchBar.scss";
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
+  const { searchByTitleAndTag } = useResources();
 
-  const submitSearch = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("test");
+
+    const title = searchValue ?? null;
+    const tag = searchValue ?? null;
+
+    searchByTitleAndTag(title, tag);
   };
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
 
   return (
     <section role="search">
-      <form onSubmit={submitSearch}>
-        <label htmlFor="search">Search Resources</label>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="search">Search:</label>
         <input
           id="search"
           type="search"
           name="search"
           value={searchValue}
-          onChange={onChange}
+          onChange={handleChange}
         />
         <button type="submit">search</button>
       </form>
@@ -30,4 +36,3 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
-

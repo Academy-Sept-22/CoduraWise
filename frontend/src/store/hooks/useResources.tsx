@@ -14,7 +14,19 @@ function useResources() {
   };
 
   const getResourcesByTag = async (tag: string) => {
-    const url = backendUrls.resourcesByTagUrl + tag;
+    const url = backendUrls.resourcesByTagUrl(tag);
+    const response = await fetch(url);
+    const data = await response.json();
+    if (data && setResources) {
+      setResources(data);
+    }
+  };
+
+  const searchByTitleAndTag = async (
+    title: string | null,
+    tag: string | null,
+  ) => {
+    const url = backendUrls.searchUrl(title, tag);
     const response = await fetch(url);
     const data = await response.json();
     if (data && setResources) {
@@ -26,6 +38,7 @@ function useResources() {
     resources,
     getResources,
     getResourcesByTag,
+    searchByTitleAndTag,
   };
 }
 

@@ -1,9 +1,11 @@
 const baseBackendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export const backendUrls = {
-  resourceListUrl: baseBackendUrl + "/resources",
-  resourcesByTagUrl: baseBackendUrl + "/resources/tag/",
-  tagsUrl: baseBackendUrl + "/tags/",
+  resourceListUrl: `${baseBackendUrl}/resources`,
+  tagsUrl: `${baseBackendUrl}/tags/`,
+  resourcesByTagUrl: (tag: string) => `${baseBackendUrl}/resources/tag/${tag}`,
+  searchUrl: (title: string | null, tag: string | null) =>
+    `${baseBackendUrl}/search?tag=${tag}&title=${title}`,
 };
 
 export const routerPaths = {
