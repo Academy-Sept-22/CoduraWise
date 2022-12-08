@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import MediaTypeSelection from "../../components/MediaTypeSelection/MediaTypeSelection";
-import ResourceList from "../../components/ResourceList/ResourceList";
+import ListingWithFilter from "../../components/ListingWithFilter/ListingWithFilter";
 import useResources from "../../store/hooks/useResources";
 import "./ResourceListPage.scss";
 
@@ -13,12 +12,7 @@ const ResourceListPage = () => {
     tag ? getResourcesByTag(tag) : getResources();
   }, []);
 
-  return (
-    <div className="container">
-      <ResourceList resources={resources} />
-      <MediaTypeSelection />
-    </div>
-  );
+  return <ListingWithFilter resources={resources} />;
 };
 
 export default ResourceListPage;
