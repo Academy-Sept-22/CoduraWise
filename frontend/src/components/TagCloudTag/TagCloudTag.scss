@@ -1,11 +1,24 @@
-.tag-container{border:black solid 1px;
-     max-width: fit-content;
-      padding: 50px;
-      margin: auto;
-      margin-top: 5%;
-      background-color:gray;
-   & > a{
-    color: white;
+.tag-container {
+  border: black solid 1px;
+  max-width: fit-content;
+  padding: 20px;
+  margin: 10px;
+  margin-top: 5%;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1px 11px 0 rgb(31 38 135 / 37%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  &:hover {
+    background-color: #e3803a;
+    transition: 0.5s;
+  }
+  & > a {
+    color: black;
     font-family: monospace, sans-serif;
-    text-decoration: none ;
-   }}
+    text-decoration: none;
+  }
+}
+

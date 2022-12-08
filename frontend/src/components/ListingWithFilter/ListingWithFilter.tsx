@@ -11,7 +11,9 @@ interface ListingWithFilterProps {
 const ListingWithFilter = ({ resources }: ListingWithFilterProps) => {
   return (
     <div className="container">
-      <ResourceList resources={resources} />
+      <div className="resource-list">
+        <ResourceList resources={resources} />
+      </div>
       <MediaTypeSelection />
     </div>
   );
