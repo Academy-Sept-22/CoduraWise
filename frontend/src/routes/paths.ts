@@ -13,5 +13,6 @@ export const routerPaths = {
   home: "/home",
   resources: "/resources",
   tag: "/resources/tag/:tag",
+  search: "/search/:text",
   any: "*",
 };

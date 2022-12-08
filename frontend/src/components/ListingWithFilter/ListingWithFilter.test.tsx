@@ -7,10 +7,9 @@ import ContextRouterMock from "../../mocks/contextRouterMock";
 test("snapshot test: the html matches", () => {
   const listingWithFilterComponent = TestRenderer.create(
     <ContextRouterMock>
-      <ListingWithFilter resources={mockResources} />,
-    </ContextRouterMock>,
+      <ListingWithFilter resources={mockResources} />
+    </ContextRouterMock>
   );
 
   expect(listingWithFilterComponent.toJSON()).toMatchSnapshot();
 });
-

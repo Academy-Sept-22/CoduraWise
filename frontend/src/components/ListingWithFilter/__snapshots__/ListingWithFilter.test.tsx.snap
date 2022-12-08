@@ -1,213 +1,210 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`snapshot test: the html matches 1`] = `
-Array [
-  <div
-    className="container"
+<div
+  className="container"
+>
+  <ul
+    className="resource-list__container"
   >
-    <ul
-      className="resource-list__container"
+    <li
+      className="resource-list__list-element"
     >
-      <li
-        className="resource-list__list-element"
+      <article
+        className="resource-card__container"
       >
-        <article
-          className="resource-card__container"
+        <h3
+          className="resource-card__title"
         >
-          <h3
-            className="resource-card__title"
+          <a
+            className="resource-card__link"
+            href="Java Link"
+            rel="noreferrer"
+            target="_blank"
           >
-            <a
-              className="resource-card__link"
-              href="Java Link"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Java
-            </a>
-          </h3>
-          <div
-            aria-label="Rating of this product is 1 out of 5."
-            className="star-container"
-            style={
-              Object {
-                "--rating": 1,
-              }
+            Java
+          </a>
+        </h3>
+        <div
+          aria-label="Rating of this product is 1 out of 5."
+          className="star-container"
+          style={
+            Object {
+              "--rating": 1,
             }
-          />
-        </article>
-      </li>
-      <li
-        className="resource-list__list-element"
-      >
-        <article
-          className="resource-card__container"
-        >
-          <h3
-            className="resource-card__title"
-          >
-            <a
-              className="resource-card__link"
-              href="Python Link"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Python
-            </a>
-          </h3>
-          <div
-            aria-label="Rating of this product is 4 out of 5."
-            className="star-container"
-            style={
-              Object {
-                "--rating": 4,
-              }
-            }
-          />
-        </article>
-      </li>
-      <li
-        className="resource-list__list-element"
-      >
-        <article
-          className="resource-card__container"
-        >
-          <h3
-            className="resource-card__title"
-          >
-            <a
-              className="resource-card__link"
-              href="Javascript Link"
-              rel="noreferrer"
-              target="_blank"
-            >
-              Javascript
-            </a>
-          </h3>
-          <div
-            aria-label="Rating of this product is 3 out of 5."
-            className="star-container"
-            style={
-              Object {
-                "--rating": 3,
-              }
-            }
-          />
-        </article>
-      </li>
-      <li
-        className="resource-list__list-element"
-      >
-        <article
-          className="resource-card__container"
-        >
-          <h3
-            className="resource-card__title"
-          >
-            <a
-              className="resource-card__link"
-              href="C# Link"
-              rel="noreferrer"
-              target="_blank"
-            >
-              C#
-            </a>
-          </h3>
-          <div
-            aria-label="Rating of this product is 4 out of 5."
-            className="star-container"
-            style={
-              Object {
-                "--rating": 4,
-              }
-            }
-          />
-        </article>
-      </li>
-    </ul>
-    <form
-      className="media-selection"
+          }
+        />
+      </article>
+    </li>
+    <li
+      className="resource-list__list-element"
     >
-      <h3>
-        Filter by
-      </h3>
-      <div>
-        <input
-          checked={false}
-          id="videomedia"
-          name="video"
-          onChange={[Function]}
-          type="checkbox"
-          value="video"
-        />
-        <label
-          htmlFor="videomedia"
+      <article
+        className="resource-card__container"
+      >
+        <h3
+          className="resource-card__title"
         >
-          video
-        </label>
-      </div>
-      <div>
-        <input
-          checked={false}
-          id="articlemedia"
-          name="article"
-          onChange={[Function]}
-          type="checkbox"
-          value="article"
+          <a
+            className="resource-card__link"
+            href="Python Link"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Python
+          </a>
+        </h3>
+        <div
+          aria-label="Rating of this product is 4 out of 5."
+          className="star-container"
+          style={
+            Object {
+              "--rating": 4,
+            }
+          }
         />
-        <label
-          htmlFor="articlemedia"
+      </article>
+    </li>
+    <li
+      className="resource-list__list-element"
+    >
+      <article
+        className="resource-card__container"
+      >
+        <h3
+          className="resource-card__title"
         >
-          article
-        </label>
-      </div>
-      <div>
-        <input
-          checked={false}
-          id="bookmedia"
-          name="book"
-          onChange={[Function]}
-          type="checkbox"
-          value="book"
+          <a
+            className="resource-card__link"
+            href="Javascript Link"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Javascript
+          </a>
+        </h3>
+        <div
+          aria-label="Rating of this product is 3 out of 5."
+          className="star-container"
+          style={
+            Object {
+              "--rating": 3,
+            }
+          }
         />
-        <label
-          htmlFor="bookmedia"
+      </article>
+    </li>
+    <li
+      className="resource-list__list-element"
+    >
+      <article
+        className="resource-card__container"
+      >
+        <h3
+          className="resource-card__title"
         >
-          book
-        </label>
-      </div>
-      <div>
-        <input
-          checked={false}
-          id="tutorialmedia"
-          name="tutorial"
-          onChange={[Function]}
-          type="checkbox"
-          value="tutorial"
+          <a
+            className="resource-card__link"
+            href="C# Link"
+            rel="noreferrer"
+            target="_blank"
+          >
+            C#
+          </a>
+        </h3>
+        <div
+          aria-label="Rating of this product is 4 out of 5."
+          className="star-container"
+          style={
+            Object {
+              "--rating": 4,
+            }
+          }
         />
-        <label
-          htmlFor="tutorialmedia"
-        >
-          tutorial
-        </label>
-      </div>
-      <div>
-        <input
-          checked={false}
-          id="coursemedia"
-          name="course"
-          onChange={[Function]}
-          type="checkbox"
-          value="course"
-        />
-        <label
-          htmlFor="coursemedia"
-        >
-          course
-        </label>
-      </div>
-    </form>
-  </div>,
-  ",",
-]
+      </article>
+    </li>
+  </ul>
+  <form
+    className="media-selection"
+  >
+    <h3>
+      Filter by
+    </h3>
+    <div>
+      <input
+        checked={false}
+        id="videomedia"
+        name="video"
+        onChange={[Function]}
+        type="checkbox"
+        value="video"
+      />
+      <label
+        htmlFor="videomedia"
+      >
+        video
+      </label>
+    </div>
+    <div>
+      <input
+        checked={false}
+        id="articlemedia"
+        name="article"
+        onChange={[Function]}
+        type="checkbox"
+        value="article"
+      />
+      <label
+        htmlFor="articlemedia"
+      >
+        article
+      </label>
+    </div>
+    <div>
+      <input
+        checked={false}
+        id="bookmedia"
+        name="book"
+        onChange={[Function]}
+        type="checkbox"
+        value="book"
+      />
+      <label
+        htmlFor="bookmedia"
+      >
+        book
+      </label>
+    </div>
+    <div>
+      <input
+        checked={false}
+        id="tutorialmedia"
+        name="tutorial"
+        onChange={[Function]}
+        type="checkbox"
+        value="tutorial"
+      />
+      <label
+        htmlFor="tutorialmedia"
+      >
+        tutorial
+      </label>
+    </div>
+    <div>
+      <input
+        checked={false}
+        id="coursemedia"
+        name="course"
+        onChange={[Function]}
+        type="checkbox"
+        value="course"
+      />
+      <label
+        htmlFor="coursemedia"
+      >
+        course
+      </label>
+    </div>
+  </form>
+</div>
 `;

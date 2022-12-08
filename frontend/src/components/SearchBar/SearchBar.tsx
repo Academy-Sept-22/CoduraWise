@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { routerPaths } from "../../routes/paths";
-import useResources from "../../store/hooks/useResources";
 import "./SearchBar.scss";
 
 const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
-  const { searchByTitleAndTag } = useResources();
   const navigate = useNavigate();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const title = searchValue ?? null;
-    const tag = searchValue ?? null;
-
-    searchByTitleAndTag(title, tag);
-    navigate(routerPaths.resources);
+    // searchByTitleAndTag(title, tag);
+    const path = routerPaths.search.replace(":text", searchValue ?? "");
+    navigate(path);
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
