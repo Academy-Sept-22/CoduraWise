@@ -13,6 +13,7 @@ const SearchBar = () => {
     // searchByTitleAndTag(title, tag);
     const path = routerPaths.search.replace(":text", searchValue ?? "");
     navigate(path);
+    setSearchValue("");
   };
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
@@ -36,3 +37,4 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
