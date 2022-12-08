@@ -4,10 +4,11 @@ import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.repos.SearchRepository;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import static com.codurance.codurawise.repos.mysql.util.StatementCreator.resourceStatementCreator;
+import static com.codurance.codurawise.repos.mysql.util.PreparedStatementExecutor.executeResourceQuery;
 
 public class SearchMySQLRepository implements SearchRepository {
   private final Connection connection;
@@ -35,11 +36,15 @@ public class SearchMySQLRepository implements SearchRepository {
         "FROM Resource " +
         "INNER JOIN Resource_Tag " +
         "USING (Resource_ID) " +
-        "WHERE Resource_Tag.Tag = '" + tag + "' " +
-        " OR Title = '" + title + "' " +
+        "WHERE Resource_Tag.Tag = ? " +
+        " OR Title = ? " +
         " ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date DESC;");
 
-      return runQuery(sql);
+      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setString(1, tag);
+      preparedStatement.setString(2, title);
+
+      return runQuery(preparedStatement);
     } catch (SQLException sqlException) {
       throw new RuntimeException("Error searching resources", sqlException);
     }
@@ -53,9 +58,13 @@ public class SearchMySQLRepository implements SearchRepository {
         "FROM Resource " +
         "INNER JOIN Resource_Tag " +
         "USING (Resource_ID) " +
-        "WHERE Title = '" + title + "' " +
+        "WHERE Title = ? " +
         "ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date DESC;");
-      return runQuery(sql);
+
+      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setString(1, title);
+
+      return runQuery(preparedStatement);
     } catch (SQLException sqlException) {
       throw new RuntimeException("Error getting resources", sqlException);
     }
@@ -69,16 +78,20 @@ public class SearchMySQLRepository implements SearchRepository {
         "FROM Resource " +
         "INNER JOIN Resource_Tag " +
         "USING (Resource_ID) " +
-        "WHERE Resource_Tag.Tag = '" + tag + "' " +
+        "WHERE Resource_Tag.Tag = ? " +
         "ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date DESC;");
-      return runQuery(sql);
+
+      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setString(1, tag);
+
+      return runQuery(preparedStatement);
     } catch (SQLException sqlException) {
       throw new RuntimeException("Error getting resources", sqlException);
     }
   }
 
-  private List<Resource> runQuery(String sql) throws SQLException {
-    return resourceStatementCreator(sql, connection);
+  private List<Resource> runQuery(PreparedStatement preparedStatement) throws SQLException {
+    return executeResourceQuery(preparedStatement);
   }
 
 }
