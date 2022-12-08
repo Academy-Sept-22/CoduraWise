@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { routerPaths } from "../../routes/paths";
+import { FaSearch } from 'react-icons/fa';
 import "./SearchBar.scss";
 
 const SearchBar = () => {
@@ -22,7 +23,6 @@ const SearchBar = () => {
   return (
     <section role="search">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="search">Search:</label>
         <input
           id="search"
           type="search"
@@ -30,7 +30,7 @@ const SearchBar = () => {
           value={searchValue}
           onChange={handleChange}
         />
-        <button type="submit">search</button>
+        <button type="submit"><FaSearch size={12} /></button>
       </form>
     </section>
   );

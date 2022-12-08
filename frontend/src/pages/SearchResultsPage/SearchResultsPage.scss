@@ -1,0 +1,11 @@
+.search-result-page {
+  font-family: monospace, sans-serif;
+  font-size: 0.9em;
+  padding: 2em;
+
+  & h3 {
+      font-size: 1em;
+      margin: 7px 0;
+    }
+
+}

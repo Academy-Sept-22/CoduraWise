@@ -3,7 +3,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  font-family: monospace, sans-serif;
+  font-size: 0.9em;
+  
   &__logo {
     display: flex;
     justify-content: space-between;
