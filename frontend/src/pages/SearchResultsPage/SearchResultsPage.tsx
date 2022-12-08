@@ -9,7 +9,7 @@ const SearchResultsPage = () => {
 
   useEffect(() => {
    text ? searchByTitleAndTag(text, text) : [];
-  }, []);
+  }, [text]);
 
   return (<section>
     <h3>Search results for {text}:</h3>
