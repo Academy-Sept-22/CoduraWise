@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory } from "history";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
 import App from "./App";
@@ -10,12 +10,12 @@ const root = ReactDOM.createRoot(
 );
 
 const history = createBrowserHistory();
-    // 1. Set up the browser history with the updated location
-    // (minus the # sign)
+// 1. Set up the browser history with the updated location
+// (minus the # sign)
 const path = (/#!(\/.*)$/.exec(location.hash) || [])[1];
 
 if (path) {
-	history.replace(path);
+  history.replace(path);
 }
 
 root.render(
