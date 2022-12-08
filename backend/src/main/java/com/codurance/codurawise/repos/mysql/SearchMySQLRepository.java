@@ -35,8 +35,8 @@ public class SearchMySQLRepository implements SearchRepository {
         "FROM Resource " +
         "INNER JOIN Resource_Tag " +
         "USING (Resource_ID) " +
-        "WHERE " + tag +
-        " OR " + title +
+        "WHERE Resource_Tag.Tag = '" + tag + "' " +
+        " OR Title = '" + title + "' " +
         " ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date DESC;");
 
       return runQuery(sql);
