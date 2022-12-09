@@ -33,14 +33,17 @@ public class QueryResourcesByTitleAndTag implements RequestHandler<APIGatewayPro
     searchService = new SearchService(repository);
   }
 
-
   @Override
   public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
-    Map<String, String> queryParameters = event.getQueryStringParameters();
-    String tag = queryParameters.get("tag");
-    String title = queryParameters.get("title");
-    List<Resource> resources = searchService.getResourceBySearch(title, tag);
-    logger.info("Got " + resources.size() + " resources for tag " + tag + " resources for title " + title);
-    return response.createResponse(resources);
+    try {
+      Map<String, String> queryParameters = event.getQueryStringParameters();
+      String tag = queryParameters.get("tag");
+      String title = queryParameters.get("title");
+      List<Resource> resources = searchService.getResourceBySearch(title, tag);
+      logger.info("Got " + resources.size() + " resources for tag " + tag + " resources for title " + title);
+      return response.createResponse(resources);
+    } catch (Exception e) {
+      return response.createErrorResponse(e.getMessage());
+    }
   }
 }
