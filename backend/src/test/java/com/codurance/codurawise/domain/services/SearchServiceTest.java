@@ -2,6 +2,7 @@ package com.codurance.codurawise.domain.services;
 
 import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.repos.SearchRepository;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -17,16 +18,16 @@ import static org.mockito.BDDMockito.given;
 @ExtendWith(MockitoExtension.class)
 
 public class SearchServiceTest {
-    @Mock
-    SearchRepository repository;
+  @Mock
+  SearchRepository repository;
 
   @Test
   public void return_by_title() {
-    List<Resource> resourceList =  new ArrayList<>();
+    List<Resource> resourceList = new ArrayList<>();
     SearchService searchService = new SearchService(repository);
     String title = "scrum";
 
-    given(repository.queryByTitleAndTag(title, null)).willReturn(resourceList);
+    given(repository.queryByTitle(title)).willReturn(resourceList);
 
     List<Resource> result = searchService.getResourceBySearch(title, null);
 
@@ -35,11 +36,11 @@ public class SearchServiceTest {
 
   @Test
   public void return_by_tag() {
-    List<Resource> resourceList =  new ArrayList<>();
+    List<Resource> resourceList = new ArrayList<>();
     SearchService searchService = new SearchService(repository);
     String tag = "agile";
 
-    given(repository.queryByTitleAndTag(null, tag)).willReturn(resourceList);
+    given(repository.queryByTag(tag)).willReturn(resourceList);
 
     List<Resource> result = searchService.getResourceBySearch(null, tag);
 
@@ -48,16 +49,28 @@ public class SearchServiceTest {
 
   @Test
   public void return_by_title_and_tag() {
-    List<Resource> resourceList =  new ArrayList<>();
+    List<Resource> resourceList = new ArrayList<>();
     SearchService searchService = new SearchService(repository);
     String title = "scrum";
     String tag = "agile";
 
-    given(repository.queryByTitleAndTag(title, tag)).willReturn(resourceList);
+    given(repository.queryBothByTitleAndTag(title, tag)).willReturn(resourceList);
 
     List<Resource> result = searchService.getResourceBySearch(title, tag);
 
     assertThat(result).isEqualTo(resourceList);
   }
 
+  @Test
+  public void throws_exception_for_both_nulls() {
+
+    SearchService searchService = new SearchService(repository);
+
+    Exception exception = Assert.assertThrows(RuntimeException.class, () -> {
+      searchService.getResourceBySearch(null, null);
+    });
+    assertThat(exception.getMessage()).isEqualTo(
+      "Must provide either title or tag to query!");
   }
+
+}

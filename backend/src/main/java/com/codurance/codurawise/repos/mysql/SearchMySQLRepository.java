@@ -18,17 +18,6 @@ public class SearchMySQLRepository implements SearchRepository {
   }
 
   @Override
-  public List<Resource> queryByTitleAndTag(String title, String tag) {
-    if (title != null && tag == null) {
-      return queryByTitle(title);
-    } else if (tag != null && title == null) {
-      return queryByTag(tag);
-    } else {
-      return queryBothByTitleAndTag(title, tag);
-    }
-  }
-
-  @Override
   public List<Resource> queryBothByTitleAndTag(String title, String tag) {
     try {
       String sql = ("SELECT" +
