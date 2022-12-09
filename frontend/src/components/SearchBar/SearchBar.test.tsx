@@ -11,7 +11,8 @@ describe("given the searchbar", () => {
       </ContextRouterMock>,
     );
 
-    const form = screen.getByLabelText("Search:");
+    const form = screen.getByLabelText("");
     expect(form).toBeInTheDocument();
   });
 });
+

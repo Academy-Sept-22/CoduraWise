@@ -4,126 +4,130 @@ exports[`snapshot test: the html matches 1`] = `
 <div
   className="container"
 >
-  <ul
-    className="resource-list__container"
+  <div
+    className="resource-list"
   >
-    <li
-      className="resource-list__list-element"
+    <ul
+      className="resource-list__container"
     >
-      <article
-        className="resource-card__container"
+      <li
+        className="resource-list__list-element"
       >
-        <h3
-          className="resource-card__title"
+        <article
+          className="resource-card__container"
         >
-          <a
-            className="resource-card__link"
-            href="Java Link"
-            rel="noreferrer"
-            target="_blank"
+          <h3
+            className="resource-card__title"
           >
-            Java
-          </a>
-        </h3>
-        <div
-          aria-label="Rating of this product is 1 out of 5."
-          className="star-container"
-          style={
-            Object {
-              "--rating": 1,
+            <a
+              className="resource-card__link"
+              href="Java Link"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Java
+            </a>
+          </h3>
+          <div
+            aria-label="Rating of this product is 1 out of 5."
+            className="star-container"
+            style={
+              Object {
+                "--rating": 1,
+              }
             }
-          }
-        />
-      </article>
-    </li>
-    <li
-      className="resource-list__list-element"
-    >
-      <article
-        className="resource-card__container"
+          />
+        </article>
+      </li>
+      <li
+        className="resource-list__list-element"
       >
-        <h3
-          className="resource-card__title"
+        <article
+          className="resource-card__container"
         >
-          <a
-            className="resource-card__link"
-            href="Python Link"
-            rel="noreferrer"
-            target="_blank"
+          <h3
+            className="resource-card__title"
           >
-            Python
-          </a>
-        </h3>
-        <div
-          aria-label="Rating of this product is 4 out of 5."
-          className="star-container"
-          style={
-            Object {
-              "--rating": 4,
+            <a
+              className="resource-card__link"
+              href="Python Link"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Python
+            </a>
+          </h3>
+          <div
+            aria-label="Rating of this product is 4 out of 5."
+            className="star-container"
+            style={
+              Object {
+                "--rating": 4,
+              }
             }
-          }
-        />
-      </article>
-    </li>
-    <li
-      className="resource-list__list-element"
-    >
-      <article
-        className="resource-card__container"
+          />
+        </article>
+      </li>
+      <li
+        className="resource-list__list-element"
       >
-        <h3
-          className="resource-card__title"
+        <article
+          className="resource-card__container"
         >
-          <a
-            className="resource-card__link"
-            href="Javascript Link"
-            rel="noreferrer"
-            target="_blank"
+          <h3
+            className="resource-card__title"
           >
-            Javascript
-          </a>
-        </h3>
-        <div
-          aria-label="Rating of this product is 3 out of 5."
-          className="star-container"
-          style={
-            Object {
-              "--rating": 3,
+            <a
+              className="resource-card__link"
+              href="Javascript Link"
+              rel="noreferrer"
+              target="_blank"
+            >
+              Javascript
+            </a>
+          </h3>
+          <div
+            aria-label="Rating of this product is 3 out of 5."
+            className="star-container"
+            style={
+              Object {
+                "--rating": 3,
+              }
             }
-          }
-        />
-      </article>
-    </li>
-    <li
-      className="resource-list__list-element"
-    >
-      <article
-        className="resource-card__container"
+          />
+        </article>
+      </li>
+      <li
+        className="resource-list__list-element"
       >
-        <h3
-          className="resource-card__title"
+        <article
+          className="resource-card__container"
         >
-          <a
-            className="resource-card__link"
-            href="C# Link"
-            rel="noreferrer"
-            target="_blank"
+          <h3
+            className="resource-card__title"
           >
-            C#
-          </a>
-        </h3>
-        <div
-          aria-label="Rating of this product is 4 out of 5."
-          className="star-container"
-          style={
-            Object {
-              "--rating": 4,
+            <a
+              className="resource-card__link"
+              href="C# Link"
+              rel="noreferrer"
+              target="_blank"
+            >
+              C#
+            </a>
+          </h3>
+          <div
+            aria-label="Rating of this product is 4 out of 5."
+            className="star-container"
+            style={
+              Object {
+                "--rating": 4,
+              }
             }
-          }
-        />
-      </article>
-    </li>
-  </ul>
+          />
+        </article>
+      </li>
+    </ul>
+  </div>
   <form
     className="media-selection"
   >

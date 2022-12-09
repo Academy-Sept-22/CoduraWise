@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { routerPaths } from "../../routes/paths";
-import { FaSearch } from 'react-icons/fa';
+import { FaSearch } from "react-icons/fa";
 import "./SearchBar.scss";
 
 const SearchBar = () => {
@@ -23,14 +23,19 @@ const SearchBar = () => {
   return (
     <section role="search">
       <form onSubmit={handleSubmit}>
+        <label htmlFor="search"></label>
         <input
           id="search"
           type="search"
           name="search"
           value={searchValue}
           onChange={handleChange}
+          placeholder="Search For Resources..."
         />
-        <button type="submit"><FaSearch size={12} /></button>
+        <span className="caret"></span>
+        <button type="submit">
+          <FaSearch size={12} />
+        </button>
       </form>
     </section>
   );

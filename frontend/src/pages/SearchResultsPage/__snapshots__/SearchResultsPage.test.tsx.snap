@@ -1,17 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`given the search results list page snapshot test: the html matches 1`] = `
-<section>
+<section
+  className="search-result-page"
+>
   <h3>
-    Search results for 
-    :
+    Search results for “
+    ”:
   </h3>
   <div
     className="container"
   >
-    <ul
-      className="resource-list__container"
-    />
+    <div
+      className="resource-list"
+    >
+      <ul
+        className="resource-list__container"
+      />
+    </div>
     <form
       className="media-selection"
     >
