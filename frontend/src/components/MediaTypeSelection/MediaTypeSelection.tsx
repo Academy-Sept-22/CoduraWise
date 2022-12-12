@@ -1,6 +1,5 @@
-import React, { useContext, useState, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { MediaType, MediaTypes } from "../../models/MediaTypes";
-import { ResourcesContext } from "../../store/ResourcesContext";
 import "./MediaTypeSelection.scss";
 
 interface MediaTypeSelectionProps {
