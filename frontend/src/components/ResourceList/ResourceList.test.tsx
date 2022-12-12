@@ -1,9 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import ResourceList from "./ResourceList";
 import ContextRouterMock from "../../mocks/contextRouterMock";
-import { ContextState, ResourcesContext } from "../../store/ResourcesContext";
-import { MediaType } from "../../models/MediaTypes";
 import { Resource } from "../../models/Resource";
 
 describe("given the resource list", () => {
@@ -19,7 +17,7 @@ describe("given the resource list", () => {
     test("then the titles match the data", () => {
 
       render(<ContextRouterMock>
-        <ResourceList resources={mockResources} />
+        <ResourceList resources={mockResources} filterMediaTypes={[]} />
       </ContextRouterMock>);
 
       const title1 = screen.getByRole("heading", { name: "Java" });
@@ -34,7 +32,7 @@ describe("given the resource list", () => {
 
     test("then the url match the data", () => {
       render(<ContextRouterMock>
-        <ResourceList resources={mockResources} />
+        <ResourceList resources={mockResources} filterMediaTypes={[]}/>
       </ContextRouterMock>);
 
       const url1 = screen.getByRole("link", { name: "Java" });
@@ -50,9 +48,9 @@ describe("given the resource list", () => {
     describe("then the context has video in filter", () => {
       test("then only titles for video match the data", () => {
 
-        render(<ResourcesContext.Provider value={{filterMediaTypes: [ "video" ] as Array<MediaType>} as ContextState}>
-            <ResourceList resources={mockResources} />
-        </ResourcesContext.Provider>);
+        render(<ContextRouterMock>
+            <ResourceList resources={mockResources} filterMediaTypes={["video"]}/>
+        </ContextRouterMock>);
 
         const title1 = screen.getByRole("heading", { name: "Java" });
         expect(title1).toBeInTheDocument();
@@ -62,12 +60,12 @@ describe("given the resource list", () => {
       });
     });
 
-    describe("then the context has video and article in filter", () => {
-      test("filter video and article", () => {
+    describe("when has video and article in filter", () => {
+      test("then only titles for video and article match the data", () => {
 
-        render(<ResourcesContext.Provider value={{filterMediaTypes: [ "video", "article" ] as Array<MediaType>} as ContextState}>
-            <ResourceList resources={mockResources} />
-        </ResourcesContext.Provider>);
+        render(<ContextRouterMock>
+            <ResourceList resources={mockResources} filterMediaTypes={["video", "article"]}/>
+        </ContextRouterMock>);
 
         const title1 = screen.getByRole("heading", { name: "Java" });
         expect(title1).toBeInTheDocument();
