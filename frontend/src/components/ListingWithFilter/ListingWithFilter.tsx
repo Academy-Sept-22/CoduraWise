@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { MediaType } from "../../models/MediaTypes";
 import { Resource } from "../../models/Resource";
 import MediaTypeSelection from "../MediaTypeSelection/MediaTypeSelection";
 import ResourceList from "../ResourceList/ResourceList";
@@ -9,15 +10,21 @@ interface ListingWithFilterProps {
 }
 
 const ListingWithFilter = ({ resources }: ListingWithFilterProps) => {
+  const [filterMediaTypes, setFilterMediaTypes] = useState<Array<MediaType>>(
+    [],
+  );
+
   return (
     <div className="container">
       <div className="resource-list">
-        <ResourceList resources={resources} />
+        <ResourceList
+          resources={resources}
+          filterMediaTypes={filterMediaTypes}
+        />
       </div>
-      <MediaTypeSelection />
+      <MediaTypeSelection setFilterMediaTypes={setFilterMediaTypes} />
     </div>
   );
 };
 
 export default ListingWithFilter;
-
