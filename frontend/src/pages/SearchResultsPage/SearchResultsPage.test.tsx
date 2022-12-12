@@ -1,13 +1,11 @@
 import React from "react";
 import TestRenderer from "react-test-renderer";
 import SearchResultsPage from "./SearchResultsPage";
-import { MemoryRouter } from "react-router-dom";
-import { ContextState, ResourcesContext } from "../../store/ResourcesContext";
-import { MediaType } from "../../models/MediaTypes";
 import { Resource } from "../../models/Resource";
 import { setupServer } from "msw/node";
 import { baseBackendUrl } from "../../routes/paths";
 import { rest } from "msw";
+import ContextRouterMock from "../../mocks/contextRouterMock";
 
 describe("given the search results list page", () => {
   
@@ -15,7 +13,6 @@ describe("given the search results list page", () => {
 
   const server = setupServer(rest.get(`${baseBackendUrl}/search`, (req, res, ctx) => {
       const title = req.url.searchParams.get('title') as string;
-      console.log('API call');
       //
       // NOTE: this is not being called!!!!!
       //
@@ -23,7 +20,6 @@ describe("given the search results list page", () => {
   }));
   
   beforeEach(() => {
-    console.log('Before each')
     server.listen();
   });
   
@@ -31,13 +27,10 @@ describe("given the search results list page", () => {
     const route = `/search/${textToSearch}`
 
     const searchListPage = TestRenderer.create(
-      <MemoryRouter initialEntries={[route]}>
-        <ResourcesContext.Provider value={{filterMediaTypes : [] as Array<MediaType>} as ContextState}>
-          <SearchResultsPage />
-        </ResourcesContext.Provider>
-      </MemoryRouter>
+        <ContextRouterMock initialEntries={[route]}>
+        <SearchResultsPage />
+      </ContextRouterMock>,
     );
-    console.log('Test')
 
     expect(searchListPage.toJSON()).toMatchSnapshot();
   });
