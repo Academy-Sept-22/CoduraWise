@@ -10,7 +10,7 @@ const ResourceListPage = () => {
 
   useEffect(() => {
     tag ? getResourcesByTag(tag) : getResources();
-  }, []);
+  }, [tag]);
 
   return <ListingWithFilter resources={resources} />;
 };
