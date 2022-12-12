@@ -1,3 +1,4 @@
+import React from "react";
 import { Dispatch, SetStateAction, useState } from "react";
 import { MediaType, MediaTypes } from "../../models/MediaTypes";
 import "./MediaTypeSelection.scss";
