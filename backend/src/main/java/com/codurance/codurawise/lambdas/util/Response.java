@@ -18,7 +18,7 @@ public class Response<T> {
     return createResponse(500, message);
   }
 
-  private APIGatewayProxyResponseEvent createResponse(int statusCode, String bodyContent) {
+  public APIGatewayProxyResponseEvent createResponse(int statusCode, String bodyContent) {
     APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
     response.setIsBase64Encoded(false);
     response.setStatusCode(statusCode);

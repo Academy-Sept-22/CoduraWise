@@ -3,8 +3,8 @@ package com.codurance.codurawise;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
+import com.codurance.codurawise.api.SearchAPI;
 import com.codurance.codurawise.domain.models.Resource;
-import com.codurance.codurawise.domain.services.SearchService;
 import com.codurance.codurawise.lambdas.Search;
 import com.codurance.codurawise.repos.SearchRepository;
 import org.junit.jupiter.api.Test;
@@ -42,7 +42,7 @@ public class SearchFeatureTest {
     given(repository.search("java","spring","configuration")).willReturn(expectedData);
 
     // act
-    Search searchLambda = new Search(new SearchService(repository));
+    Search searchLambda = new Search(new SearchAPI(repository));
     APIGatewayProxyResponseEvent responseEvent = searchLambda.handleRequest(requestEvent, context);
 
     // assert

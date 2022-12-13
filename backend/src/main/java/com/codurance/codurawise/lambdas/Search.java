@@ -4,16 +4,51 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.codurance.codurawise.domain.services.SearchService;
+import com.codurance.codurawise.api.SearchAPI;
+import com.codurance.codurawise.lambdas.util.MySqlConnectionProvider;
+import com.codurance.codurawise.lambdas.util.Response;
+import com.codurance.codurawise.repos.mysql.SearchMySQLRepository;
+
+import java.sql.Connection;
 
 public class Search implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-  public Search(SearchService search) {
-    throw new UnsupportedOperationException();
+  private final SearchAPI searchAPI;
+  private final Response response = new Response();
+
+  private static Connection connection;
+
+  static {
+    try {
+      if (isRunningOnAWS()) {
+        connection = MySqlConnectionProvider.createDatabaseConnection();
+      }
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private static boolean isRunningOnAWS() {
+    return System.getenv("AWS_REGION") != null;
+  }
+
+  public Search() {
+    SearchMySQLRepository repository = new SearchMySQLRepository(connection);
+    searchAPI = new SearchAPI(repository);
+  }
+
+  public Search(SearchAPI searchAPI) {
+    this.searchAPI = searchAPI;
   }
 
   @Override
   public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
-    throw new UnsupportedOperationException();
+    String searchText = event.getQueryStringParameters().get("query");
+    try {
+      String json = searchAPI.search(searchText);
+      return response.createResponse(200, json);
+    } catch (Exception e) {
+      return response.createResponse(500, e.getMessage());
+    }
   }
 }
