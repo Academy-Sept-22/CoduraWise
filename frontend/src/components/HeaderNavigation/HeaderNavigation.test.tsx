@@ -17,4 +17,18 @@ describe("Given a Header navigation", () => {
     expect(homeLink).toBeInTheDocument();
     expect(resourcesLink).toBeInTheDocument();
   });
+
+  test("should render a Add Resource Link", () => {
+    render(
+      <ContextRouterMock>
+        <HeaderNavigation />
+      </ContextRouterMock>,
+    );
+
+    const addResourceButton = screen.getByRole("link", {
+      name: "Add Resource",
+    });
+    expect(addResourceButton).toBeInTheDocument();
+  });
 });
+
