@@ -5,6 +5,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.codurance.codurawise.api.SearchAPI;
+import com.codurance.codurawise.domain.services.SearchService;
 import com.codurance.codurawise.lambdas.util.MySqlConnectionProvider;
 import com.codurance.codurawise.lambdas.util.Response;
 import com.codurance.codurawise.repos.mysql.SearchMySQLRepository;
@@ -39,7 +40,7 @@ public class Search implements RequestHandler<APIGatewayProxyRequestEvent, APIGa
 
   public Search() {
     SearchMySQLRepository repository = new SearchMySQLRepository(connection);
-    searchAPI = new SearchAPI(repository);
+    searchAPI = new SearchAPI(new SearchService(repository));
   }
 
   public Search(SearchAPI searchAPI) {

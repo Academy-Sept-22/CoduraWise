@@ -1,9 +1,9 @@
 package com.codurance.codurawise.api;
 
-import com.codurance.codurawise.repos.SearchRepository;
+import com.codurance.codurawise.domain.services.SearchService;
 
 public class SearchAPI {
-  public SearchAPI(SearchRepository repository) {
+  public SearchAPI(SearchService searchService) {
     throw new UnsupportedOperationException();
 
   }
