@@ -4,6 +4,8 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.codurance.codurawise.api.SearchAPI;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -28,19 +30,10 @@ class SearchTest {
   void search_calls_service() {
 
     // arrange
-    APIGatewayProxyRequestEvent requestEvent = new APIGatewayProxyRequestEvent();
-    Map<String, String> params = new HashMap<>();
-    params.put("query", "java%20spring%20configuration");
-    requestEvent.setQueryStringParameters(params);
-
-    String resourcesJson = "[{\n" +
-      "  \"Id\": \"1\",\n" +
-      "  \"Title\": \"Title1\",\n" +
-      "  \"Link\": \"Link1\",\n" +
-      "  \"AverageRating\": 4.5,\n" +
-      "  \"MediaType\": \"video\"\n" +
-      "}]";
-    given(searchAPI.search("java%20spring%20configuration")).willReturn(resourcesJson);
+    String queryValue = "java%20spring%20configuration";
+    APIGatewayProxyRequestEvent requestEvent = createEvent(queryValue);
+    String resourcesJson = createResourcesJson();
+    given(searchAPI.search(queryValue)).willReturn(resourcesJson);
 
     // act
     Search searchLambda = new Search(searchAPI);
@@ -49,6 +42,26 @@ class SearchTest {
     // assert
     assertThat(responseEvent.getStatusCode()).isEqualTo(200);
     assertThat(responseEvent.getBody()).isEqualTo(resourcesJson);
+  }
+
+  private static APIGatewayProxyRequestEvent createEvent(String queryValue) {
+    APIGatewayProxyRequestEvent requestEvent = new APIGatewayProxyRequestEvent();
+    Map<String, String> params = new HashMap<>();
+    params.put("query", queryValue);
+    requestEvent.setQueryStringParameters(params);
+    return requestEvent;
+  }
+
+  private static String createResourcesJson() {
+    JsonObject object = new JsonObject();
+    object.addProperty("Id", 1);
+    object.addProperty("Title", "Title1");
+    object.addProperty("Link", "Link1");
+    object.addProperty("AverageRating", 4.5);
+    object.addProperty("MediaType", "video");
+    JsonArray array = new JsonArray();
+    array.add(object);
+    return array.toString();
   }
 
 }
