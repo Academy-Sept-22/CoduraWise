@@ -3,6 +3,7 @@
 exports[`given a resource form snapshot test: the html matches 1`] = `
 <form
   action=""
+  className="add-resource__form"
 >
   <label
     htmlFor="title"
