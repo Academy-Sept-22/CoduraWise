@@ -1,5 +1,13 @@
-const AddResourcePage = () => {
-  return null;
-}
+import React from "react";
+import AddResourceForm from "../../components/AddResourceForm/AddResourceForm";
 
-export default AddResourcePage 
+const AddResourcePage = () => {
+  return (
+    <section>
+      <h2>Submit your Resource</h2>
+      <AddResourceForm />
+    </section>
+  );
+};
+
+export default AddResourcePage;

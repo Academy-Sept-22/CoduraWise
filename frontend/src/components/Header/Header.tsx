@@ -1,5 +1,4 @@
 import React from "react";
-import AddResourceButton from "../AddResourceButton/AddResourceButton";
 import HeaderNavigation from "../HeaderNavigation/HeaderNavigation";
 import SearchBar from "../SearchBar/SearchBar";
 import "./Header.scss";
