@@ -3,15 +3,14 @@ package com.codurance.codurawise.lambdas;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.codurance.codurawise.api.SearchAPI;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.codurance.codurawise.domain.services.SearchService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,7 +20,7 @@ import static org.mockito.BDDMockito.given;
 class SearchTest {
 
   @Mock
-  SearchAPI searchAPI;
+  SearchService searchService;
 
   @Mock
   Context context;
@@ -32,16 +31,15 @@ class SearchTest {
     // arrange
     String queryValue = "java%20spring%20configuration";
     APIGatewayProxyRequestEvent requestEvent = createEvent(queryValue);
-    String resourcesJson = createResourcesJson();
-    given(searchAPI.search(queryValue)).willReturn(resourcesJson);
+    given(searchService.search(queryValue)).willReturn(List.of());
 
     // act
-    Search searchLambda = new Search(searchAPI);
+    Search searchLambda = new Search(searchService);
     APIGatewayProxyResponseEvent responseEvent = searchLambda.handleRequest(requestEvent, context);
 
     // assert
     assertThat(responseEvent.getStatusCode()).isEqualTo(200);
-    assertThat(responseEvent.getBody()).isEqualTo(resourcesJson);
+    assertThat(responseEvent.getBody()).isEqualTo("[]");
   }
 
   private static APIGatewayProxyRequestEvent createEvent(String queryValue) {
@@ -50,18 +48,6 @@ class SearchTest {
     params.put("query", queryValue);
     requestEvent.setQueryStringParameters(params);
     return requestEvent;
-  }
-
-  private static String createResourcesJson() {
-    JsonObject object = new JsonObject();
-    object.addProperty("Id", 1);
-    object.addProperty("Title", "Title1");
-    object.addProperty("Link", "Link1");
-    object.addProperty("AverageRating", 4.5);
-    object.addProperty("MediaType", "video");
-    JsonArray array = new JsonArray();
-    array.add(object);
-    return array.toString();
   }
 
 }

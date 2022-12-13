@@ -4,13 +4,12 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.codurance.codurawise.lambdas.util.MySqlConnectionProvider;
-import com.codurance.codurawise.lambdas.util.Response;
 
 import java.sql.Connection;
 
 public abstract class Lambda implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+
   protected static Connection connection;
-  protected final Response response = new Response();
 
   static {
     connection = initializeConnection();
@@ -18,7 +17,7 @@ public abstract class Lambda implements RequestHandler<APIGatewayProxyRequestEve
 
   private static Connection initializeConnection() {
     try {
-      if (Lambda.isRunningOnAWS()) {
+      if (isRunningOnAWS()) {
         return MySqlConnectionProvider.createDatabaseConnection();
       }
     } catch (Exception e) {
