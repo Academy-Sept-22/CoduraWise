@@ -4,11 +4,11 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
-import com.codurance.codurawise.repos.SearchRepository;
+import com.codurance.codurawise.domain.services.SearchService;
 
 public class Search implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-  public Search(SearchRepository repository) {
+  public Search(SearchService search) {
     throw new UnsupportedOperationException();
   }
 

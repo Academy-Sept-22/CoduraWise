@@ -24,4 +24,9 @@ public class SearchService {
       return repository.queryBothByTitleAndTag(title, tag);
     }
   }
+
+    public List<Resource> search(String text) {
+        throw new UnsupportedOperationException();
+
+    }
 }
