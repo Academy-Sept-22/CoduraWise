@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { routerPaths } from "../../routes/paths";
+import StarRatingInput from "../StarRatingInput/StarRatingInput";
 
 const AddResourceForm = () => {
   const initialState = {
     title: "",
     link: "",
-    tags: ""
-  }
+    tags: "",
+  };
 
   const [formValues, setFormValues] = useState(initialState);
 
   const navigate = useNavigate();
 
-  const handleInputChange = (event : React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormValues({
       ...formValues,
@@ -64,7 +65,7 @@ const AddResourceForm = () => {
         onChange={handleInputChange}
       />
       <label htmlFor="rating">Rating:</label>
-      <p>RATING TO GO HERE</p>
+      <StarRatingInput />
       <input type="submit" value="Submit Resource" />
     </form>
   );
