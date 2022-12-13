@@ -16,16 +16,21 @@ public class Search implements RequestHandler<APIGatewayProxyRequestEvent, APIGa
   private final SearchAPI searchAPI;
   private final Response response = new Response();
 
-  private static Connection connection;
+  protected static Connection connection;
 
   static {
+    connection = initializeConnection();
+  }
+
+  private static Connection initializeConnection() {
     try {
       if (isRunningOnAWS()) {
-        connection = MySqlConnectionProvider.createDatabaseConnection();
+        return MySqlConnectionProvider.createDatabaseConnection();
       }
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
+    return null;
   }
 
   private static boolean isRunningOnAWS() {
