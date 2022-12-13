@@ -6,37 +6,16 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.codurance.codurawise.api.SearchAPI;
 import com.codurance.codurawise.domain.services.SearchService;
+import com.codurance.codurawise.lambdas.base.Lambda;
 import com.codurance.codurawise.lambdas.util.MySqlConnectionProvider;
 import com.codurance.codurawise.lambdas.util.Response;
 import com.codurance.codurawise.repos.mysql.SearchMySQLRepository;
 
 import java.sql.Connection;
 
-public class Search implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class Search extends Lambda {
 
   private final SearchAPI searchAPI;
-  private final Response response = new Response();
-
-  protected static Connection connection;
-
-  static {
-    connection = initializeConnection();
-  }
-
-  private static Connection initializeConnection() {
-    try {
-      if (isRunningOnAWS()) {
-        return MySqlConnectionProvider.createDatabaseConnection();
-      }
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
-    return null;
-  }
-
-  private static boolean isRunningOnAWS() {
-    return System.getenv("AWS_REGION") != null;
-  }
 
   public Search() {
     SearchMySQLRepository repository = new SearchMySQLRepository(connection);
