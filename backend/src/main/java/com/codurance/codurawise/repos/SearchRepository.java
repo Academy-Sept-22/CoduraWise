@@ -9,4 +9,5 @@ public interface SearchRepository {
   List<Resource> queryByTag(String tag);
   List<Resource> queryBothByTitleAndTag(String title, String tag);
 
+  List<Resource> search(String...term);
 }

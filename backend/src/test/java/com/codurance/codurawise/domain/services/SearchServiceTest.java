@@ -2,7 +2,6 @@ package com.codurance.codurawise.domain.services;
 
 import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.repos.SearchRepository;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -14,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 @ExtendWith(MockitoExtension.class)
 
@@ -66,7 +66,7 @@ public class SearchServiceTest {
 
     SearchService searchService = new SearchService(repository);
 
-    Exception exception = Assert.assertThrows(RuntimeException.class, () -> {
+    Exception exception = assertThrows(RuntimeException.class, () -> {
       searchService.getResourceBySearch(null, null);
     });
     assertThat(exception.getMessage()).isEqualTo(

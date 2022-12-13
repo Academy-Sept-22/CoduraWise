@@ -79,6 +79,11 @@ public class SearchMySQLRepository implements SearchRepository {
     }
   }
 
+  @Override
+  public List<Resource> search(String... term) {
+    throw new UnsupportedOperationException();
+  }
+
   private List<Resource> runQuery(PreparedStatement preparedStatement) throws SQLException {
     return executeResourceQuery(preparedStatement);
   }
