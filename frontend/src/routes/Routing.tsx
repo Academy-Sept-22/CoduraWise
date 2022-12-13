@@ -5,6 +5,7 @@ import { routerPaths } from "./paths";
 import HomePage from "../pages/HomePage/HomePage";
 import Header from "../components/Header/Header";
 import SearchResultsPage from "../pages/SearchResultsPage/SearchResultsPage";
+import AddResourcePage from "../pages/AddResourcePage/AddResourcePage";
 
 const Routing = () => {
   return (
@@ -24,6 +25,7 @@ const Routing = () => {
         <Route path={routerPaths.tag} element={<ResourceListPage />} />
         <Route path={routerPaths.search} element={<SearchResultsPage />} />
         <Route path={routerPaths.emptySearch} element={<SearchResultsPage />} />
+        <Route path={routerPaths.addResource} element={<AddResourcePage />} />
       </Routes>
     </BrowserRouter>
   );

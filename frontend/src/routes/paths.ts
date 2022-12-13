@@ -14,5 +14,6 @@ export const routerPaths = {
   tag: "/resources/tag/:tag",
   search: "/search/:text",
   emptySearch: "/search",
+  addResource: "/resources/new",
   any: "*",
 };
