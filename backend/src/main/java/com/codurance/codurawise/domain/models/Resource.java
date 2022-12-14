@@ -19,6 +19,10 @@ public class Resource {
     return resource;
   }
 
+  public int getId() {
+    return id;
+  }
+
   public void setId(Integer id) {
     this.id = id;
   }
@@ -73,4 +77,5 @@ public class Resource {
       ", mediaType='" + mediaType + '\'' +
       '}';
   }
+
 }
