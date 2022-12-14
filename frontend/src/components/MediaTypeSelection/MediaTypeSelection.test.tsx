@@ -1,4 +1,4 @@
-import TestRenderer, { act } from "react-test-renderer";
+import TestRenderer from "react-test-renderer";
 import MediaTypeSelection from "./MediaTypeSelection";
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";

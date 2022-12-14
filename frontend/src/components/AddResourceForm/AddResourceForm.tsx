@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { MediaType } from "../../models/MediaTypes";
 import { routerPaths } from "../../routes/paths";
 import useResources from "../../store/hooks/useResources";
+import MediaCheckBox from "../MediaCheckBox/MediaCheckBox";
 import StarRatingInput from "../StarRatingInput/StarRatingInput";
 
 const AddResourceForm = () => {
@@ -15,6 +16,7 @@ const AddResourceForm = () => {
   const [formValues, setFormValues] = useState(initialState);
   const { postNewResource } = useResources();
   const [rating, setRating] = useState("1");
+  const [checkedMediaType, setCheckedMediaType] = useState("")
 
   const navigate = useNavigate();
 
@@ -74,8 +76,11 @@ const AddResourceForm = () => {
         value={formValues.tags}
         onChange={handleInputChange}
       />
-      <label htmlFor="rating">Rating:</label>
+      <small>Enter tags with a prepending &quot;#&quot;</small>
+    
+      <MediaCheckBox setCheckedMediaType={setCheckedMediaType} />
       <StarRatingInput setRating={setRating} />
+
       <input type="submit" value="Submit Resource" />
     </form>
   );
