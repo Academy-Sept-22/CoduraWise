@@ -1,13 +1,11 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import "./StarRatingInput.scss";
 
 interface RatingSelectionProps {
   setRating: Dispatch<SetStateAction<string>>;
 }
 
-const StarRatingInput = () => {
-  const [rating, setRating] = useState("");
-
+const StarRatingInput = ({ setRating }: RatingSelectionProps) => {
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRating(event.target.value);
   };

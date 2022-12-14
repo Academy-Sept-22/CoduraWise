@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { MediaType } from "../../models/MediaTypes";
 import { routerPaths } from "../../routes/paths";
+import useResources from "../../store/hooks/useResources";
 import StarRatingInput from "../StarRatingInput/StarRatingInput";
 
 const AddResourceForm = () => {
@@ -11,6 +13,8 @@ const AddResourceForm = () => {
   };
 
   const [formValues, setFormValues] = useState(initialState);
+  const { postNewResource } = useResources();
+  const [rating, setRating] = useState("1");
 
   const navigate = useNavigate();
 
@@ -27,6 +31,12 @@ const AddResourceForm = () => {
 
     const path = routerPaths.home;
     navigate(path);
+    const body = {
+      ...formValues,
+      rating,
+      mediaType: "video" as MediaType,
+    };
+    postNewResource(body);
   };
 
   return (
@@ -65,7 +75,7 @@ const AddResourceForm = () => {
         onChange={handleInputChange}
       />
       <label htmlFor="rating">Rating:</label>
-      <StarRatingInput />
+      <StarRatingInput setRating={setRating} />
       <input type="submit" value="Submit Resource" />
     </form>
   );

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { backendUrls } from "../../routes/paths";
 import { ResourcesContext } from "../ResourcesContext";
+import { AddResourceBodyDTO } from "../../models/DataTransferObject";
 
 function useResources() {
   const { resources, setResources } = useContext(ResourcesContext);
@@ -35,11 +36,25 @@ function useResources() {
     }
   };
 
+  const postNewResource = async (body: AddResourceBodyDTO) => {
+    const response = await fetch(backendUrls.resourcesNew, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+    console.log(response);
+
+    // if (response.ok) return null;
+  };
+
   return {
     resources,
     getResources,
     getResourcesByTag,
     searchByText,
+    postNewResource,
   };
 }
 

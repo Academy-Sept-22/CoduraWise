@@ -5,6 +5,7 @@ export const backendUrls = {
   tagsUrl: `${baseBackendUrl}/tags/`,
   resourcesByTagUrl: (tag: string) => `${baseBackendUrl}/resources/tag/${tag}`,
   searchUrl: (text: string) => `${baseBackendUrl}/search?query=${text}`,
+  resourcesNew: `${baseBackendUrl}/resources/new`,
 };
 
 export const routerPaths = {
