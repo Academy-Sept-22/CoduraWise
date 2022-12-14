@@ -19,68 +19,6 @@ public class SearchMySQLRepository implements SearchRepository {
   }
 
   @Override
-  public List<Resource> queryBothByTitleAndTag(String title, String tag) {
-    try {
-      String sql = ("SELECT" +
-        " Resource.* " +
-        "FROM Resource " +
-        "INNER JOIN Resource_Tag " +
-        "USING (Resource_ID) " +
-        "WHERE Resource_Tag.Tag = ? " +
-        " OR Title LIKE ? " +
-        " ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date DESC;");
-
-      PreparedStatement preparedStatement = connection.prepareStatement(sql);
-      preparedStatement.setString(1, tag);
-      preparedStatement.setString(2, anyMatch(title));
-
-      return runQuery(preparedStatement);
-    } catch (SQLException sqlException) {
-      throw new RuntimeException("Error searching resources", sqlException);
-    }
-  }
-
-  @Override
-  public List<Resource> queryByTitle(String title) {
-    try {
-      String sql = ("SELECT" +
-        " Resource.* " +
-        "FROM Resource " +
-        "LEFT JOIN Resource_Tag " +
-        "USING (Resource_ID) " +
-        "WHERE Title LIKE ? " +
-        "ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date DESC;");
-
-      PreparedStatement preparedStatement = connection.prepareStatement(sql);
-      preparedStatement.setString(1, anyMatch(title));
-
-      return runQuery(preparedStatement);
-    } catch (SQLException sqlException) {
-      throw new RuntimeException("Error getting resources", sqlException);
-    }
-  }
-
-  @Override
-  public List<Resource> queryByTag(String tag) {
-    try {
-      String sql = ("SELECT" +
-        " Resource.* " +
-        "FROM Resource " +
-        "INNER JOIN Resource_Tag " +
-        "USING (Resource_ID) " +
-        "WHERE Resource_Tag.Tag = ? " +
-        "ORDER BY Resource.Average_Rating DESC, Resource.Creation_Date DESC;");
-
-      PreparedStatement preparedStatement = connection.prepareStatement(sql);
-      preparedStatement.setString(1, tag);
-
-      return runQuery(preparedStatement);
-    } catch (SQLException sqlException) {
-      throw new RuntimeException("Error getting resources", sqlException);
-    }
-  }
-
-  @Override
   public List<Resource> search(String... terms) {
 
     try {
@@ -122,10 +60,6 @@ public class SearchMySQLRepository implements SearchRepository {
 
   private List<Resource> runQuery(PreparedStatement preparedStatement) throws SQLException {
     return executeResourceQuery(preparedStatement);
-  }
-
-  private static String anyMatch(String title) {
-    return "%" + title + "%";
   }
 
 }

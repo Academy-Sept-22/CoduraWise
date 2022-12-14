@@ -13,18 +13,6 @@ public class SearchService {
     this.repository = repository;
   }
 
-  public List<Resource> getResourceBySearch(String title, String tag) {
-    if (title == null && tag == null) {
-      throw new RuntimeException("Must provide either title or tag to query!");
-    } else if (title != null && tag == null) {
-      return repository.queryByTitle(title);
-    } else if (title == null) {
-      return repository.queryByTag(tag);
-    } else {
-      return repository.queryBothByTitleAndTag(title, tag);
-    }
-  }
-
   public List<Resource> search(String text) {
     String[] arrOfText = text.split(" ");
     return repository.search(arrOfText);

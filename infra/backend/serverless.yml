@@ -89,8 +89,8 @@ functions:
           method: GET
           path: /tags
           cors: true
-  QueryResourcesByTitleAndTag:
-    handler: com.codurance.codurawise.lambdas.QueryResourcesByTitleAndTag
+  Search:
+    handler: com.codurance.codurawise.lambdas.Search
     events:
       - http:
           method: GET
