@@ -25,8 +25,8 @@ public class SearchService {
     }
   }
 
-    public List<Resource> search(String text) {
-        throw new UnsupportedOperationException();
-
-    }
+  public List<Resource> search(String text) {
+    String[] arrOfText = text.split(" ");
+    return repository.search(arrOfText);
+  }
 }
