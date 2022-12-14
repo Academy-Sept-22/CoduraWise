@@ -9,6 +9,7 @@ import com.codurance.codurawise.lambdas.base.Lambda;
 import com.codurance.codurawise.lambdas.util.Response;
 import com.codurance.codurawise.repos.mysql.SearchMySQLRepository;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class Search extends Lambda {
@@ -28,7 +29,8 @@ public class Search extends Lambda {
 
   @Override
   public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
-    String searchText = event.getQueryStringParameters().get("query");
+    String encodedSearchText = event.getQueryStringParameters().get("query");
+    String searchText = java.net.URLDecoder.decode(encodedSearchText, StandardCharsets.UTF_8);
     List<Resource> resources = searchService.search(searchText);
     return response.createResponse(resources);
   }

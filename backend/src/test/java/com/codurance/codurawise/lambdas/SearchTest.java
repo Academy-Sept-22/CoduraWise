@@ -30,8 +30,9 @@ class SearchTest {
 
     // arrange
     String queryValue = "java%20spring%20configuration";
+    String transformedQueryvalue = "java spring configuration";
     APIGatewayProxyRequestEvent requestEvent = createEvent(queryValue);
-    given(searchService.search(queryValue)).willReturn(List.of());
+    given(searchService.search(transformedQueryvalue)).willReturn(List.of());
 
     // act
     Search searchLambda = new Search(searchService);
