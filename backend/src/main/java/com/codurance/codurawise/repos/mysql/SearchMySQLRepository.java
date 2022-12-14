@@ -53,9 +53,13 @@ public class SearchMySQLRepository implements SearchRepository {
   }
 
   private String createRegexpForTerms(String[] terms) {
+    if (terms.length == 1) {
+      return "?";
+    }
     String[] questionMarks = new String[terms.length];
     Arrays.fill(questionMarks, "?");
-    return String.join(" || '|' || ", questionMarks);
+    String concatenatedTerms = String.join(",'|',", questionMarks);
+    return "CONCAT("+ concatenatedTerms + ")";
   }
 
   private List<Resource> runQuery(PreparedStatement preparedStatement) throws SQLException {
