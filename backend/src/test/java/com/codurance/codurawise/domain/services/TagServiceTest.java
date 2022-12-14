@@ -1,7 +1,7 @@
 package com.codurance.codurawise.domain.services;
 
 import com.codurance.codurawise.domain.models.Tag;
-import com.codurance.codurawise.repos.TagRepository;
+import com.codurance.codurawise.domain.ports.repositories.TagRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

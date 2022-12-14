@@ -1,11 +1,11 @@
 package com.codurance.codurawise.domain.services;
 
 import com.codurance.codurawise.domain.models.Resource;
-import com.codurance.codurawise.repos.SearchRepository;
+import com.codurance.codurawise.domain.ports.repositories.SearchRepository;
 
 import java.util.List;
 
-public class SearchService{
+public class SearchService {
 
   private final SearchRepository repository;
 
@@ -14,6 +14,6 @@ public class SearchService{
   }
 
   public List<Resource> getResourceBySearch(String title, String tag) {
-      return repository.queryByTitleAndTag(title, tag);
+    return repository.queryByTitleAndTag(title, tag);
   }
 }

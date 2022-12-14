@@ -1,24 +1,32 @@
-package com.codurance.codurawise.repos.mysql;
+package com.codurance.codurawise.application.repositories;
 
+import com.codurance.codurawise.application.repositories.mysql.util.PreparedStatementExecutor;
 import com.codurance.codurawise.domain.models.Resource;
-import com.codurance.codurawise.repos.ResourcesRepository;
-import com.codurance.codurawise.repos.mysql.util.PreparedStatementExecutor;
+import com.codurance.codurawise.domain.ports.repositories.ResourcesRepository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
-public class ResourcesMySQLRepository implements ResourcesRepository {
+public class MySQLResourcesRepository implements ResourcesRepository {
 
+  // TODO: try to remove redundancies in the names, this is already the tags repository
+  // so the name TAG_TABLE and TAG_COLUMN are redundant, they can be just TABLE and COLUMN
   private static final String RESOURCE_TABLE = "Resource";
   private final Connection connection;
 
-  public ResourcesMySQLRepository(Connection connection) {
+  public MySQLResourcesRepository(Connection connection) {
     this.connection = connection;
   }
 
   @Override
   public List<Resource> getAllSortedByAverageRatingAndCreationDate() {
     try {
+      // TODO:
+      // There is a nice java library that makes this sql syntax a little nicer
+      // https://github.com/zsoltherpai/fluent-jdbc it may help you remove some lines
+      // and clean a little bit this code
       String sql = ("SELECT" +
         " * " +
         "FROM " + RESOURCE_TABLE + " " +
@@ -26,6 +34,9 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
       PreparedStatement preparedStatement = connection.prepareStatement(sql);
       return runQuery(preparedStatement);
     } catch (SQLException sqlException) {
+      // TODO:
+      // Application exceptions are part of the application, I would recommend that
+      // next time you add typed exceptions so it's more explicit and easier to find
       throw new RuntimeException("Error getting resources", sqlException);
     }
   }

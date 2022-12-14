@@ -6,7 +6,6 @@ public class Resource {
   private String title;
   private String link;
   private Double averageRating;
-
   private String mediaType;
 
   public void setId(Integer id) {
