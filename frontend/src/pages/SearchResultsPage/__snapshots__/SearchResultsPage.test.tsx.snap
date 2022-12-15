@@ -5,8 +5,7 @@ exports[`given the search results list page snapshot test: the html matches 1`] 
   className="search-result-page"
 >
   <h3>
-    Search results for “
-    ”:
+    No valid search term was provided
   </h3>
   <div
     className="container"

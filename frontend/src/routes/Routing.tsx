@@ -23,6 +23,7 @@ const Routing = () => {
         />
         <Route path={routerPaths.tag} element={<ResourceListPage />} />
         <Route path={routerPaths.search} element={<SearchResultsPage />} />
+        <Route path={routerPaths.emptySearch} element={<SearchResultsPage />} />
       </Routes>
     </BrowserRouter>
   );

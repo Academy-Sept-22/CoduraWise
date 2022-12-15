@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { ResourcesContext } from "../ResourcesContext";
 import { backendUrls } from "../../routes/paths";
+import { ResourcesContext } from "../ResourcesContext";
 
 function useResources() {
   const { resources, setResources } = useContext(ResourcesContext);
@@ -22,15 +22,16 @@ function useResources() {
     }
   };
 
-  const searchByTitleAndTag = async (
-    title: string | null,
-    tag: string | null,
-  ) => {
-    const url = backendUrls.searchUrl(title, tag);
-    const response = await fetch(url);
-    const data = await response.json();
-    if (data && setResources) {
-      setResources(data);
+  const searchByText = async (text: string) => {
+    if (!text) {
+      setResources([]);
+    } else {
+      const url = backendUrls.searchUrl(text);
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data && setResources) {
+        setResources(data);
+      }
     }
   };
 
@@ -38,7 +39,7 @@ function useResources() {
     resources,
     getResources,
     getResourcesByTag,
-    searchByTitleAndTag,
+    searchByText,
   };
 }
 

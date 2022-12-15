@@ -4,8 +4,7 @@ export const backendUrls = {
   resourceListUrl: `${baseBackendUrl}/resources`,
   tagsUrl: `${baseBackendUrl}/tags/`,
   resourcesByTagUrl: (tag: string) => `${baseBackendUrl}/resources/tag/${tag}`,
-  searchUrl: (title: string | null, tag: string | null) =>
-    `${baseBackendUrl}/search?tag=${tag}&title=${title}`,
+  searchUrl: (text: string) => `${baseBackendUrl}/search?query=${text}`,
 };
 
 export const routerPaths = {
@@ -14,5 +13,6 @@ export const routerPaths = {
   resources: "/resources",
   tag: "/resources/tag/:tag",
   search: "/search/:text",
+  emptySearch: "/search",
   any: "*",
 };

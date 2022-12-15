@@ -11,8 +11,9 @@ const SearchBar = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // searchByTitleAndTag(title, tag);
-    const path = routerPaths.search.replace(":text", searchValue ?? "");
+    const formattedSearchValue = encodeURIComponent(searchValue) ?? "";
+
+    const path = routerPaths.search.replace(":text", formattedSearchValue);
     navigate(path);
     setSearchValue("");
   };
@@ -42,4 +43,3 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
-
