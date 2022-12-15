@@ -5,6 +5,7 @@ import { routerPaths } from "../../routes/paths";
 import useResources from "../../store/hooks/useResources";
 import MediaCheckBox from "../MediaCheckBox/MediaCheckBox";
 import StarRatingInput from "../StarRatingInput/StarRatingInput";
+import convertTagsToArray from "./convertTagsToArray";
 
 const AddResourceForm = () => {
   const initialState = {
@@ -36,7 +37,9 @@ const AddResourceForm = () => {
       ...formValues,
       rating,
       mediaType: checkedMediaType,
+      tags: convertTagsToArray(formValues.tags)
     };
+
     postNewResource(body);
   };
 
@@ -72,11 +75,11 @@ const AddResourceForm = () => {
           pattern="(#\w{3,})+"
           autoFocus
           required
-          title="Please append each tag with a '#'"
+          title="Please append each tag with a '#' without spaces."
           value={formValues.tags}
           onChange={handleInputChange}
         />
-        <small>Enter tags with a prepending &quot;#&quot;</small>
+        <small>Enter tags with a prepending &quot;#&quot; without spaces.</small>
 
         <MediaCheckBox setCheckedMediaType={setCheckedMediaType} />
         <StarRatingInput setRating={setRating} />
