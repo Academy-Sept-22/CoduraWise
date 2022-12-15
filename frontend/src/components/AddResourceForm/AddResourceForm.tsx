@@ -16,7 +16,7 @@ const AddResourceForm = () => {
   const [formValues, setFormValues] = useState(initialState);
   const { postNewResource } = useResources();
   const [rating, setRating] = useState("1");
-  const [checkedMediaType, setCheckedMediaType] = useState("")
+  const [checkedMediaType, setCheckedMediaType] = useState<MediaType>("video");
 
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ const AddResourceForm = () => {
     const body = {
       ...formValues,
       rating,
-      mediaType: "video" as MediaType,
+      mediaType: checkedMediaType,
     };
     postNewResource(body);
   };
@@ -77,7 +77,7 @@ const AddResourceForm = () => {
         onChange={handleInputChange}
       />
       <small>Enter tags with a prepending &quot;#&quot;</small>
-    
+
       <MediaCheckBox setCheckedMediaType={setCheckedMediaType} />
       <StarRatingInput setRating={setRating} />
 

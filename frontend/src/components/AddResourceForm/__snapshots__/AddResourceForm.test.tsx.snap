@@ -31,7 +31,7 @@ exports[`given a resource form snapshot test: the html matches 1`] = `
     onChange={[Function]}
     pattern="[(http(s)?):\\\\/\\\\/(www\\\\.)?a-zA-Z0-9@:%._\\\\+~#=]{2,256}\\\\.[a-z]{2,6}\\\\b([-a-zA-Z0-9@:%_\\\\+.~#?&//=]*)"
     required={true}
-    title="Please input a URL to the resource"
+    title="Please give a valid URL to the resource"
     type="text"
     value=""
   />
@@ -46,18 +46,164 @@ exports[`given a resource form snapshot test: the html matches 1`] = `
     onChange={[Function]}
     pattern="(#\\\\w{3,})+"
     required={true}
-    title="Please input tags separated by '#'"
+    title="Please append each tag with a '#'"
     type="text"
     value=""
   />
-  <label
-    htmlFor="rating"
+  <small>
+    Enter tags with a prepending "#"
+  </small>
+  <form
+    className="media-selection"
   >
-    Rating:
-  </label>
-  <p>
-    RATING TO GO HERE
-  </p>
+    <h3>
+      Select Media Type:
+    </h3>
+    <div>
+      <input
+        defaultChecked={true}
+        id="videomedia"
+        name="mediaType"
+        onChange={[Function]}
+        type="radio"
+        value="video"
+      />
+      <label
+        htmlFor="videomedia"
+      >
+        video
+      </label>
+    </div>
+    <div>
+      <input
+        defaultChecked={false}
+        id="articlemedia"
+        name="mediaType"
+        onChange={[Function]}
+        type="radio"
+        value="article"
+      />
+      <label
+        htmlFor="articlemedia"
+      >
+        article
+      </label>
+    </div>
+    <div>
+      <input
+        defaultChecked={false}
+        id="bookmedia"
+        name="mediaType"
+        onChange={[Function]}
+        type="radio"
+        value="book"
+      />
+      <label
+        htmlFor="bookmedia"
+      >
+        book
+      </label>
+    </div>
+    <div>
+      <input
+        defaultChecked={false}
+        id="tutorialmedia"
+        name="mediaType"
+        onChange={[Function]}
+        type="radio"
+        value="tutorial"
+      />
+      <label
+        htmlFor="tutorialmedia"
+      >
+        tutorial
+      </label>
+    </div>
+    <div>
+      <input
+        defaultChecked={false}
+        id="coursemedia"
+        name="mediaType"
+        onChange={[Function]}
+        type="radio"
+        value="course"
+      />
+      <label
+        htmlFor="coursemedia"
+      >
+        course
+      </label>
+    </div>
+  </form>
+  <div
+    className="rate"
+  >
+    <input
+      id="star5"
+      name="rate"
+      onChange={[Function]}
+      type="radio"
+      value="5"
+    />
+    <label
+      htmlFor="star5"
+      title="text"
+    >
+      5 stars
+    </label>
+    <input
+      id="star4"
+      name="rate"
+      onChange={[Function]}
+      type="radio"
+      value="4"
+    />
+    <label
+      htmlFor="star4"
+      title="text"
+    >
+      4 stars
+    </label>
+    <input
+      id="star3"
+      name="rate"
+      onChange={[Function]}
+      type="radio"
+      value="3"
+    />
+    <label
+      htmlFor="star3"
+      title="text"
+    >
+      3 stars
+    </label>
+    <input
+      id="star2"
+      name="rate"
+      onChange={[Function]}
+      type="radio"
+      value="2"
+    />
+    <label
+      htmlFor="star2"
+      title="text"
+    >
+      2 stars
+    </label>
+    <input
+      id="star1"
+      name="rate"
+      onChange={[Function]}
+      type="radio"
+      value="1"
+    />
+    <label
+      htmlFor="star1"
+      title="text"
+    >
+      1 star
+    </label>
+  </div>
   <input
     type="submit"
     value="Submit Resource"
