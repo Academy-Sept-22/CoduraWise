@@ -3,9 +3,7 @@ package com.codurance.codurawise.repos.mysql;
 import com.codurance.codurawise.domain.models.Tag;
 import com.codurance.codurawise.repos.TagRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 import static com.codurance.codurawise.repos.mysql.util.PreparedStatementExecutor.executeTagQuery;
@@ -36,7 +34,20 @@ public class TagsMySQLRepository implements TagRepository {
 
   @Override
   public Tag add(Tag tag) {
-    throw new UnsupportedOperationException();
+    try {
+      String sql = ("INSERT INTO `Tag` VALUES (?);");
+
+      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setString(1, tag.getTag());
+      int rowsAdded = preparedStatement.executeUpdate();
+      if (rowsAdded != 1) {
+        throw new RuntimeException("Tag not added!");
+      }
+
+      return tag;
+    } catch (SQLException sqlException) {
+      throw new RuntimeException("Error adding tag", sqlException);
+    }
   }
 
   private List<Tag> runQuery(PreparedStatement preparedStatement) throws SQLException {
