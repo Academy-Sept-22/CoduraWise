@@ -50,10 +50,10 @@ const AddResourceForm = () => {
         <input
           type="text"
           name="title"
-          pattern="\w{3,}"
+          pattern="^[A-Za-z]{1}(.\s?)*"
           autoFocus
           required
-          title="Requires a title longer than 3 letters"
+          title="Requires a title"
           value={formValues.title}
           onChange={handleInputChange}
         />
