@@ -5,11 +5,15 @@ import com.codurance.codurawise.repos.ResourcesRepository;
 import com.codurance.codurawise.repos.mysql.util.PreparedStatementExecutor;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ResourcesMySQLRepository implements ResourcesRepository {
 
   private static final String RESOURCE_TABLE = "Resource";
+  private static final String DEFAULT_USER_EMAIL = "default@codurance.com";
   private final Connection connection;
 
   public ResourcesMySQLRepository(Connection connection) {
@@ -53,23 +57,33 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
   @Override
   public Resource add(Resource resourceToAdd) {
     try {
-      String sql = ("INSERT INTO `Resource`" +
-        " VALUES (?,?,?,?,?,?,?);");
+      String sql = ("INSERT INTO `Resource` " +
+        "(Title, Link, Description, Creation_Date, Media_Type, Average_Rating, Email) " +
+        "VALUES (?,?,?,?,?,?,?);");
 
-      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+      PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
       preparedStatement.setString(1, resourceToAdd.getTitle());
       preparedStatement.setString(2, resourceToAdd.getLink());
       preparedStatement.setString(3, "");
-      preparedStatement.setString(4, "TODO:"); // TODO: date in correct format
+      preparedStatement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
       preparedStatement.setString(5, resourceToAdd.getMediaType());
       preparedStatement.setDouble(6, resourceToAdd.getAverageRating());
-      preparedStatement.setString(7, "TODO"); // TODO: default email existing in db
+      preparedStatement.setString(7, DEFAULT_USER_EMAIL);
 
-      // TODO: get id generated and set in resource
+      int rowsAdded = preparedStatement.executeUpdate();
+      if (rowsAdded != 1) {
+        throw new RuntimeException("Resource not added!");
+      }
+
+      ResultSet generatedKeysResult = preparedStatement.getGeneratedKeys();
+      generatedKeysResult.next();
+      int newId = generatedKeysResult.getInt(1);
+
+      resourceToAdd.setId(newId);
 
       return resourceToAdd;
     } catch (SQLException sqlException) {
-      throw new RuntimeException("Error getting resources", sqlException);
+      throw new RuntimeException("Error adding resource", sqlException);
     }
   }
 

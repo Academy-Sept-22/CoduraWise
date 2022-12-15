@@ -15,8 +15,8 @@ class ResourcesMySQLRepositoryTest extends SqlTestBase {
   void add_resource_with_existing_tag() throws Exception {
 
     // arrange
-    sqlExecutor.executeUpdate(connection, "INSERT INTO `Media_Type` VALUES ('video');");
-    sqlExecutor.executeUpdate(connection, "INSERT INTO `User` VALUES ('user1@codurance.com','User1');");
+    sqlExecutor.executeUpdate(connection, "INSERT INTO `Media_Type` VALUES ('article');");
+    sqlExecutor.executeUpdate(connection, "INSERT INTO `User` VALUES ('default@codurance.com','Default');");
     sqlExecutor.executeUpdate(connection, "INSERT INTO `Tag` VALUES ('java');");
 
     Resource resourceToAdd = new Resource();
