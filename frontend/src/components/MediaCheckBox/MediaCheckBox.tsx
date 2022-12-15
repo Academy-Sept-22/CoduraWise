@@ -7,7 +7,7 @@ interface MediaCheckBoxProps {
 
 const MediaCheckBox = ({ setCheckedMediaType }: MediaCheckBoxProps) => {
   return (
-    <form className="media-selection">
+    <fieldset className="media-selection">
       <h3>Select Media Type:</h3>
       {MediaTypes.map((mediaType: MediaType) => (
         <div key={mediaType}>
@@ -22,9 +22,8 @@ const MediaCheckBox = ({ setCheckedMediaType }: MediaCheckBoxProps) => {
           <label htmlFor={`${mediaType}media`}>{mediaType}</label>
         </div>
       ))}
-    </form>
+    </fieldset>
   );
 };
 
 export default MediaCheckBox;
-

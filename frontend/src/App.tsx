@@ -2,11 +2,14 @@ import React from "react";
 
 import Routing from "./routes/Routing";
 import ResourcesContextProvider from "./store/ResourcesContext";
+import ToastsContextProvider from "./store/ToastsContext";
 
 function App() {
   return (
     <ResourcesContextProvider>
-      <Routing />
+      <ToastsContextProvider>
+        <Routing />
+      </ToastsContextProvider>
     </ResourcesContextProvider>
   );
 }

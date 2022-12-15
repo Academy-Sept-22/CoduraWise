@@ -6,11 +6,13 @@ import HomePage from "../pages/HomePage/HomePage";
 import Header from "../components/Header/Header";
 import SearchResultsPage from "../pages/SearchResultsPage/SearchResultsPage";
 import AddResourcePage from "../pages/AddResourcePage/AddResourcePage";
+import { ToastContainer } from "react-toastify";
 
 const Routing = () => {
   return (
     <BrowserRouter>
       <Header />
+      <ToastContainer />
       <Routes>
         <Route
           path={routerPaths.noPath}
