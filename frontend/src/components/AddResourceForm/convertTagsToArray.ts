@@ -1,5 +1,5 @@
-const convertTagsToArray = (tagsString : string) => {
-  return tagsString.split("#");
-}
+const convertTagsToArray = (tagsString: string) => {
+  return tagsString.split("#").splice(1);
+};
 
-export default convertTagsToArray
+export default convertTagsToArray;
