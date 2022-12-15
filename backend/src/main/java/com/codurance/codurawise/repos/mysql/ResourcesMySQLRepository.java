@@ -1,13 +1,12 @@
 package com.codurance.codurawise.repos.mysql;
 
 import com.codurance.codurawise.domain.models.Resource;
+import com.codurance.codurawise.domain.models.Tag;
 import com.codurance.codurawise.repos.ResourcesRepository;
 import com.codurance.codurawise.repos.mysql.util.PreparedStatementExecutor;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ResourcesMySQLRepository implements ResourcesRepository {
@@ -78,12 +77,35 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
       ResultSet generatedKeysResult = preparedStatement.getGeneratedKeys();
       generatedKeysResult.next();
       int newId = generatedKeysResult.getInt(1);
-
       resourceToAdd.setId(newId);
+
+      for (Tag tag: resourceToAdd.getTags()) {
+        insertResourceTags(newId, tag);
+      }
 
       return resourceToAdd;
     } catch (SQLException sqlException) {
       throw new RuntimeException("Error adding resource", sqlException);
+    }
+  }
+
+  private void insertResourceTags(int newId, Tag tag) {
+
+    try {
+      String sql = ("INSERT INTO `Resource_Tag` " +
+        "VALUES (?,?);");
+
+      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setInt(1, newId);
+      preparedStatement.setString(2, tag.getTag());
+
+      int rowsAdded = preparedStatement.executeUpdate();
+      if (rowsAdded != 1) {
+        throw new RuntimeException("Resource tag relation not added!");
+      }
+
+    } catch (SQLException sqlException) {
+      throw new RuntimeException("Error adding resource tag relation", sqlException);
     }
   }
 

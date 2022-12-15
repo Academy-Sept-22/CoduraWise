@@ -18,6 +18,15 @@ public class SqlExecutor {
     }
   }
 
+  public int queryCount(Connection connection, String sql) throws SQLException {
+    int counter = 0;
+    try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+      ResultSet resultSet = preparedStatement.executeQuery();
+      while(resultSet.next()) counter++;
+    }
+    return counter;
+  }
+
   public void insertResource(Connection connection, int id, String title, String link, String description,
                       String date, String type, double averageRating, String email) throws SQLException {
     String sql = "INSERT INTO `Resource` VALUES (?,?,?,?,?,?,?,?)";

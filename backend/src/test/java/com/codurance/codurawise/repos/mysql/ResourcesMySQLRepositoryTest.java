@@ -17,14 +17,14 @@ class ResourcesMySQLRepositoryTest extends SqlTestBase {
     // arrange
     sqlExecutor.executeUpdate(connection, "INSERT INTO `Media_Type` VALUES ('article');");
     sqlExecutor.executeUpdate(connection, "INSERT INTO `User` VALUES ('default@codurance.com','Default');");
-    sqlExecutor.executeUpdate(connection, "INSERT INTO `Tag` VALUES ('java');");
+    sqlExecutor.executeUpdate(connection, "INSERT INTO `Tag` VALUES ('java'),('agile');");
 
     Resource resourceToAdd = new Resource();
     resourceToAdd.setAverageRating(3.0);
     resourceToAdd.setTitle("Uncle Bob");
     resourceToAdd.setLink("www.bob.com");
     resourceToAdd.setMediaType("article");
-    resourceToAdd.setTags(List.of(Tag.of("java")));
+    resourceToAdd.setTags(List.of(Tag.of("java"), Tag.of("agile")));
 
     // act
     ResourcesMySQLRepository repository = new ResourcesMySQLRepository(connection);
@@ -34,6 +34,9 @@ class ResourcesMySQLRepositoryTest extends SqlTestBase {
     List<Resource> resources = repository.getAllSortedByAverageRatingAndCreationDate();
     assertThat(resources.size()).isEqualTo(1);
     assertThat(resourceAdded.getId()).isGreaterThan(0);
+
+    int resourceTagAddedCount = sqlExecutor.queryCount(connection, "SELECT * FROM `Resource_Tag`");
+    assertThat(resourceTagAddedCount).isEqualTo(2);
   }
 
 }
