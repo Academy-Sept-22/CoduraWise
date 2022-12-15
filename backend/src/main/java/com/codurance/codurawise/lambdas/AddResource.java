@@ -9,6 +9,7 @@ import com.codurance.codurawise.domain.services.ResourceService;
 import com.codurance.codurawise.lambdas.base.Lambda;
 import com.codurance.codurawise.lambdas.util.Response;
 import com.codurance.codurawise.repos.mysql.ResourcesMySQLRepository;
+import com.codurance.codurawise.repos.mysql.TagsMySQLRepository;
 import com.google.gson.*;
 
 import java.lang.reflect.Type;
@@ -24,7 +25,8 @@ public class AddResource extends Lambda {
 
   public AddResource() {
     ResourcesMySQLRepository repository = new ResourcesMySQLRepository(connection);
-    resourceService = new ResourceService(repository);
+    TagsMySQLRepository tagRepository = new TagsMySQLRepository(connection);
+    resourceService = new ResourceService(repository, tagRepository);
   }
 
   public AddResource(ResourceService resourceService) {

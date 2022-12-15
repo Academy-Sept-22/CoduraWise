@@ -8,4 +8,5 @@ public interface TagRepository {
 
   List<Tag> getAllTags();
 
+    Tag add(Tag tag);
 }

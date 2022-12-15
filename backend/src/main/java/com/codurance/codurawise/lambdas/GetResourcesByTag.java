@@ -9,7 +9,9 @@ import com.codurance.codurawise.domain.services.ResourceService;
 import com.codurance.codurawise.lambdas.util.MySqlConnectionProvider;
 import com.codurance.codurawise.lambdas.util.Response;
 import com.codurance.codurawise.repos.ResourcesRepository;
+import com.codurance.codurawise.repos.TagRepository;
 import com.codurance.codurawise.repos.mysql.ResourcesMySQLRepository;
+import com.codurance.codurawise.repos.mysql.TagsMySQLRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,13 +27,15 @@ public class GetResourcesByTag implements RequestHandler<APIGatewayProxyRequestE
 
   public GetResourcesByTag() {
     ResourcesRepository repository;
+    TagRepository tagRepository;
     try {
       Connection connection = MySqlConnectionProvider.createDatabaseConnection();
       repository = new ResourcesMySQLRepository(connection);
+      tagRepository = new TagsMySQLRepository(connection);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
-    resourceService = new ResourceService(repository);
+    resourceService = new ResourceService(repository, tagRepository);
   }
 
   @Override

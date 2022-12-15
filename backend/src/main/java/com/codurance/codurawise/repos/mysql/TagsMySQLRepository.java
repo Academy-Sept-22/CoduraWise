@@ -34,6 +34,11 @@ public class TagsMySQLRepository implements TagRepository {
     }
   }
 
+  @Override
+  public Tag add(Tag tag) {
+    throw new UnsupportedOperationException();
+  }
+
   private List<Tag> runQuery(PreparedStatement preparedStatement) throws SQLException {
     return executeTagQuery(preparedStatement);
   }

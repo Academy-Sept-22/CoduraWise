@@ -2,6 +2,7 @@ package com.codurance.codurawise.domain.models;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 public class Resource {
@@ -29,7 +30,7 @@ public class Resource {
     return resource;
   }
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
@@ -41,20 +42,40 @@ public class Resource {
     this.title = title;
   }
 
+  public String getTitle() {
+    return title;
+  }
+
   public void setLink(String link) {
     this.link = link;
+  }
+
+  public String getLink() {
+    return link;
   }
 
   public void setAverageRating(Double averageRating) {
     this.averageRating = averageRating;
   }
 
+  public Double getAverageRating() {
+    return averageRating;
+  }
+
   public void setMediaType(String mediaType) {
     this.mediaType = mediaType;
   }
 
+  public String getMediaType() {
+    return mediaType;
+  }
+
   public void setTags(Collection<Tag> tags) {
     this.tags = new ArrayList<>(tags);
+  }
+
+  public Collection<Tag> getTags() {
+    return Collections.unmodifiableCollection(tags);
   }
 
   @Override

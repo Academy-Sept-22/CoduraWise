@@ -50,6 +50,29 @@ public class ResourcesMySQLRepository implements ResourcesRepository {
     }
   }
 
+  @Override
+  public Resource add(Resource resourceToAdd) {
+    try {
+      String sql = ("INSERT INTO `Resource`" +
+        " VALUES (?,?,?,?,?,?,?);");
+
+      PreparedStatement preparedStatement = connection.prepareStatement(sql);
+      preparedStatement.setString(1, resourceToAdd.getTitle());
+      preparedStatement.setString(2, resourceToAdd.getLink());
+      preparedStatement.setString(3, "");
+      preparedStatement.setString(4, "TODO:"); // TODO: date in correct format
+      preparedStatement.setString(5, resourceToAdd.getMediaType());
+      preparedStatement.setDouble(6, resourceToAdd.getAverageRating());
+      preparedStatement.setString(7, "TODO"); // TODO: default email existing in db
+
+      // TODO: get id generated and set in resource
+
+      return resourceToAdd;
+    } catch (SQLException sqlException) {
+      throw new RuntimeException("Error getting resources", sqlException);
+    }
+  }
+
   private List<Resource> runQuery(PreparedStatement preparedStatement) throws SQLException {
     return PreparedStatementExecutor.executeResourceQuery(preparedStatement);
   }

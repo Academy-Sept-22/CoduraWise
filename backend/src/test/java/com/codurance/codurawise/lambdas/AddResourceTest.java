@@ -49,11 +49,11 @@ public class AddResourceTest {
     resourceToAdd.setTags(List.of(Tag.of("java"), Tag.of("agile")));
 
     Resource resourceAdded = new Resource();
+    resourceAdded.setId(1);
     resourceAdded.setAverageRating(3.0);
     resourceAdded.setTitle("Uncle Bob");
     resourceAdded.setLink("www.bob.com");
     resourceAdded.setMediaType("article");
-    resourceAdded.setId(1);
     resourceToAdd.setTags(List.of(Tag.of("java"), Tag.of("agile")));
 
     given(resourceService.add(resourceToAdd)).willReturn(resourceAdded);
