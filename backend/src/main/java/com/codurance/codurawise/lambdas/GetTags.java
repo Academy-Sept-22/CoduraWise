@@ -8,7 +8,7 @@ import com.codurance.codurawise.domain.models.Tag;
 import com.codurance.codurawise.domain.services.TagService;
 import com.codurance.codurawise.lambdas.util.MySqlConnectionProvider;
 import com.codurance.codurawise.lambdas.util.Response;
-import com.codurance.codurawise.repos.TagRepository;
+import com.codurance.codurawise.domain.repos.TagRepository;
 import com.codurance.codurawise.repos.mysql.TagsMySQLRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

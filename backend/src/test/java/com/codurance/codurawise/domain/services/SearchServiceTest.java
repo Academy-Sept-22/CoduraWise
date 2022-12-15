@@ -1,7 +1,7 @@
 package com.codurance.codurawise.domain.services;
 
 import com.codurance.codurawise.domain.models.Resource;
-import com.codurance.codurawise.repos.SearchRepository;
+import com.codurance.codurawise.domain.repos.SearchRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

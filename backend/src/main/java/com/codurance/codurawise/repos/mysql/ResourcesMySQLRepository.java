@@ -2,7 +2,7 @@ package com.codurance.codurawise.repos.mysql;
 
 import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.domain.models.Tag;
-import com.codurance.codurawise.repos.ResourcesRepository;
+import com.codurance.codurawise.domain.repos.ResourcesRepository;
 import com.codurance.codurawise.repos.mysql.util.PreparedStatementExecutor;
 
 import java.sql.*;

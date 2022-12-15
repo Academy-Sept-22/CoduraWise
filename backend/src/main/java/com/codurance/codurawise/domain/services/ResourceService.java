@@ -2,11 +2,10 @@ package com.codurance.codurawise.domain.services;
 
 import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.domain.models.Tag;
-import com.codurance.codurawise.repos.ResourcesRepository;
-import com.codurance.codurawise.repos.TagRepository;
+import com.codurance.codurawise.domain.repos.ResourcesRepository;
+import com.codurance.codurawise.domain.repos.TagRepository;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class ResourceService {

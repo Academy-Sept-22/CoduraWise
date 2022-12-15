@@ -1,7 +1,7 @@
 package com.codurance.codurawise.repos.mysql;
 
 import com.codurance.codurawise.domain.models.Resource;
-import com.codurance.codurawise.repos.SearchRepository;
+import com.codurance.codurawise.domain.repos.SearchRepository;
 import com.codurance.codurawise.repos.mysql.util.SqlTestBase;
 import org.junit.jupiter.api.Test;
 

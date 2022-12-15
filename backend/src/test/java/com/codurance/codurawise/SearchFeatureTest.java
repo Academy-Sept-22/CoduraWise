@@ -6,7 +6,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.domain.services.SearchService;
 import com.codurance.codurawise.lambdas.Search;
-import com.codurance.codurawise.repos.SearchRepository;
+import com.codurance.codurawise.domain.repos.SearchRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;

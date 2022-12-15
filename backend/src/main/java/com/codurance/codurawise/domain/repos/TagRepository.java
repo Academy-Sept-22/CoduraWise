@@ -1,4 +1,4 @@
-package com.codurance.codurawise.repos;
+package com.codurance.codurawise.domain.repos;
 
 import com.codurance.codurawise.domain.models.Tag;
 

@@ -1,7 +1,7 @@
 package com.codurance.codurawise.repos.mysql;
 
 import com.codurance.codurawise.domain.models.Tag;
-import com.codurance.codurawise.repos.TagRepository;
+import com.codurance.codurawise.domain.repos.TagRepository;
 
 import java.sql.*;
 import java.util.List;
