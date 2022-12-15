@@ -6,6 +6,7 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 import com.codurance.codurawise.domain.models.Resource;
 import com.codurance.codurawise.domain.models.Tag;
 import com.codurance.codurawise.domain.services.ResourceService;
+import com.codurance.codurawise.domain.services.TagService;
 import com.codurance.codurawise.lambdas.AddResource;
 import com.codurance.codurawise.repos.mysql.ResourcesMySQLRepository;
 import com.codurance.codurawise.repos.mysql.TagsMySQLRepository;
@@ -30,12 +31,14 @@ public class AddResourceFeatureTest extends SqlTestBase {
   Context context;
 
   private ResourceService resourceService;
+  private TagService tagService;
 
   @BeforeEach
   public void repoSetup() {
     TagsMySQLRepository tagRepository = new TagsMySQLRepository(connection);
     ResourcesMySQLRepository resourceRepository = new ResourcesMySQLRepository(connection);
     resourceService = new ResourceService(resourceRepository, tagRepository);
+    tagService = new TagService(tagRepository);
   }
 
   @Test
@@ -72,6 +75,10 @@ public class AddResourceFeatureTest extends SqlTestBase {
     // assert
     assertThat(responseEvent.getStatusCode()).isEqualTo(201);
     assertThat(responseEvent.getBody()).contains("Uncle Bob");
+
+    assertThat(resourceService.getAll().get(0).getId()).isGreaterThan(0);
+    assertThat(resourceService.getAll().get(0).getTitle()).isEqualTo(resourceToAdd.getTitle());
+    assertThat(tagService.getAllTags()).contains(Tag.of("java"), Tag.of("agile"));
 
     System.out.println("Resource -----------------------");
     sqlExecutor.queryAndPrint(connection, "SELECT * FROM Resource;");
