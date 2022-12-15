@@ -4,13 +4,16 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.codurance.codurawise.domain.models.Resource;
+import com.codurance.codurawise.domain.models.Tag;
 import com.codurance.codurawise.domain.services.ResourceService;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -26,18 +29,24 @@ public class AddResourceTest {
 
   @Test
   void should_add_a_resource_to_database_and_return_it() {
+
     //arrange
     JsonObject resourceJson = new JsonObject();
     resourceJson.addProperty("title", "Uncle Bob");
     resourceJson.addProperty("link", "www.bob.com");
     resourceJson.addProperty("averageRating", 3.0);
     resourceJson.addProperty("mediaType", "article");
+    JsonArray tagsArray = new JsonArray();
+    tagsArray.add("java");
+    tagsArray.add("agile");
+    resourceJson.add("tags", tagsArray);
 
     Resource resourceToAdd = new Resource();
     resourceToAdd.setAverageRating(3.0);
     resourceToAdd.setTitle("Uncle Bob");
     resourceToAdd.setLink("www.bob.com");
     resourceToAdd.setMediaType("article");
+    resourceToAdd.setTags(List.of(Tag.of("java"), Tag.of("agile")));
 
     Resource resourceAdded = new Resource();
     resourceAdded.setAverageRating(3.0);
@@ -45,6 +54,7 @@ public class AddResourceTest {
     resourceAdded.setLink("www.bob.com");
     resourceAdded.setMediaType("article");
     resourceAdded.setId(1);
+    resourceToAdd.setTags(List.of(Tag.of("java"), Tag.of("agile")));
 
     given(resourceService.add(resourceToAdd)).willReturn(resourceAdded);
 

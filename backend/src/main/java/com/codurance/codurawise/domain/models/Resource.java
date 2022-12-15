@@ -1,13 +1,17 @@
 package com.codurance.codurawise.domain.models;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
+
 public class Resource {
 
   private Integer id;
   private String title;
   private String link;
   private Double averageRating;
-
   private String mediaType;
+  private Collection<Tag> tags;
 
   public static Resource of(Integer id, String title, String link, Double averageRating, String mediaType) {
     Resource resource = new Resource();
@@ -16,6 +20,12 @@ public class Resource {
     resource.setLink(link);
     resource.setAverageRating(averageRating);
     resource.setMediaType(mediaType);
+    return resource;
+  }
+
+  public static Resource of(Integer id, String title, String link, Double averageRating, String mediaType, Collection<Tag> tags) {
+    Resource resource = of(id, title, link, averageRating, mediaType);
+    resource.setTags(tags);
     return resource;
   }
 
@@ -43,6 +53,10 @@ public class Resource {
     this.mediaType = mediaType;
   }
 
+  public void setTags(Collection<Tag> tags) {
+    this.tags = new ArrayList<>(tags);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -50,20 +64,23 @@ public class Resource {
 
     Resource resource = (Resource) o;
 
-    if (!id.equals(resource.id)) return false;
-    if (!title.equals(resource.title)) return false;
-    if (!link.equals(resource.link)) return false;
-    if (!averageRating.equals(resource.averageRating)) return false;
-    return mediaType.equals(resource.mediaType);
+    if (!Objects.equals(id, resource.id)) return false;
+    if (!Objects.equals(title, resource.title)) return false;
+    if (!Objects.equals(link, resource.link)) return false;
+    if (!Objects.equals(averageRating, resource.averageRating))
+      return false;
+    if (!Objects.equals(mediaType, resource.mediaType)) return false;
+    return Objects.equals(tags, resource.tags);
   }
 
   @Override
   public int hashCode() {
-    int result = id.hashCode();
-    result = 31 * result + title.hashCode();
-    result = 31 * result + link.hashCode();
-    result = 31 * result + averageRating.hashCode();
-    result = 31 * result + mediaType.hashCode();
+    int result = id != null ? id.hashCode() : 0;
+    result = 31 * result + (title != null ? title.hashCode() : 0);
+    result = 31 * result + (link != null ? link.hashCode() : 0);
+    result = 31 * result + (averageRating != null ? averageRating.hashCode() : 0);
+    result = 31 * result + (mediaType != null ? mediaType.hashCode() : 0);
+    result = 31 * result + (tags != null ? tags.hashCode() : 0);
     return result;
   }
 
@@ -75,7 +92,7 @@ public class Resource {
       ", link='" + link + '\'' +
       ", averageRating=" + averageRating +
       ", mediaType='" + mediaType + '\'' +
+      ", tags=" + tags +
       '}';
   }
-
 }
