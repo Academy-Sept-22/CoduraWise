@@ -19,4 +19,9 @@ public class ResourceService {
   public List<Resource> getByTag(String tag) {
     return repository.getByTagSortedByAverageRatingAndCreationDate(tag);
   }
+
+    public Resource add(Resource resourceToAdd) {
+        throw new UnsupportedOperationException();
+
+    }
 }
