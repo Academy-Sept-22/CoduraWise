@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { backendUrls } from "../../routes/paths";
 import { ResourcesContext } from "../ResourcesContext";
 import { AddResourceBodyDTO } from "../../models/DataTransferObject";
+import { ToastsContext } from "../../store/ToastsContext";
 
 function useResources() {
   const { resources, setResources } = useContext(ResourcesContext);
+  const { notifyResourceSubmit } = useContext(ToastsContext);
 
   const getResources = async () => {
     const response = await fetch(backendUrls.resourceListUrl);
@@ -44,9 +46,7 @@ function useResources() {
       },
       body: JSON.stringify(body),
     });
-    console.log(response);
-
-    // if (response.ok) return null;
+    notifyResourceSubmit(response.ok);
   };
 
   return {

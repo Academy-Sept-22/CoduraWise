@@ -1,10 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
 import { MediaType } from "../../models/MediaTypes";
 import { routerPaths } from "../../routes/paths";
 import useResources from "../../store/hooks/useResources";
-import { ToastsContext } from "../../store/ToastsContext";
 import MediaCheckBox from "../MediaCheckBox/MediaCheckBox";
 import StarRatingInput from "../StarRatingInput/StarRatingInput";
 
@@ -14,8 +12,6 @@ const AddResourceForm = () => {
     link: "",
     tags: "",
   };
-
-  const { notifyAddResourceSuccess } = useContext(ToastsContext);
   const [formValues, setFormValues] = useState(initialState);
   const { postNewResource } = useResources();
   const [rating, setRating] = useState("1");
@@ -42,7 +38,6 @@ const AddResourceForm = () => {
       mediaType: checkedMediaType,
     };
     postNewResource(body);
-    notifyAddResourceSuccess();
   };
 
   return (
@@ -93,3 +88,4 @@ const AddResourceForm = () => {
 };
 
 export default AddResourceForm;
+

@@ -2,7 +2,7 @@ import React, { createContext } from "react";
 import { toast } from "react-toastify";
 
 interface ToastFunctions {
-  notifyAddResourceSuccess: () => void;
+  notifyResourceSubmit: (success: boolean) => void;
 }
 
 export default function ToastsContextProvider({
@@ -10,13 +10,24 @@ export default function ToastsContextProvider({
 }: {
   children: JSX.Element;
 }) {
-  const notifyAddResourceSuccess = () => toast("Wow so easy !");
+  const notifyResourceSubmit = (success: boolean) => {
+    if (success) {
+      toast.success("Congratulations! Resource Added");
+    } else {
+      toast.error("Error Adding Resource");
+    }
+  };
 
   return (
-    <ToastsContext.Provider value={{ notifyAddResourceSuccess }}>
+    <ToastsContext.Provider
+      value={{
+        notifyResourceSubmit,
+      }}
+    >
       {children}
     </ToastsContext.Provider>
   );
 }
 export type ContextState = ToastFunctions;
 export const ToastsContext = createContext({} as ContextState);
+

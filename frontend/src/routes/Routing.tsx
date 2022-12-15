@@ -7,12 +7,24 @@ import Header from "../components/Header/Header";
 import SearchResultsPage from "../pages/SearchResultsPage/SearchResultsPage";
 import AddResourcePage from "../pages/AddResourcePage/AddResourcePage";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Routing = () => {
   return (
     <BrowserRouter>
       <Header />
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Routes>
         <Route
           path={routerPaths.noPath}

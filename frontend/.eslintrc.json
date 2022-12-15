@@ -19,6 +19,7 @@
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
     "no-var": "error",
+    "no-constant-condition": "off",
     "prefer-const": [
       "error",
       {
