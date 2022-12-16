@@ -1,0 +1,28 @@
+.search-bar {
+  --search-bar-color: #1d3557;
+  --search-bar-border: 0.2em;
+  --search-bar-border-radius: 6px;
+
+  &__input {
+    padding: 0.4em;
+    color: var(--search-bar-color);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-right: none;
+    border-radius: var(--search-bar-border-radius) 0 0
+      var(--search-bar-border-radius);
+    outline: none;
+
+    &:focus {
+      color: var(--search-bar-color);
+    }
+  }
+
+  &__button {
+    padding: 0.4em;
+    border: var(--search-bar-border) solid var(--search-bar-color);
+    background: var(--search-bar-color);
+    color: white;
+    border-radius: 0 var(--search-bar-border-radius)
+      var(--search-bar-border-radius) 0;
+  }
+}

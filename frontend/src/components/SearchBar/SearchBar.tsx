@@ -22,10 +22,11 @@ const SearchBar = () => {
   };
 
   return (
-    <section role="search">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="search"></label>
+    <section className="search-bar" role="search">
+      <form className="search-bar__form" onSubmit={handleSubmit}>
+        <label className="search-bar__label" htmlFor="search"></label>
         <input
+          className="search-bar__input"
           id="search"
           type="search"
           name="search"
@@ -33,8 +34,7 @@ const SearchBar = () => {
           onChange={handleChange}
           placeholder="Search For Resources..."
         />
-        <span className="caret"></span>
-        <button type="submit">
+        <button className="search-bar__button" type="submit">
           <FaSearch size={12} />
         </button>
       </form>
