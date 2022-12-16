@@ -96,4 +96,11 @@ functions:
           method: GET
           path: /search
           cors: true
+  AddResource:
+    handler: com.codurance.codurawise.lambdas.AddResource
+    events:
+      - http:
+          method: POST
+          path: /resources/new
+          cors: true
 
