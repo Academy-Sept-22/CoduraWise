@@ -34,6 +34,8 @@ public class AddResource extends Lambda {
   }
 
   public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent requestEvent, Context context) {
+    // TODO: we must change to accept rating instead of averageRating
+    //  (the frontend was changed to use averageRating to comply)
     Resource resourceToAdd = gson.fromJson(requestEvent.getBody(), Resource.class);
     Resource resourceAdded = resourceService.add(resourceToAdd);
     return response.createResponse(201, gson.toJson(resourceAdded));
