@@ -14,9 +14,9 @@ exports[`given a resource form snapshot test: the html matches 1`] = `
     autoFocus={true}
     name="title"
     onChange={[Function]}
-    pattern="\\\\w{3,}"
+    pattern="^[A-Za-z]{1}(.\\\\s?)*"
     required={true}
-    title="Requires a title longer than 3 letters"
+    title="Requires a title"
     type="text"
     value=""
   />
@@ -46,14 +46,14 @@ exports[`given a resource form snapshot test: the html matches 1`] = `
     onChange={[Function]}
     pattern="(#\\\\w{3,})+"
     required={true}
-    title="Please append each tag with a '#'"
+    title="Please append each tag with a '#' without spaces."
     type="text"
     value=""
   />
   <small>
-    Enter tags with a prepending "#"
+    Enter tags with a prepending "#" without spaces.
   </small>
-  <form
+  <fieldset
     className="media-selection"
   >
     <h3>
@@ -134,7 +134,7 @@ exports[`given a resource form snapshot test: the html matches 1`] = `
         course
       </label>
     </div>
-  </form>
+  </fieldset>
   <div
     className="rate"
   >
