@@ -1,0 +1,43 @@
+.add-resource {
+  &__form {
+    width: 30em;
+    margin: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__input-container {
+    margin: 5px 0 5px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  &__input-container-with-instruction {
+    display: flex;
+    flex-direction: column;
+    .add-resource__instruction {
+      margin-right: 2.4em;
+      align-self: flex-end;
+    }
+  }
+  &__label {
+    width: 7em;
+  }
+  &__input {
+    width: 22em;
+    padding: 0.3em;
+  }
+
+  &__button {
+    width: 10em;
+    margin: 1em;
+    padding: 0.7em;
+    background-color: #1d3557;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    align-self: center;
+  }
+}

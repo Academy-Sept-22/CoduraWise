@@ -39,10 +39,11 @@ const MediaTypeSelection = ({
 
   return (
     <form className="media-selection">
-      <h3>Filter by</h3>
+      <legend className="media-selection__legend">Filter by</legend>
       {MediaTypes.map((mediaType: MediaType, index) => (
         <div key={mediaType}>
           <input
+            className="media-selection__input"
             type="checkbox"
             name={mediaType}
             id={`${mediaType}media`}
@@ -50,7 +51,12 @@ const MediaTypeSelection = ({
             onChange={() => handleOnChange(mediaType, index)}
             checked={checkedState[index]}
           />
-          <label htmlFor={`${mediaType}media`}>{mediaType}</label>
+          <label
+            className="media-selection__label"
+            htmlFor={`${mediaType}media`}
+          >
+            {mediaType}
+          </label>
         </div>
       ))}
     </form>

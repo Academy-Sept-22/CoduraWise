@@ -1,16 +1,21 @@
 .media-selection {
-  width: 20rem;
+  width: 88%;
   margin: 10px;
+
+  border: none;
+  padding: 1em;
 
   font-family: monospace, sans-serif;
   font-size: 0.9em;
 
-  & h3 {
-    font-size: 1em;
-    margin: 7px 0;
+  & legend {
+    font-size: 50em;
+    margin: 50px;
+  }
+  & input {
+    margin-left: 5px;
   }
   & label {
     margin-left: 5px;
   }
 }
-

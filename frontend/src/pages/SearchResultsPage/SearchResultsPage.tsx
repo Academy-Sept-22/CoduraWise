@@ -22,9 +22,9 @@ const SearchResultsPage = () => {
   return (
     <section className="search-result-page">
       {text ? (
-        <h3>Search results for &ldquo;{text}&rdquo;:</h3>
+        <h1>Search results for &ldquo;{text}&rdquo;:</h1>
       ) : (
-        <h3>No valid search term was provided</h3>
+        <h1>No valid search term was provided</h1>
       )}
       <ListingWithFilter resources={resources} />
     </section>
