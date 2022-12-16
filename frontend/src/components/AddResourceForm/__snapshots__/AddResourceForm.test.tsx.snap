@@ -5,54 +5,78 @@ exports[`given a resource form snapshot test: the html matches 1`] = `
   className="add-resource__form"
   onSubmit={[Function]}
 >
-  <label
-    htmlFor="title"
+  <div
+    className="add-resource__input-container"
   >
-    Title:
-  </label>
-  <input
-    autoFocus={true}
-    name="title"
-    onChange={[Function]}
-    pattern="^[A-Za-z]{1}(.\\\\s?)*"
-    required={true}
-    title="Requires a title"
-    type="text"
-    value=""
-  />
-  <label
-    htmlFor="link"
+    <label
+      className="add-resource__label"
+      htmlFor="title"
+    >
+      Title:
+    </label>
+    <input
+      autoFocus={true}
+      className="add-resource__input"
+      name="title"
+      onChange={[Function]}
+      pattern="^[A-Za-z]{1}(.\\\\s?)*"
+      required={true}
+      title="Requires a title"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="add-resource__input-container"
   >
-    Resource Link:
-  </label>
-  <input
-    autoFocus={true}
-    name="link"
-    onChange={[Function]}
-    pattern="[(http(s)?):\\\\/\\\\/(www\\\\.)?a-zA-Z0-9@:%._\\\\+~#=]{2,256}\\\\.[a-z]{2,6}\\\\b([-a-zA-Z0-9@:%_\\\\+.~#?&//=]*)"
-    required={true}
-    title="Please give a valid URL to the resource"
-    type="text"
-    value=""
-  />
-  <label
-    htmlFor="tags"
+    <label
+      className="add-resource__label"
+      htmlFor="link"
+    >
+      Resource Link:
+    </label>
+    <input
+      autoFocus={true}
+      className="add-resource__input"
+      name="link"
+      onChange={[Function]}
+      pattern="[(http(s)?):\\\\/\\\\/(www\\\\.)?a-zA-Z0-9@:%._\\\\+~#=]{2,256}\\\\.[a-z]{2,6}\\\\b([-a-zA-Z0-9@:%_\\\\+.~#?&//=]*)"
+      required={true}
+      title="Please give a valid URL to the resource"
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="add-resource__input-container-with-instruction"
   >
-    Tags:
-  </label>
-  <input
-    autoFocus={true}
-    name="tags"
-    onChange={[Function]}
-    pattern="(#\\\\w{3,})+"
-    required={true}
-    title="Please append each tag with a '#' without spaces."
-    type="text"
-    value=""
-  />
-  <small>
-    Enter tags with a prepending "#" without spaces.
-  </small>
+    <div
+      className="add-resource__input-container"
+    >
+      <label
+        className="add-resource__label"
+        htmlFor="tags"
+      >
+        Tags:
+      </label>
+      <input
+        autoFocus={true}
+        className="add-resource__input"
+        name="tags"
+        onChange={[Function]}
+        pattern="(#\\\\w{3,})+"
+        required={true}
+        title="Please append each tag with a '#' without spaces."
+        type="text"
+        value=""
+      />
+    </div>
+    <small
+      className="add-resource__instruction"
+    >
+      Enter tags with a prepending "#" without spaces.
+    </small>
+  </div>
   <fieldset
     className="media-selection"
   >
@@ -205,6 +229,7 @@ exports[`given a resource form snapshot test: the html matches 1`] = `
     </label>
   </div>
   <input
+    className="add-resource__button"
     type="submit"
     value="Submit Resource"
   />

@@ -131,12 +131,15 @@ exports[`snapshot test: the html matches 1`] = `
   <form
     className="media-selection"
   >
-    <h3>
+    <legend
+      className="media-selection__legend"
+    >
       Filter by
-    </h3>
+    </legend>
     <div>
       <input
         checked={false}
+        className="media-selection__input"
         id="videomedia"
         name="video"
         onChange={[Function]}
@@ -144,6 +147,7 @@ exports[`snapshot test: the html matches 1`] = `
         value="video"
       />
       <label
+        className="media-selection__label"
         htmlFor="videomedia"
       >
         video
@@ -152,6 +156,7 @@ exports[`snapshot test: the html matches 1`] = `
     <div>
       <input
         checked={false}
+        className="media-selection__input"
         id="articlemedia"
         name="article"
         onChange={[Function]}
@@ -159,6 +164,7 @@ exports[`snapshot test: the html matches 1`] = `
         value="article"
       />
       <label
+        className="media-selection__label"
         htmlFor="articlemedia"
       >
         article
@@ -167,6 +173,7 @@ exports[`snapshot test: the html matches 1`] = `
     <div>
       <input
         checked={false}
+        className="media-selection__input"
         id="bookmedia"
         name="book"
         onChange={[Function]}
@@ -174,6 +181,7 @@ exports[`snapshot test: the html matches 1`] = `
         value="book"
       />
       <label
+        className="media-selection__label"
         htmlFor="bookmedia"
       >
         book
@@ -182,6 +190,7 @@ exports[`snapshot test: the html matches 1`] = `
     <div>
       <input
         checked={false}
+        className="media-selection__input"
         id="tutorialmedia"
         name="tutorial"
         onChange={[Function]}
@@ -189,6 +198,7 @@ exports[`snapshot test: the html matches 1`] = `
         value="tutorial"
       />
       <label
+        className="media-selection__label"
         htmlFor="tutorialmedia"
       >
         tutorial
@@ -197,6 +207,7 @@ exports[`snapshot test: the html matches 1`] = `
     <div>
       <input
         checked={false}
+        className="media-selection__input"
         id="coursemedia"
         name="course"
         onChange={[Function]}
@@ -204,6 +215,7 @@ exports[`snapshot test: the html matches 1`] = `
         value="course"
       />
       <label
+        className="media-selection__label"
         htmlFor="coursemedia"
       >
         course
