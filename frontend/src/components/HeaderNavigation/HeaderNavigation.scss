@@ -1,5 +1,18 @@
 .header-nav {
-  width: 130px;
+  width: 19em;
   display: flex;
+  gap: 20px;
   justify-content: space-around;
+
+  &__link {
+    text-decoration: underline;
+    color: black;
+    text-decoration-color: transparent;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: black;
+      transition: 0.3s;
+    }
+  }
 }

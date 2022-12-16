@@ -31,4 +31,3 @@ describe("Given a Header navigation", () => {
     expect(addResourceButton).toBeInTheDocument();
   });
 });
-
