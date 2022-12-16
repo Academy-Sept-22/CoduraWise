@@ -1,6 +1,7 @@
 import ResourcesContextProvider from "../store/ResourcesContext";
 import React from "react";
 import { MemoryRouter } from "react-router";
+import ToastsContextProvider from "../store/ToastsContext";
 
 export default function ContextRouterMock({
   children,
@@ -10,8 +11,10 @@ export default function ContextRouterMock({
   initialEntries?: Array<string>;
 }) {
   return (
-    <ResourcesContextProvider>
-      <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
-    </ResourcesContextProvider>
+    <ToastsContextProvider>
+      <ResourcesContextProvider>
+        <MemoryRouter initialEntries={initialEntries}>{children}</MemoryRouter>
+      </ResourcesContextProvider>
+    </ToastsContextProvider>
   );
 }
