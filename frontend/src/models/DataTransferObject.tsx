@@ -4,7 +4,7 @@ export interface AddResourceBodyDTO {
   title: string;
   link: string;
   tags: Array<string>;
-  rating: string;
+  averageRating: string;
   mediaType: MediaType;
 }
 
