@@ -2,7 +2,8 @@
   &__container {
     font-family: monospace, sans-serif;
     font-size: 0.9em;
-    width: 31rem;
+    width: auto;
+    max-width: 60em;
     height: 4em;
     margin: 10px 20px;
     display: flex;

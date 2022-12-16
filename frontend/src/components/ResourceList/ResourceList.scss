@@ -1,11 +1,18 @@
 .resource-list {
+  display: flex;
+  justify-content: center;
   &__container {
     padding: 0;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
   &__list-element {
     list-style: none;
+    width: 100%;
   }
+}
+
+.container {
 }

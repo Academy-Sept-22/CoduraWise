@@ -1,9 +1,8 @@
 .container {
   display: flex;
-  flex-direction: row;
+  justify-content: space-around;
 
   & .resource-list {
     width: 100%;
   }
 }
-
