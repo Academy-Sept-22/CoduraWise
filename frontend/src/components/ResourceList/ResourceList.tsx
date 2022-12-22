@@ -29,6 +29,7 @@ const ResourceList = ({ resources, filterMediaTypes }: ResourceListProps) => {
                 title={resource.title}
                 link={resource.link}
                 rating={resource.averageRating}
+                mediaType={resource.mediaType}
               />
             </li>
           ))
