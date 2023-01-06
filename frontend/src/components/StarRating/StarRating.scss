@@ -10,6 +10,7 @@
   font-size: 1em;
   font-family: Times; // make sure ★ appears correctly
   line-height: 1;
+  padding: 2%;
 
   &::before {
     content: "★★★★★";

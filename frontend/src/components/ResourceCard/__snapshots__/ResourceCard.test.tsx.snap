@@ -4,26 +4,31 @@ exports[`snapshot test: the html matches 1`] = `
 <article
   className="resource-card__container"
 >
-  <h3
-    className="resource-card__title"
+  <a
+    className="resource-card__link"
+    href="url"
+    rel="noreferrer"
+    target="_blank"
   >
-    <a
-      className="resource-card__link"
-      href="url"
-      rel="noreferrer"
-      target="_blank"
+    <img
+      alt="video"
+      className="resource-card__image"
+      src="/ResourceCardImage/video.jpg"
+    />
+    <div
+      aria-label="Rating of this product is 1 out of 5."
+      className="star-container"
+      style={
+        Object {
+          "--rating": 1,
+        }
+      }
+    />
+    <h3
+      className="resource-card__title"
     >
       title
-    </a>
-  </h3>
-  <div
-    aria-label="Rating of this product is 1 out of 5."
-    className="star-container"
-    style={
-      Object {
-        "--rating": 1,
-      }
-    }
-  />
+    </h3>
+  </a>
 </article>
 `;

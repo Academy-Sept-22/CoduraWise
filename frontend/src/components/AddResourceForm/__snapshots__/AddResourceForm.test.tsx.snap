@@ -6,20 +6,15 @@ exports[`given a resource form snapshot test: the html matches 1`] = `
   onSubmit={[Function]}
 >
   <div
-    className="add-resource__input-container"
+    className="add-resource__input-container ic1"
   >
-    <label
-      className="add-resource__label"
-      htmlFor="title"
-    >
-      Title:
-    </label>
     <input
       autoFocus={true}
       className="add-resource__input"
       name="title"
       onChange={[Function]}
       pattern="^[A-Za-z]{1}(.\\\\s?)*"
+      placeholder="Title of Resource"
       required={true}
       title="Requires a title"
       type="text"
@@ -27,20 +22,18 @@ exports[`given a resource form snapshot test: the html matches 1`] = `
     />
   </div>
   <div
+    className="add-resource__cut"
+  />
+  <div
     className="add-resource__input-container"
   >
-    <label
-      className="add-resource__label"
-      htmlFor="link"
-    >
-      Resource Link:
-    </label>
     <input
       autoFocus={true}
       className="add-resource__input"
       name="link"
       onChange={[Function]}
       pattern="[(http(s)?):\\\\/\\\\/(www\\\\.)?a-zA-Z0-9@:%._\\\\+~#=]{2,256}\\\\.[a-z]{2,6}\\\\b([-a-zA-Z0-9@:%_\\\\+.~#?&//=]*)"
+      placeholder="Link to Resource"
       required={true}
       title="Please give a valid URL to the resource"
       type="text"
@@ -53,18 +46,12 @@ exports[`given a resource form snapshot test: the html matches 1`] = `
     <div
       className="add-resource__input-container"
     >
-      <label
-        className="add-resource__label"
-        htmlFor="tags"
-      >
-        Tags:
-      </label>
       <input
-        autoFocus={true}
         className="add-resource__input"
         name="tags"
         onChange={[Function]}
         pattern="(#\\\\w{3,})+"
+        placeholder="Input Tags"
         required={true}
         title="Please append each tag with a '#' without spaces."
         type="text"
@@ -78,155 +65,190 @@ exports[`given a resource form snapshot test: the html matches 1`] = `
     </small>
   </div>
   <fieldset
-    className="media-selection"
+    className="add-resource-media-selection"
   >
-    <h3>
+    <h3
+      className="add-resource-media-selection__formHeading"
+    >
       Select Media Type:
     </h3>
-    <div>
-      <input
-        defaultChecked={true}
-        id="videomedia"
-        name="mediaType"
-        onChange={[Function]}
-        type="radio"
-        value="video"
-      />
-      <label
-        htmlFor="videomedia"
+    <div
+      className="add-resource-media-selection__inputs"
+    >
+      <div
+        className="add-resource-media-selection__radio"
       >
-        video
-      </label>
-    </div>
-    <div>
-      <input
-        defaultChecked={false}
-        id="articlemedia"
-        name="mediaType"
-        onChange={[Function]}
-        type="radio"
-        value="article"
-      />
-      <label
-        htmlFor="articlemedia"
+        <input
+          className="add-resource-media-selection__state"
+          defaultChecked={true}
+          id="videomedia"
+          name="mediaType"
+          onChange={[Function]}
+          type="radio"
+          value="video"
+        />
+        <label
+          className="add-resource-media-selection__media-input"
+          htmlFor="videomedia"
+        >
+          video
+        </label>
+      </div>
+      <div
+        className="add-resource-media-selection__radio"
       >
-        article
-      </label>
-    </div>
-    <div>
-      <input
-        defaultChecked={false}
-        id="bookmedia"
-        name="mediaType"
-        onChange={[Function]}
-        type="radio"
-        value="book"
-      />
-      <label
-        htmlFor="bookmedia"
+        <input
+          className="add-resource-media-selection__state"
+          defaultChecked={false}
+          id="articlemedia"
+          name="mediaType"
+          onChange={[Function]}
+          type="radio"
+          value="article"
+        />
+        <label
+          className="add-resource-media-selection__media-input"
+          htmlFor="articlemedia"
+        >
+          article
+        </label>
+      </div>
+      <div
+        className="add-resource-media-selection__radio"
       >
-        book
-      </label>
-    </div>
-    <div>
-      <input
-        defaultChecked={false}
-        id="tutorialmedia"
-        name="mediaType"
-        onChange={[Function]}
-        type="radio"
-        value="tutorial"
-      />
-      <label
-        htmlFor="tutorialmedia"
+        <input
+          className="add-resource-media-selection__state"
+          defaultChecked={false}
+          id="bookmedia"
+          name="mediaType"
+          onChange={[Function]}
+          type="radio"
+          value="book"
+        />
+        <label
+          className="add-resource-media-selection__media-input"
+          htmlFor="bookmedia"
+        >
+          book
+        </label>
+      </div>
+      <div
+        className="add-resource-media-selection__radio"
       >
-        tutorial
-      </label>
-    </div>
-    <div>
-      <input
-        defaultChecked={false}
-        id="coursemedia"
-        name="mediaType"
-        onChange={[Function]}
-        type="radio"
-        value="course"
-      />
-      <label
-        htmlFor="coursemedia"
+        <input
+          className="add-resource-media-selection__state"
+          defaultChecked={false}
+          id="tutorialmedia"
+          name="mediaType"
+          onChange={[Function]}
+          type="radio"
+          value="tutorial"
+        />
+        <label
+          className="add-resource-media-selection__media-input"
+          htmlFor="tutorialmedia"
+        >
+          tutorial
+        </label>
+      </div>
+      <div
+        className="add-resource-media-selection__radio"
       >
-        course
-      </label>
+        <input
+          className="add-resource-media-selection__state"
+          defaultChecked={false}
+          id="coursemedia"
+          name="mediaType"
+          onChange={[Function]}
+          type="radio"
+          value="course"
+        />
+        <label
+          className="add-resource-media-selection__media-input"
+          htmlFor="coursemedia"
+        >
+          course
+        </label>
+      </div>
     </div>
   </fieldset>
   <div
     className="rate"
   >
-    <input
-      id="star5"
-      name="rate"
-      onChange={[Function]}
-      type="radio"
-      value="5"
-    />
-    <label
-      htmlFor="star5"
-      title="text"
+    <h3
+      className="star-rating-input__heading"
     >
-      5 stars
-    </label>
-    <input
-      id="star4"
-      name="rate"
-      onChange={[Function]}
-      type="radio"
-      value="4"
-    />
-    <label
-      htmlFor="star4"
-      title="text"
+      Rating:
+    </h3>
+    <div
+      className="star-rating-input-stars"
     >
-      4 stars
-    </label>
-    <input
-      id="star3"
-      name="rate"
-      onChange={[Function]}
-      type="radio"
-      value="3"
-    />
-    <label
-      htmlFor="star3"
-      title="text"
-    >
-      3 stars
-    </label>
-    <input
-      id="star2"
-      name="rate"
-      onChange={[Function]}
-      type="radio"
-      value="2"
-    />
-    <label
-      htmlFor="star2"
-      title="text"
-    >
-      2 stars
-    </label>
-    <input
-      id="star1"
-      name="rate"
-      onChange={[Function]}
-      type="radio"
-      value="1"
-    />
-    <label
-      htmlFor="star1"
-      title="text"
-    >
-      1 star
-    </label>
+      <input
+        id="star5"
+        name="rate"
+        onChange={[Function]}
+        type="radio"
+        value="5"
+      />
+      <label
+        htmlFor="star5"
+        title="text"
+      >
+        5 stars
+      </label>
+      <input
+        id="star4"
+        name="rate"
+        onChange={[Function]}
+        type="radio"
+        value="4"
+      />
+      <label
+        htmlFor="star4"
+        title="text"
+      >
+        4 stars
+      </label>
+      <input
+        id="star3"
+        name="rate"
+        onChange={[Function]}
+        type="radio"
+        value="3"
+      />
+      <label
+        htmlFor="star3"
+        title="text"
+      >
+        3 stars
+      </label>
+      <input
+        id="star2"
+        name="rate"
+        onChange={[Function]}
+        type="radio"
+        value="2"
+      />
+      <label
+        htmlFor="star2"
+        title="text"
+      >
+        2 stars
+      </label>
+      <input
+        id="star1"
+        name="rate"
+        onChange={[Function]}
+        type="radio"
+        value="1"
+      />
+      <label
+        htmlFor="star1"
+        title="text"
+      >
+        1 star
+      </label>
+    </div>
   </div>
   <input
     className="add-resource__button"

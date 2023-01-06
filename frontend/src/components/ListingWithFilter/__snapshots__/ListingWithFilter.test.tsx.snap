@@ -16,27 +16,32 @@ exports[`snapshot test: the html matches 1`] = `
         <article
           className="resource-card__container"
         >
-          <h3
-            className="resource-card__title"
+          <a
+            className="resource-card__link"
+            href="Java Link"
+            rel="noreferrer"
+            target="_blank"
           >
-            <a
-              className="resource-card__link"
-              href="Java Link"
-              rel="noreferrer"
-              target="_blank"
+            <img
+              alt="video"
+              className="resource-card__image"
+              src="/ResourceCardImage/video.jpg"
+            />
+            <div
+              aria-label="Rating of this product is 1 out of 5."
+              className="star-container"
+              style={
+                Object {
+                  "--rating": 1,
+                }
+              }
+            />
+            <h3
+              className="resource-card__title"
             >
               Java
-            </a>
-          </h3>
-          <div
-            aria-label="Rating of this product is 1 out of 5."
-            className="star-container"
-            style={
-              Object {
-                "--rating": 1,
-              }
-            }
-          />
+            </h3>
+          </a>
         </article>
       </li>
       <li
@@ -45,27 +50,32 @@ exports[`snapshot test: the html matches 1`] = `
         <article
           className="resource-card__container"
         >
-          <h3
-            className="resource-card__title"
+          <a
+            className="resource-card__link"
+            href="Python Link"
+            rel="noreferrer"
+            target="_blank"
           >
-            <a
-              className="resource-card__link"
-              href="Python Link"
-              rel="noreferrer"
-              target="_blank"
+            <img
+              alt="article"
+              className="resource-card__image"
+              src="/ResourceCardImage/article.jpg"
+            />
+            <div
+              aria-label="Rating of this product is 4 out of 5."
+              className="star-container"
+              style={
+                Object {
+                  "--rating": 4,
+                }
+              }
+            />
+            <h3
+              className="resource-card__title"
             >
               Python
-            </a>
-          </h3>
-          <div
-            aria-label="Rating of this product is 4 out of 5."
-            className="star-container"
-            style={
-              Object {
-                "--rating": 4,
-              }
-            }
-          />
+            </h3>
+          </a>
         </article>
       </li>
       <li
@@ -74,27 +84,32 @@ exports[`snapshot test: the html matches 1`] = `
         <article
           className="resource-card__container"
         >
-          <h3
-            className="resource-card__title"
+          <a
+            className="resource-card__link"
+            href="Javascript Link"
+            rel="noreferrer"
+            target="_blank"
           >
-            <a
-              className="resource-card__link"
-              href="Javascript Link"
-              rel="noreferrer"
-              target="_blank"
+            <img
+              alt="course"
+              className="resource-card__image"
+              src="/ResourceCardImage/course.jpg"
+            />
+            <div
+              aria-label="Rating of this product is 3 out of 5."
+              className="star-container"
+              style={
+                Object {
+                  "--rating": 3,
+                }
+              }
+            />
+            <h3
+              className="resource-card__title"
             >
               Javascript
-            </a>
-          </h3>
-          <div
-            aria-label="Rating of this product is 3 out of 5."
-            className="star-container"
-            style={
-              Object {
-                "--rating": 3,
-              }
-            }
-          />
+            </h3>
+          </a>
         </article>
       </li>
       <li
@@ -103,27 +118,32 @@ exports[`snapshot test: the html matches 1`] = `
         <article
           className="resource-card__container"
         >
-          <h3
-            className="resource-card__title"
+          <a
+            className="resource-card__link"
+            href="C# Link"
+            rel="noreferrer"
+            target="_blank"
           >
-            <a
-              className="resource-card__link"
-              href="C# Link"
-              rel="noreferrer"
-              target="_blank"
+            <img
+              alt="article"
+              className="resource-card__image"
+              src="/ResourceCardImage/article.jpg"
+            />
+            <div
+              aria-label="Rating of this product is 4 out of 5."
+              className="star-container"
+              style={
+                Object {
+                  "--rating": 4,
+                }
+              }
+            />
+            <h3
+              className="resource-card__title"
             >
               C#
-            </a>
-          </h3>
-          <div
-            aria-label="Rating of this product is 4 out of 5."
-            className="star-container"
-            style={
-              Object {
-                "--rating": 4,
-              }
-            }
-          />
+            </h3>
+          </a>
         </article>
       </li>
     </ul>
